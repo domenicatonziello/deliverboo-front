@@ -9,4 +9,7 @@ export default {
 </template>
 
 
-<style></style>
+<style lang="scss">
+@use './assets/scss/style' as *;
+@use './assets/scss/partial/variables' as *;
+</style>
