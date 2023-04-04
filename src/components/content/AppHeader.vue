@@ -10,14 +10,14 @@ export default {
         <div class="container-fluid">
 
             <div class="row">
-                <div class="col-7">
+                <div class="col-9">
                     <div class="logo">Delive<span>Boo</span></div>
                 </div>
-                <div class="col-5 d-none d-lg-flex justify-content-between align-items-center">
+                <div class="col-3 d-none d-lg-flex justify-content-between align-items-center">
                     <a href="#">Home</a>
                     <a href="#">Menu</a>
-                    <a href="#">Contact</a>
-                    <a href="#">Shop</a>
+                    <a href="http://127.0.0.1:8000/register">Registrati</a>
+                    <a href="http://127.0.0.1:8000/login">Login</a>
                     <a href="#" class="me-5">
                         <font-awesome-icon icon="fa-solid fa-cart-shopping " class="text-white" />
                     </a>
