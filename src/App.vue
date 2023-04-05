@@ -11,7 +11,7 @@ export default {
 <template>
   <section-jumbotron>
     <app-header></app-header>
-    <not-found-page></not-found-page>
+    <routerView />
   </section-jumbotron>
 </template>
 

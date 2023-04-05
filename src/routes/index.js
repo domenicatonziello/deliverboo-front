@@ -1,13 +1,21 @@
 import { createRouter, createWebHistory } from "vue-router";
 
-// importare le pagine
+// PAGES
+import HomePage from '../pages/HomePage.vue';
+import TypologyPage from '../pages/TypologyPage.vue';
+
+
+
+// ROUTES
 
 const router = createRouter({
     history: createWebHistory(),
     linkActiveClass: 'active',
     linkExactActiveClass: 'active',
     routes: [
-        // inserire rotte
+        { path: '/', name: 'home', component: HomePage },
+        { path: '/typologies/:id', name: 'typology', component: TypologyPage },
+
     ]
 });
 
