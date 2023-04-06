@@ -4,8 +4,7 @@ const baseUri = 'http://127.0.0.1:8000/api/';
 export default {
     name: 'TypologyPage',
     data: () => ({
-        restaurants: [],
-        filterRestaurants: []
+        typologies: [],
     }),
     computed: {
         // getRestaurant() {
@@ -15,24 +14,10 @@ export default {
     },
     methods: {
         fetchRestaurants() {
-            axios.get(baseUri + 'restaurants/')
-                .then((res) => {
-
-                    this.restaurants = res.data;
-
-                    this.filterRestaurants = this.restaurants.filter(restaurant => {
-                        restaurant.typologies.filter(typology => typology.id == 2)
-                    })
-                    console.log(this.filterRestaurants);
-                    // this.restaurants.forEach(restaurant, i )
-                    // {
-                    // if (restaurant.typologies === params.id)
-                    //     restaurant = this.filterRestaurants
-                    // }
-                })
+            axios.get(baseUri + 'typologies/' + this.$route.params.id)
+                .then((res) => { this.typologies = res.data.restaurants })
                 .catch((err) => { console.error(err) })
         },
-
     },
     created() {
         this.fetchRestaurants()
@@ -43,7 +28,7 @@ export default {
 
 <template>
     <div class="container">
-        <router-link :to="{ name: '' }" v-for="restaurant in filterRestaurants" :key="restaurant.id">
+        <router-link :to="{ name: '' }" v-for="restaurant in typologies" :key="restaurant.id">
             <li>{{ restaurant.name }}</li>
             <!-- <li v-for="restaurant in typology.restaurants" :key="restaurant.id">{{ restaurant.name }}</li> -->
         </router-link>
