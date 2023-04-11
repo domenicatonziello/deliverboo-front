@@ -13,12 +13,12 @@ export default {
         setActive() {
 
             this.active = !this.active;
-            const getIndex = store.currentTypology.indexOf(this.typology.name);
+            const getIndex = store.currentTypology.indexOf(this.typology);
 
             if (this.active) {
                 store.currentTypology.push(this.typology);
             } else {
-                store.currentTypology.splice(getIndex);
+                store.currentTypology.splice(getIndex, 1);
             }
         }
     }
