@@ -7,11 +7,16 @@ export default {
         store,
         active: false,
     }),
+    computed: {
 
+    },
     methods: {
         setActive() {
             this.active = !this.active;
         }
+    },
+    created() {
+
     }
 
 }

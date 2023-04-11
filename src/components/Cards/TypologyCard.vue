@@ -16,7 +16,7 @@ export default {
             const getIndex = store.currentTypology.indexOf(this.typology);
 
             if (this.active) {
-                store.currentTypology.push(this.typology);
+                store.currentTypology.push(this.typology.id);
             } else {
                 store.currentTypology.splice(getIndex, 1);
             }
