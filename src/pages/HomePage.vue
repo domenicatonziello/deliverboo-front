@@ -15,10 +15,19 @@ export default {
     }),
     computed: {
         newArray() {
-            this.store.currentTypology.forEach(typology => {
-                console.log(typology);
+            this.typologies.forEach(typology => {
+                if (store.currentTypology.includes(typology.id)) {
+                    typology.restaurants.forEach(restaurant => {
+                        if (!store.restaurants.includes(restaurant)) {
+                            store.restaurants.push(restaurant);
+                        }
+                    });
+                }
+                store.restaurants.forEach(restaurant => {
+                    if (!store.currentTypology.includes(restaurant.pivot.typology_id))
+                        store.restaurants.splice(restaurant, 1);
+                });
             });
-
         }
     },
     methods: {
@@ -43,7 +52,10 @@ export default {
         </div>
 
         <div class="d-flex justify-content-center gap-2 mt-5" v-for="typology in store.currentTypology" :key="typology.id">
-            <restaurant-card v-for="restaurant in typology.restaurants" :key="restaurant.id"
+
+        </div>
+        <div class="d-flex justify-content-center gap-2 mt-5">
+            <restaurant-card v-for="restaurant in store.restaurants" :key="restaurant.id"
                 :restaurant="restaurant"></restaurant-card>
         </div>
     </div>
