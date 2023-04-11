@@ -39,8 +39,7 @@ export default {
         }
     },
     created() {
-        this.fetchTypologies(),
-            this.newArray
+        this.fetchTypologies();
     }
 
 }
