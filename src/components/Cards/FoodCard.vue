@@ -17,7 +17,7 @@ export default {
 
 <template>
     <div @click='setActive()' class="custm-card" :class="{ active: active }">
-        <img :src="'http//' + food.image" class="img-fluid" :alt="food.name">
+        <img :src="food.image" class="img-fluid" :alt="food.name">
         <div class="overlay align-items-center justify-content-center">
             <h4>{{ food.name }}</h4>
         </div>
