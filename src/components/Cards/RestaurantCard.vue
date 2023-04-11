@@ -18,12 +18,13 @@ export default {
 </script>
 
 <template>
-    <div @click='setActive()' class="card" :class="{ active: active }" style="width: 10rem;">
+    <router-link :to="'restaurants/' + restaurant.id" @click='setActive()' class="card" :class="{ active: active }"
+        style="width: 10rem;">
         <img :src="restaurant.image" class="card-img-top" alt="...">
         <div class="card-body">
             <h5 class="card-title">{{ restaurant.name }}</h5>
         </div>
-    </div>
+    </router-link>
 </template>
 
 <style lang="scss" scoped>
