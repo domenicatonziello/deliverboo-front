@@ -38,7 +38,7 @@ export default {
 
 <template>
     <div class="container">
-        <div class="d-flex pt-5 justify-content-center gap-2">
+        <div class="d-flex flex-wrap pt-5 justify-content-center gap-2">
             <typology-card v-for="typology in typologies" :key="typology.id" :typology="typology"></typology-card>
         </div>
 
