@@ -41,7 +41,7 @@ export default {
 }
 
 .custm-card {
-    min-width: calc(100%/3);
+    min-width: calc(100%/4);
     height: 150px;
     position: relative;
     border-radius: 10px;
