@@ -14,10 +14,7 @@ export default {
         id_typologies: '',
     }),
     computed: {
-        getString() {
-            return this.id_typologies = store.currentTypology.toString()
 
-        }
     },
     methods: {
         fetchTypologies() {
@@ -30,7 +27,6 @@ export default {
                 axios.get(baseUri + 'restaurants/?types=' + store.currentTypology.toString())
                     .then((res) => {
                         console.log(res.data)
-                        this.getString;
                         store.restaurants = res.data;
                     })
                     .catch((err) => { console.error(err) });
