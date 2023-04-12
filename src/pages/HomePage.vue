@@ -46,7 +46,7 @@ export default {
 
 <template>
     <div class="container">
-        <div class="slider-container">
+        <div class="slider-container d-flex justify-content-center">
             <div class="slider-content d-flex align-items-center">
                 <i class="fa-solid fa-arrow-left"></i>
                 <div class="carousel d-flex">
@@ -55,10 +55,6 @@ export default {
                 </div>
                 <i class="fa-solid fa-arrow-right"></i>
             </div>
-        </div>
-
-        <div class="d-flex justify-content-center gap-2 mt-5" v-for="typology in store.currentTypology" :key="typology.id">
-
         </div>
         <div class="d-flex justify-content-center gap-2 mt-5">
             <restaurant-card v-for="restaurant in store.restaurants" :key="restaurant.id"
