@@ -15,19 +15,30 @@ export default {
     }),
     computed: {
         getString() {
+            console.log(this.id_typologies)
             return this.id_typologies = store.currentTypology.toString()
+
         }
     },
     methods: {
         fetchTypologies() {
             axios.get(baseUri + 'typologies')
-                .then((res) => { this.typologies = res.data; })
-                .catch((err) => { console.error(err) })
+                .then((res) => { this.typologies = res.data })
+                .catch((err) => { console.error(err) });
         },
         onClick() {
-            axios.get(baseUri + 'typologies/?ids=' + id_typologies)
-                .then((res) => { store.restaurants = res.data.restaurants; })
-                .catch((err) => { console.error(err) })
+            if (store.currentTypology.length > 0) {
+                axios.get(baseUri + 'restaurants/' + store.currentTypology.toString())
+                    .then((res) => {
+                        console.log(res.data)
+                        this.getString;
+                        store.restaurants = res.data;
+                    })
+                    .catch((err) => { console.error(err) });
+            } else {
+                store.restaurants = []
+            }
+
         }
     },
     created() {
