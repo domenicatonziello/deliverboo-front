@@ -41,12 +41,14 @@ export default {
 }
 
 .custm-card {
-    width: 250px;
-    height: 180px;
+    min-width: calc(100%/3);
+    height: 150px;
     position: relative;
     border-radius: 10px;
     // background-color: aqua;
     cursor: pointer;
+
+    margin: 1rem;
 
     &.active .overlay {
         height: 30%;
@@ -90,6 +92,18 @@ export default {
             color: #11090300;
             transition: color 1s;
         }
+    }
+}
+
+@media screen and (max-width: 900px) {
+    .custm-card {
+        min-width: calc(100%/2);
+    }
+}
+
+@media screen and (max-width: 550px) {
+    .custm-card {
+        min-width: 100%;
     }
 }
 </style>
