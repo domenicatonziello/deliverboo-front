@@ -10,10 +10,13 @@ export default {
     components: { TypologyCard, RestaurantCard },
     data: () => ({
         store,
-        typologies: []
+        typologies: [],
+        id_typologies: '',
     }),
     computed: {
-
+        getString() {
+            return this.id_typologies = store.currentTypology.toString()
+        }
     },
     methods: {
         fetchTypologies() {
@@ -21,20 +24,10 @@ export default {
                 .then((res) => { this.typologies = res.data; })
                 .catch((err) => { console.error(err) })
         },
-        newArray() {
-            this.typologies.forEach(typology => {
-                if (store.currentTypology.includes(typology.id)) {
-                    typology.restaurants.forEach(restaurant => {
-                        if (!store.restaurants.includes(restaurant)) {
-                            store.restaurants.push(restaurant);
-                        }
-                    });
-                }
-                store.restaurants.forEach(restaurant => {
-                    if (!store.currentTypology.includes(restaurant.pivot.typology_id))
-                        store.restaurants.splice(restaurant, 1);
-                });
-            });
+        onClick() {
+            axios.get(baseUri + 'typologies/?ids=' + id_typologies)
+                .then((res) => { store.restaurants = res.data.restaurants; })
+                .catch((err) => { console.error(err) })
         }
     },
     created() {
@@ -50,7 +43,7 @@ export default {
             <div class="slider-content d-flex align-items-center">
                 <i class="fa-solid fa-arrow-left"></i>
                 <div class="carousel d-flex">
-                    <typology-card @click="newArray()" v-for="typology in typologies" :key="typology.id"
+                    <typology-card @click="onClick()" v-for="typology in typologies" :key="typology.id"
                         :typology="typology"></typology-card>
                 </div>
                 <i class="fa-solid fa-arrow-right"></i>
