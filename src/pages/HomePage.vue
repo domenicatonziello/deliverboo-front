@@ -10,8 +10,7 @@ export default {
     components: { TypologyCard, RestaurantCard },
     data: () => ({
         store,
-        typologies: [],
-
+        typologies: []
     }),
     computed: {
 
@@ -47,9 +46,16 @@ export default {
 
 <template>
     <div class="container">
-        <div class="d-flex flex-wrap pt-5 justify-content-center gap-2">
-            <typology-card @click="newArray()" v-for="typology in typologies" :key="typology.id"
-                :typology="typology"></typology-card>
+        <div class="slider-container">
+            <div class="slider-content d-flex align-items-center">
+                <i class="fa-solid fa-arrow-left"></i>
+                <div class="carousel d-flex">
+                    <typology-card v-for="typology in typologies" :key="typology.id" :typology="typology"></typology-card>
+                    <typology-card @click="newArray()" v-for="typology in typologies" :key="typology.id"
+                        :typology="typology"></typology-card>
+                </div>
+                <i class="fa-solid fa-arrow-right"></i>
+            </div>
         </div>
 
         <div class="d-flex justify-content-center gap-2 mt-5" v-for="typology in store.currentTypology" :key="typology.id">
@@ -62,4 +68,45 @@ export default {
     </div>
 </template>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.slider-container {
+    padding: 3rem;
+
+    .slider-content {
+        margin: 0 10px;
+        max-width: 1200px;
+
+        .fa-solid {
+            cursor: pointer;
+            margin-left: 1rem;
+            margin-right: 1rem;
+            background-color: white;
+            border-radius: 30px;
+            padding: 1rem;
+
+            &:hover {
+                transform: translateY(-10%) scale(1.1);
+                background: #f2f2f2;
+
+            }
+        }
+
+        .carousel {
+            white-space: nowrap;
+            overflow-x: hidden;
+        }
+    }
+}
+
+@media screen and (max-width: 900px) {
+    .slider-content {
+        min-width: calc(100%/2);
+    }
+}
+
+@media screen and (max-width: 550px) {
+    .slider-content {
+        min-width: 100%;
+    }
+}
+</style>
