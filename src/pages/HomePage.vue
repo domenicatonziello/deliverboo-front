@@ -50,7 +50,6 @@ export default {
             <div class="slider-content d-flex align-items-center">
                 <i class="fa-solid fa-arrow-left"></i>
                 <div class="carousel d-flex">
-                    <typology-card v-for="typology in typologies" :key="typology.id" :typology="typology"></typology-card>
                     <typology-card @click="newArray()" v-for="typology in typologies" :key="typology.id"
                         :typology="typology"></typology-card>
                 </div>
