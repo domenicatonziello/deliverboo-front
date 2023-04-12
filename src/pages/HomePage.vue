@@ -15,7 +15,6 @@ export default {
     }),
     computed: {
         getString() {
-            console.log(this.id_typologies)
             return this.id_typologies = store.currentTypology.toString()
 
         }
@@ -28,7 +27,7 @@ export default {
         },
         onClick() {
             if (store.currentTypology.length > 0) {
-                axios.get(baseUri + 'restaurants/' + store.currentTypology.toString())
+                axios.get(baseUri + 'restaurants/?types=' + store.currentTypology.toString())
                     .then((res) => {
                         console.log(res.data)
                         this.getString;
