@@ -1,6 +1,16 @@
 <script>
+import { store } from '../../data/store';
+
 export default {
     name: 'AppHeader',
+    data: () => ({
+        store,
+    }),
+    methods: {
+        setActiveCart() {
+            store.cart = !store.cart;
+        }
+    }
 
 }
 </script>
@@ -17,7 +27,7 @@ export default {
                     <a href="http://localhost:5173">Home</a>
                     <a href="http://127.0.0.1:8000/register">Registrati</a>
                     <a href="http://127.0.0.1:8000/login">Login</a>
-                    <a href="#" class="me-5">
+                    <a href="#" class="me-5" @click="setActiveCart">
                         <font-awesome-icon icon="fa-solid fa-cart-shopping " class="text-white" />
                     </a>
                 </div>
