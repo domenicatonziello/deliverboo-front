@@ -14,20 +14,33 @@ export default {
         id_typologies: '',
     }),
     computed: {
-        getString() {
-            return this.id_typologies = store.currentTypology.toString()
-        }
+
     },
     methods: {
         fetchTypologies() {
+            store.isLoading = true
+
             axios.get(baseUri + 'typologies')
-                .then((res) => { this.typologies = res.data; })
+                .then((res) => { this.typologies = res.data })
                 .catch((err) => { console.error(err) })
+                .then((res) => { store.isLoading = false })
+
         },
         onClick() {
-            axios.get(baseUri + 'typologies/?ids=' + id_typologies)
-                .then((res) => { store.restaurants = res.data.restaurants; })
-                .catch((err) => { console.error(err) })
+            if (store.currentTypology.length > 0) {
+                store.isLoading = true
+                axios.get(baseUri + 'restaurants/?types=' + store.currentTypology.toString())
+                    .then((res) => {
+                        store.restaurants = res.data;
+                    })
+                    .catch((err) => { console.error(err) })
+                    .then((res) => { store.isLoading = false });
+
+            } else {
+
+                store.restaurants = []
+            }
+
         }
     },
     created() {
