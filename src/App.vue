@@ -30,6 +30,9 @@ export default {
 
 
 <style lang="scss">
+@use './assets/scss/style' as *;
+@use './assets/scss/partial/variables' as *;
+
 .loader {
   height: calc(100vh - 80px);
   max-width: 100vw;
