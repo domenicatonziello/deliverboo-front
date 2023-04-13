@@ -61,7 +61,7 @@ export default {
                 <div class="cart">
                     <div class="container h-100 d-flex justify-content-center">
 
-                        <div class="row p-3">
+                        <div class="row p-3 h-100">
                             <cart-content v-for="foodCart in store.foodsCart" :foodCart="foodCart"></cart-content>
                             <!-- total price -->
                             <div v-if="store.foodsCart.length >= 1" class="row p-0 align-items-end h-50">
