@@ -1,8 +1,8 @@
 <script>
-import NotFoundPage from './pages/NotFoundPage.vue';
+import NotFoundPage from './pages/NotFoundPage.vue'
 import AppHeader from './components/content/AppHeader.vue'
 import AppJumbotron from './components/content/AppJumbotron.vue'
-import SectionJumbotron from './components/SectionJumbotron.vue';
+import SectionJumbotron from './components/SectionJumbotron.vue'
 export default {
   name: 'DeliverBoo',
   components: { AppHeader, AppJumbotron, NotFoundPage, SectionJumbotron }
