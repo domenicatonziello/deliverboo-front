@@ -1,109 +1,73 @@
 <script>
-import { store } from '../../data/store'
+import { store } from "../../data/store";
 export default {
-    name: 'TypologyCard',
-    props: { typology: Object },
+  name: "TypologyCard",
+  props: { typology: Object },
 
-    data: () => ({
-        store,
-        active: false,
+  data: () => ({
+    store,
+    active: false,
+  }),
+  methods: {
+    setActive() {
+      this.active = !this.active;
+      const getIndex = store.currentTypology.indexOf(this.typology.id);
 
-    }),
-    methods: {
-        setActive() {
-
-            this.active = !this.active;
-            const getIndex = store.currentTypology.indexOf(this.typology.id);
-
-            if (this.active) {
-                store.currentTypology.push(this.typology.id);
-            } else {
-                store.currentTypology.splice(getIndex, 1);
-            }
-        }
-    }
-
-}
+      if (this.active) {
+        store.currentTypology.push(this.typology.id);
+      } else {
+        store.currentTypology.splice(getIndex, 1);
+      }
+    },
+  },
+};
 </script>
 
 <template>
-    <div @click='setActive()' class="custm-card" :class="{ active: active }">
-        <img :src="typology.image" class="img-fluid" :alt="typology.name">
-        <div class="overlay align-items-center justify-content-center">
-            <h4>{{ typology.name }}</h4>
-        </div>
+  <div @click="setActive()" class="box" :class="{ active: active }">
+    <img :src="typology.image" :alt="typology.name" />
+    <div class="overlay">
+      <h4>{{ typology.name }}</h4>
     </div>
+  </div>
 </template>
 
 <style lang="scss" scoped>
 .active {
-    border: 3px solid rgb(255, 0, 0);
+  border: 3px solid rgb(255, 0, 0);
 }
+.box {
+  height: 120px;
+  position: relative;
+  &:hover .overlay {
+    h4 {
+      visibility: visible;
+      transition: 0.5s;
+    }
+  }
 
-.custm-card {
-    min-width: calc(100%/4);
-    height: 150px;
-    position: relative;
+  img {
+    height: 100%;
+    width: 100%;
     border-radius: 10px;
-    // background-color: aqua;
-    cursor: pointer;
+    object-fit: cover;
+  }
+  &:hover img {
+    background-size: 10%;
+  }
 
-    margin: 1rem;
+  .overlay {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -25%);
 
-    &.active .overlay {
-        height: 30%;
-
-        h4 {
-            visibility: visible;
-            color: white;
-        }
+    h4 {
+      color: white;
+      margin: 0;
+      font-size: 20px;
+      visibility: hidden;
     }
-
-    &:hover .overlay {
-        height: 35%;
-
-        h4 {
-            visibility: visible;
-            color: white;
-        }
-    }
-
-    img {
-        width: 100%;
-        height: 100%;
-        border-radius: 10px;
-
-    }
-
-    .overlay {
-        height: 0%;
-        background-color: #11090396;
-        position: absolute;
-        bottom: 0;
-        left: 0;
-        right: 0;
-        transition: height 0.5s;
-        display: flex;
-        border-radius: 0 0 10px 10px;
-
-        h4 {
-            margin: 0;
-            visibility: hidden;
-            color: #11090300;
-            transition: color 1s;
-        }
-    }
-}
-
-@media screen and (max-width: 900px) {
-    .custm-card {
-        min-width: calc(100%/2);
-    }
-}
-
-@media screen and (max-width: 550px) {
-    .custm-card {
-        min-width: 100%;
-    }
+  }
 }
 </style>
