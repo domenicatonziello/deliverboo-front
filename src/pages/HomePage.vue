@@ -18,19 +18,26 @@ export default {
     },
     methods: {
         fetchTypologies() {
+            store.isLoading = true
+
             axios.get(baseUri + 'typologies')
                 .then((res) => { this.typologies = res.data })
-                .catch((err) => { console.error(err) });
+                .catch((err) => { console.error(err) })
+                .then((res) => { store.isLoading = false })
+
         },
         onClick() {
             if (store.currentTypology.length > 0) {
+                store.isLoading = true
                 axios.get(baseUri + 'restaurants/?types=' + store.currentTypology.toString())
                     .then((res) => {
-                        console.log(res.data)
                         store.restaurants = res.data;
                     })
-                    .catch((err) => { console.error(err) });
+                    .catch((err) => { console.error(err) })
+                    .then((res) => { store.isLoading = false });
+
             } else {
+
                 store.restaurants = []
             }
 

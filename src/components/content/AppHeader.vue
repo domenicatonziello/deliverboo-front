@@ -3,6 +3,8 @@ export default {
     name: 'AppHeader',
 
 }
+
+
 </script>
 
 <template>
@@ -11,10 +13,14 @@ export default {
 
             <div class="row">
                 <div class="col-9">
-                    <div class="logo">Delive<span>Boo</span></div>
+                    <router-link :to="'/'">
+                        <div class="logo">Delive<span>Boo</span></div>
+                    </router-link>
                 </div>
                 <div class="col-3 d-none d-lg-flex justify-content-between align-items-center">
-                    <a href="http://localhost:5173">Home</a>
+                    <router-link :to="'/'">
+                        Home
+                    </router-link>
                     <a href="http://127.0.0.1:8000/register">Registrati</a>
                     <a href="http://127.0.0.1:8000/login">Login</a>
                     <a href="#">
