@@ -7,7 +7,7 @@ export default {
 </script>
 
 <template lang="">
-    <section id="jumbotron" class="container-fluid p-0">
+    <section id="jumbotron" class="container-fluid">
         <slot></slot>
     </section>
 </template>
