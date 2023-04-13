@@ -64,60 +64,71 @@ export default {
 </script>
 
 <template>
-    <div class="container">
-        <AppJumbotron />
-        <!-- <div class="d-flex justify-content-center"> -->
-        <carosel>
-            <typology-card @click="onClick()" v-for="typology in typologies" :key="typology.id"
-                :typology="typology"></typology-card>
-        </carosel>
-        <!-- </div> -->
+    <AppJumbotron />
+    <!-- tipologie -->
+    <section id="typology">
+        <div class="container">
+            <h2 class="mb-5">Le nostre tipologie</h2>
+            <carosel>
+                <typology-card @click="onClick()" v-for="typology in typologies" :key="typology.id"
+                    :typology="typology"></typology-card>
+            </carosel>
 
-        <div class="d-flex justify-content-center gap-2 mt-5">
-            <restaurant-card v-for="restaurant in store.restaurants" :key="restaurant.id"
-                :restaurant="restaurant"></restaurant-card>
+            <div class="d-flex justify-content-center gap-2 mt-5">
+                <restaurant-card v-for="restaurant in store.restaurants" :key="restaurant.id"
+                    :restaurant="restaurant"></restaurant-card>
+            </div>
         </div>
-    </div>
+    </section>
+    <!-- footer -->
+    <footer>
+        <div class="banner-register">
+            <h2 class="text-white mb-4">Unisciti a noi!</h2>
+            <a href="http://127.0.0.1:8000/register" class="button">Registrati</a>
+        </div>
+    </footer>
 </template>
 
 <style lang="scss" scoped>
-.slider-container {
-    padding: 3rem;
+@use '../assets/scss/partial/variables.scss' as *;
 
-    .slider-content {
-        margin: 0 10px;
-        max-width: 1200px;
+#typology {
+    min-height: 200px;
+    background-color: rgb(255, 233, 218);
+    box-shadow: inset 0px 4px 4px rgba(0, 0, 0, 0.25);
+    padding: 100px 0;
 
-        .fa-solid {
-            cursor: pointer;
-            margin-left: 1rem;
-            margin-right: 1rem;
-            background-color: white;
-            border-radius: 30px;
-            padding: 1rem;
-
-            &:hover {
-                transform: translateY(-10%) scale(1.1);
-                background: #f2f2f2;
-            }
-        }
-
-        .carousel {
-            white-space: nowrap;
-            overflow-x: hidden;
-        }
+    h2 {
+        text-shadow: 2px 1px 2px $brown;
+        color: $primary-bg;
+        font-size: 40px;
     }
 }
 
-@media screen and (max-width: 900px) {
-    .slider-content {
-        min-width: calc(100% / 2);
-    }
-}
+footer {
+    height: 150px;
+    background-color: $dark-blue;
+    position: relative;
 
-@media screen and (max-width: 550px) {
-    .slider-content {
-        min-width: 100%;
+    .banner-register {
+        background-color: $blue;
+        border-radius: 15px;
+        padding: 30px;
+        text-align: center;
+
+        position: absolute;
+        top: -50px;
+        left: 20%;
+        right: 20%;
+
+        .button {
+            background-color: $primary-bg;
+            border-radius: 10px;
+            padding: 10px 20px;
+            text-decoration: none;
+            color: white;
+            font-size: 20px;
+        }
     }
 }
 </style>
