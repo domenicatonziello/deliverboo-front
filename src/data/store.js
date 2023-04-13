@@ -3,4 +3,6 @@ export const store = reactive({
     currentTypology: [],
     restaurants: [],
     isLoading: false,
+    cart: false,
+    foodsCart: [],
 });
