@@ -27,7 +27,7 @@ export default {
 
 <template>
     <div @click='setActive()' class="custm-card" :class="{ active: active }">
-        <img :src="food.image" class="img-fluid" :alt="food.name">
+        <img :src="food.image" :alt="food.name">
         <div class="overlay align-items-center justify-content-center">
             <h4>{{ food.name }}</h4>
         </div>
@@ -69,7 +69,7 @@ export default {
         width: 100%;
         height: 100%;
         border-radius: 10px;
-
+        object-fit: cover;
     }
 
     .overlay {
