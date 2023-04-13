@@ -39,6 +39,10 @@ export default {
 .box {
   height: 120px;
   position: relative;
+  overflow: hidden;
+  border-radius: 10px;
+  cursor: pointer;
+
   &:hover .overlay {
     h4 {
       visibility: visible;
@@ -53,7 +57,8 @@ export default {
     object-fit: cover;
   }
   &:hover img {
-    background-size: 10%;
+    transform: scale(1.2);
+    filter: brightness(0.6);
   }
 
   .overlay {
