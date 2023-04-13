@@ -22,6 +22,7 @@ export default {
                 this.subtotal += Number(food.price);
             });
             this.subtotal = this.subtotal.toFixed(2);
+
         }
 
     },
