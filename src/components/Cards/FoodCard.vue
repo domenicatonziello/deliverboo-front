@@ -1,14 +1,24 @@
 <script>
+import { store } from '../../data/store';
 export default {
     name: 'FoodCard',
     props: { food: Object },
     data: () => ({
+        store,
         active: false,
     }),
 
     methods: {
         setActive() {
             this.active = !this.active;
+            store.cart = true;
+            const getIndex = store.foodsCart.indexOf(this.food)
+
+            if (this.active) {
+                store.foodsCart.push(this.food)
+            } else {
+                store.foodsCart.splice(getIndex, 1)
+            }
         }
     }
 
