@@ -11,9 +11,12 @@ export default {
 
             <div class="row">
                 <div class="col-9">
-                    <div class="logo">Delive<span>Boo</span></div>
+                    <div class="logo"><i>Delive<span>Boo</span></i></div>
                 </div>
-                <div class="col-3 d-none d-lg-flex justify-content-between align-items-center">
+                <div class="col-3 justify-content-between align-items-center mobile-nav">
+                    <a href=""><i class="fa-solid fa-bars"></i></a>
+                </div>
+                <div class="col-3 justify-content-between align-items-center web-nav">
                     <a href="http://localhost:5173">Home</a>
                     <a href="http://127.0.0.1:8000/register">Registrati</a>
                     <a href="http://127.0.0.1:8000/login">Login</a>
@@ -39,7 +42,7 @@ header {
     .logo {
         color: white;
         // margin-left: 60px;
-        font-size: 40px;
+        font-size: 60px;
         font-weight: bold;
 
         span {
@@ -53,5 +56,33 @@ header {
         color: white;
     }
 
+    .mobile-nav {
+        display: none;
+    }
+
+    .web-nav {
+        display: flex;
+    }
+
+}
+
+@media screen and (max-width: 550px) {
+    header {
+        .logo {
+            font-size: 40px;
+        }
+
+        .mobile-nav {
+            display: flex;
+
+            .fa-bars {
+                font-size: 2rem;
+            }
+        }
+
+        .web-nav {
+            display: none;
+        }
+    }
 }
 </style>
