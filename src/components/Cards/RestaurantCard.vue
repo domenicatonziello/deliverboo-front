@@ -13,17 +13,13 @@ export default {
       this.active = !this.active;
     },
   },
-  created() {},
+  created() { },
 };
 </script>
 
 <template>
-  <router-link
-    :to="'restaurants/' + restaurant.id"
-    @click="setActive()"
-    class="card-restaurant"
-    :class="{ active: active }"
-  >
+  <router-link :to="'restaurants/' + restaurant.id" @click="setActive()" class="card-restaurant"
+    :class="{ active: active }">
     <img :src="restaurant.logo" class="card-img-top" alt="..." />
     <div class="card-body">
       <h5 class="card-title">{{ restaurant.name }}</h5>
@@ -35,6 +31,7 @@ export default {
 .active {
   border: 2px solid blue;
 }
+
 .card-restaurant {
   position: relative;
   border-radius: 10px;
@@ -54,10 +51,12 @@ export default {
     width: 100%;
     border-radius: 10px;
   }
+
   &:hover img {
     transform: scale(1.2);
     filter: brightness(0.6);
   }
+
   .card-body {
     position: absolute;
     top: 50%;
@@ -71,8 +70,4 @@ export default {
     }
   }
 }
-
-// .card-restaurant:hover {
-//   //   transform: scale(1.1);
-// }
 </style>
