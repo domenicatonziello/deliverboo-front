@@ -1,22 +1,117 @@
 <script>
 export default {
-    name: 'CartContent',
-    data: () => ({
-    }),
-    props: { foodCart: Object },
-    methods: {
-    }
-}
+  name: "CartContent",
+  data: () => ({}),
+  props: { foodCart: Object },
+  methods: {},
+};
 </script>
 
 <template>
-    <!-- food Cart -->
-    <div class="row px-0 py-2">
-        <div class="col-8">
-            {{ foodCart.name ? foodCart.name : 'nessun prodotto' }}
+  <!-- food Cart -->
+  <div class="container-food-cart">
+    <div class="food-cart">
+      <div class="food-cont">
+        {{ foodCart.name ? foodCart.name : "nessun prodotto" }}
+      </div>
+
+      <div class="food-price">
+        <div class="counter">
+          <div class="btn">+</div>
+          <div class="count">2</div>
+          <div class="btn">-</div>
         </div>
-        <div class="col-4 text-end">€ <span>{{ foodCart.price }}</span></div>
+        <div class="price">
+          € <span>{{ foodCart.price }}</span>
+        </div>
+      </div>
     </div>
+  </div>
 </template>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+@use "../../assets/scss/partial/variables.scss" as *;
+.container-food-cart {
+  display: flex;
+  border-top: 1px solid $white;
+
+  .food-cont {
+    display: block;
+  }
+
+  .food-cart {
+    width: 100%;
+    padding: 10px 5px 10px 5px;
+
+    display: flex;
+    justify-content: space-between;
+
+    &:hover {
+      background-color: rgba(181, 118, 0, 0.537);
+    }
+  }
+
+  .counter {
+    margin-left: 0;
+    padding: 0 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .food-price {
+    display: flex;
+  }
+}
+
+.btn {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background-color: #ffffff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 20px;
+  font-weight: 900;
+  color: #202020;
+  cursor: pointer;
+}
+.count {
+  font-size: 15px;
+  padding: 0px 10px 0 10px;
+  font-weight: 900;
+  color: #202020;
+}
+@media screen and (max-width: 992px) {
+  .container-food-cart {
+    display: flex;
+    border-top: 1px solid $white;
+
+    .counter {
+      margin-right: 20px;
+
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .food-cart {
+      width: 100%;
+      padding: 10px 5px 10px 5px;
+
+      display: flex;
+      justify-content: space-between;
+
+      &:hover {
+        background-color: rgba(181, 118, 0, 0.537);
+      }
+    }
+
+    .food-price {
+      display: flex;
+      align-items: center;
+    }
+  }
+}
+</style>
