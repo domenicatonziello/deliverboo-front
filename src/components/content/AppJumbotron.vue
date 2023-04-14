@@ -65,13 +65,17 @@ export default {
 
 .jumbotron {
   margin-top: 6rem;
+  height: 500px;
 }
 .size-text {
   font-size: 30rem;
 }
 .text {
+  img {
+    width: 150px;
+  }
   h1 {
-    font-size: 4rem;
+    font-size: 2rem;
   }
 
   h2 {
@@ -110,10 +114,22 @@ export default {
 .mobile-search {
   display: none;
 }
+.col-img {
+  position: relative;
+}
+.col-img img {
+  position: absolute;
+  right: 10px;
+  height: 400px;
+}
 
 @media screen and (max-width: 1000px) {
   .jumbotron {
     margin-top: 3rem;
+    position: relative;
+    .col-img img {
+      display: none;
+    }
   }
 
   .container {
@@ -185,6 +201,15 @@ export default {
     font-weight: bold;
 
     color: $primary-bg;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .col-img img {
+    display: none;
+  }
+  .jumbotron {
+    height: 300px;
   }
 }
 </style>
