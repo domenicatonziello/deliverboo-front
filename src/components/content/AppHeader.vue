@@ -33,8 +33,11 @@ export default {
                     </router-link>
                     <a href="http://127.0.0.1:8000/register">Registrati</a>
                     <a href="http://127.0.0.1:8000/login">Login</a>
-                    <a href="#" @click="setActiveCart">
+                    <a href="#" @click="setActiveCart" class="cart">
                         <font-awesome-icon icon="fa-solid fa-cart-shopping " class="text-white" />
+                        <div class="countCart d-flex align-items-center justify-content-center p-0 m-0">
+                            {{ store.foodsCart.length }}
+                        </div>
                     </a>
                 </div>
             </div>
@@ -96,6 +99,22 @@ header {
         .web-nav {
             display: none;
         }
+    }
+}
+
+.cart {
+    position: relative;
+
+    .countCart {
+        background-color: #000935;
+        height: 12px;
+        width: 12px;
+        border-radius: 50%;
+        position: absolute;
+        top: -1px;
+        right: 0;
+        font-size: 10px;
+        font-weight: bold;
     }
 }
 </style>
