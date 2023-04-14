@@ -25,22 +25,75 @@ export default {
 </script>
 
 <template>
-    <div @click='setActive()' class="custm-card" :class="{ active: active }">
-        <img :src="food.image" :alt="food.name">
-        <div class="overlay align-items-center justify-content-center">
-            <h4>{{ food.name }}</h4>
+    <div class="title">
+        <div class="food-card row d-flex align-items-center">
+            <div @click='setActive()' class="custm-card col d-flex justify-content-around align-items-center gap-4"
+                :class="{ active: active }">
+
+                <div class="img-box col-3">
+                    <img :src="food.image" alt="">
+                </div>
+                <div class="details col">
+                    <h4 class="mb-4">{{ food.name }}</h4>
+                    <p><b>Descrizione: </b>{{ food.description }}</p>
+                    <p><b>Prezzo: </b>€{{ food.price }}</p>
+                </div>
+
+            </div>
+            <div class="buttons col-2 d-flex flex-column align-items-center">
+                <label for="">Quantità</label>
+                <input type="number">
+                <a class="btn btn-success" href="">Aggiungi</a>
+            </div>
         </div>
     </div>
 </template>
 
 <style lang="scss" scoped>
+@use "../../assets/scss/style.scss" as *;
+@use "../../assets/scss/partial/variables" as *;
+
+.food-card {
+    display: flex;
+    margin: 25px 10px;
+    cursor: pointer;
+
+    &:hover {
+        color: grey;
+    }
+
+    .img-box {
+        img {
+            width: 100%;
+            height: 125px;
+            object-fit: cover;
+
+            &:hover {
+                filter: grayscale(0.5);
+            }
+
+        }
+    }
+
+    .buttons {
+        label {
+            margin-bottom: 5px;
+        }
+
+        input {
+            width: 50px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+        }
+    }
+}
+
+
 .active {
-    border: 3px solid rgb(255, 0, 0);
+    border: 3px solid;
 }
 
 .custm-card {
-    width: 250px;
-    height: 180px;
     position: relative;
     border-radius: 10px;
     // background-color: aqua;
