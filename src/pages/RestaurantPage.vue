@@ -24,7 +24,6 @@ export default {
             this.subtotal = this.subtotal.toFixed(2);
 
         }
-
     },
     methods: {
         fetchRestaurants() {
@@ -42,6 +41,9 @@ export default {
                 .catch((err) => { console.error(err) })
                 .then((res) => { store.isLoading = false });
         },
+        closeCart() {
+            store.cart = false
+        }
     },
     created() {
         store.isLoading = true
@@ -61,10 +63,14 @@ export default {
                 </div>
             </div>
             <div class="col-2" v-if="store.cart">
+
                 <div class="cart">
+                    <div class="p-1 mt-1">
+                        <span @click="closeCart()" class="close py-2 px-3 mx-0">x</span>
+                    </div>
                     <div class="container h-100 d-flex justify-content-center">
 
-                        <div class="row p-3 h-100">
+                        <div class="row p-3 h-100 w-100">
                             <cart-content v-for="foodCart in store.foodsCart" :foodCart="foodCart"></cart-content>
                             <!-- total price -->
                             <div v-if="store.foodsCart.length >= 1" class="row p-0 align-items-end h-50">
@@ -98,7 +104,7 @@ export default {
     background-color: #fff;
     // struttura
     min-height: 50px;
-    width: 220px;
+    width: calc(100% + 30px);
 
     // stile
     border-radius: 20px;
@@ -106,6 +112,37 @@ export default {
 
     * {
         font-size: 11px;
+    }
+}
+
+.close {
+    display: none;
+}
+
+
+@media screen and (max-width: 992px) {
+    .cart {
+        // position
+        position: absolute;
+        top: 10px;
+        right: 0;
+        bottom: 10px;
+
+        // struttura
+        min-height: 90vh;
+        width: 90vw;
+
+        * {
+            font-size: 15px;
+        }
+
+        .close {
+            display: inline-block;
+            font-size: 25px;
+            background-color: red;
+            border-radius: 50%;
+            cursor: pointer;
+        }
     }
 }
 </style>
