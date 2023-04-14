@@ -11,7 +11,6 @@ export default {
     methods: {
         setActive() {
             this.active = !this.active;
-            store.cart = true;
             const getIndex = store.foodsCart.indexOf(this.food)
 
             if (this.active) {
