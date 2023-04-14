@@ -13,6 +13,8 @@ export default {
         subtotal: 0,
         shipment_price: 0,
 
+
+
     }),
     components: { FoodCard, CartContent },
     computed: {
@@ -26,6 +28,16 @@ export default {
         }
 
     },
+    // watch: {
+    //     foodsCart: {
+    //         handler(newFoodsCart) {
+    //             localStorage.setItem.foodsCart = JSON.stringify(newFoodsCart);
+
+
+    //         },
+    //         deep: true
+    //     }
+    // },
     methods: {
         fetchRestaurants() {
 
@@ -46,6 +58,14 @@ export default {
     created() {
         store.isLoading = true
         this.fetchRestaurants()
+
+        // localStorage.setItem('foodsCart',);
+        // localStorage.foodsCart = JSON.stringify(newFoodsCart);
+        // handler(newFoodsCart) {
+        //     localStorage.foodsCart = JSON.stringify(newFoodsCart);
+
+
+        // },
     }
 
 }
@@ -65,6 +85,7 @@ export default {
                     <div class="container h-100 d-flex justify-content-center">
 
                         <div class="row p-3 h-100">
+
                             <cart-content v-for="foodCart in store.foodsCart" :foodCart="foodCart"></cart-content>
                             <!-- total price -->
                             <div v-if="store.foodsCart.length >= 1" class="row p-0 align-items-end h-50">

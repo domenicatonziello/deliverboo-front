@@ -6,8 +6,24 @@ export default {
     data: () => ({
         store,
         active: false,
+
+        carello: [],
+        newFood: {
+            name: '',
+            price: null,
+        }
     }),
 
+    mounted() {
+        if (localStorage.getItem('carello')) {
+            try {
+                this.carello = JSON.parse(localStorage.getItem('carello'));
+            } catch (e) {
+                localStorage.removeItem('carello');
+            }
+            // store.foodsCart = JSON.parse(localStorage.foodsCart)
+        }
+    },
     methods: {
         setActive() {
             this.active = !this.active;
@@ -19,8 +35,23 @@ export default {
             } else {
                 store.foodsCart.splice(getIndex, 1)
             }
-        }
-    }
+        },
+        addFood(newFood) {
+            if (!newFood.name && !newFood.price) return
+            this.carello.push(newFood);
+            // this.newFood = { name: '', price: null };
+            this.saveFood();
+        },
+        removeFood(food) {
+            this.carello.splice(food, 1);
+            this.saveFood();
+        },
+        saveFood() {
+            let parsed = JSON.stringify(this.carello);
+            localStorage.setItem('carello', parsed);
+        },
+    },
+
 
 }
 </script>
@@ -32,6 +63,16 @@ export default {
             <h4>{{ food.name }}</h4>
         </div>
     </div>
+    <div>
+        <p>
+            <span class="cat">{{ food }}</span> <button @click="removeFood(food)">Remove</button>
+        </p>
+    </div>
+
+    <p>
+        <button @click="addFood(food)">Add Cat</button>
+    </p>
+    <!-- <button @click="addFood()">Aggiungi</button> -->
 </template>
 
 <style lang="scss" scoped>
