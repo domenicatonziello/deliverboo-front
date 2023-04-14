@@ -5,4 +5,6 @@ export const store = reactive({
     isLoading: false,
     cart: false,
     foodsCart: [],
+    city: '',
+    addedCity: false,
 });

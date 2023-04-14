@@ -20,7 +20,6 @@ export default {
 <template>
     <header>
         <div class="container-fluid">
-
             <div class="row">
                 <div class="col-9">
                     <router-link :to="'/'">
@@ -45,12 +44,15 @@ export default {
 <style lang="scss" scoped>
 header {
     padding: 10px;
-    height: 80px;
+    min-height: 100px;
     width: 100%;
-    // background-color: rgba(00, 09, 35, 0.4);
 
-    // &:hover {
-    // }
+
+    .col-9 {
+        height: 100%;
+        display: flex;
+        align-items: center;
+    }
 
     .logo {
         color: white;

@@ -16,11 +16,22 @@ export default {
         id_typologies: "",
     }),
     computed: {
+        filterCheck() {
+            if (store.currentTypology.length <= 0) {
+                this.allRestaurants();
+            }
+        },
         getString() {
-            return (this.id_typologies = store.currentTypology.toString());
+            return (this.id_typologies = allRestaurants().toString());
         },
     },
     methods: {
+        refreshCity() {
+            store.currentTypology = [];
+            store.restaurants = [];
+            store.addedCity = false;
+            // store.city = ;
+        },
         fetchTypologies() {
             store.isLoading = true;
 
@@ -28,6 +39,22 @@ export default {
                 .get(baseUri + "typologies")
                 .then((res) => {
                     this.typologies = res.data;
+                })
+                .catch((err) => {
+                    console.error(err);
+                })
+                .then((res) => {
+                    store.isLoading = false;
+                });
+
+        },
+        allRestaurants() {
+            axios
+                .get(
+                    baseUri + "restaurants"
+                )
+                .then((res) => {
+                    store.restaurants = res.data;
                 })
                 .catch((err) => {
                     console.error(err);
@@ -53,12 +80,14 @@ export default {
                         store.isLoading = false;
                     });
             } else {
+
                 store.restaurants = [];
             }
         },
     },
     created() {
         this.fetchTypologies();
+        this.allRestaurants();
     },
 };
 </script>
@@ -66,69 +95,67 @@ export default {
 <template>
     <AppJumbotron />
     <!-- tipologie -->
-    <section id="typology">
+    <section id="typology" v-if="store.addedCity">
         <div class="container">
-            <h2 class="mb-5">Le nostre tipologie</h2>
+            <p><i class="fa-solid fa-location-dot" style="color: #000000;"></i> <strong>{{ store.city }}</strong>
+                <button @click="refreshCity" class="ms-2 change">Cambia indirizzo</button>
+            </p>
+        </div>
+        <div class="container">
+            <h2 class="mb-4">Le nostre tipologie</h2>
+            <p class="mb-2 indication">Scrollla e seleziona le tipologie che vuoi <i
+                    class="fa-solid fa-arrow-right-long fa-beat fa-sm ms-2" style="color: #6e6e6e;"></i></p>
             <carosel>
                 <typology-card @click="onClick()" v-for="typology in typologies" :key="typology.id"
                     :typology="typology"></typology-card>
             </carosel>
 
-            <div class="d-flex justify-content-center gap-2 mt-5">
+            <div v-if="store.restaurants.length > 0" class="row justify-content-center gap-3 mt-5">
                 <restaurant-card v-for="restaurant in store.restaurants" :key="restaurant.id"
                     :restaurant="restaurant"></restaurant-card>
             </div>
+            <div v-if="store.restaurants.length < 1" class="mt-5 py-3 text-center">
+                <h3>Non ci sono ristoranti per le tipologie selezionate</h3>
+            </div>
         </div>
     </section>
-    <!-- footer -->
-    <footer>
-        <div class="banner-register">
-            <h2 class="text-white mb-4">Unisciti a noi!</h2>
-            <a href="http://127.0.0.1:8000/register" class="button">Registrati</a>
-        </div>
-    </footer>
 </template>
 
 <style lang="scss" scoped>
 @use '../assets/scss/partial/variables.scss' as *;
 
+.change {
+    border: 0;
+    background-color: rgb(255, 140, 66);
+    border-radius: 15px;
+    font-weight: bold;
+    font-size: 13px;
+    color: #ffffff;
+
+    &:hover {
+        // background-color: rgb(233, 117, 9);
+        color: #000;
+    }
+
+}
+
 #typology {
-    min-height: 200px;
+    min-height: 65vh;
     background-color: rgb(255, 233, 218);
     box-shadow: inset 0px 4px 4px rgba(0, 0, 0, 0.25);
-    padding: 100px 0;
+    padding-top: 50px;
+    padding-bottom: 100px;
 
     h2 {
         text-shadow: 2px 1px 2px $brown;
         color: $primary-bg;
         font-size: 40px;
     }
-}
 
-footer {
-    height: 150px;
-    background-color: $dark-blue;
-    position: relative;
-
-    .banner-register {
-        background-color: $blue;
-        border-radius: 15px;
-        padding: 30px;
-        text-align: center;
-
-        position: absolute;
-        top: -50px;
-        left: 20%;
-        right: 20%;
-
-        .button {
-            background-color: $primary-bg;
-            border-radius: 10px;
-            padding: 10px 20px;
-            text-decoration: none;
-            color: white;
-            font-size: 20px;
-        }
+    .indication {
+        font-weight: 400;
+        color: #505152;
+        font-style: oblique;
     }
 }
 </style>
