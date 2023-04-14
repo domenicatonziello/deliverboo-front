@@ -15,8 +15,8 @@ export default {
 };
 </script>
 <template>
-  <section>
-    <div class="container jumbotron" v-if="!store.addedCity">
+  <section v-if="!store.addedCity" class="d-flex align-items-center main">
+    <div class="container jumbotron">
       <div class="row d-flex">
         <div class="col-6 col-text col">
           <div class="text">
@@ -55,7 +55,9 @@ export default {
 @use "../../assets/scss/style.scss" as *;
 @use "../../assets/scss/partial/variables" as *;
 
-
+.main {
+  height: 80vh;
+}
 
 .brown {
   color: $brown;

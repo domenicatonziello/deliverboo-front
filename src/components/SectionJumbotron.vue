@@ -12,7 +12,7 @@ export default {
 
 <style lang="scss">
 #jumbotron {
-  min-height: 74.4vh;
+  min-height: 100vh;
   // padding-bottom: 20px;
   background: linear-gradient(297.36deg,
       #ff8c42 55%,
