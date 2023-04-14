@@ -24,6 +24,16 @@ export default {
             // store.foodsCart = JSON.parse(localStorage.foodsCart)
         }
     },
+    watch: {
+        foodsCart: {
+            handler(addFood) {
+                localStorage.carello = JSON.stringify(addFood);
+
+
+            },
+            deep: true
+        }
+    },
     methods: {
         setActive() {
             this.active = !this.active;
@@ -64,15 +74,9 @@ export default {
         </div>
     </div>
     <div>
-        <p>
-            <span class="cat">{{ food }}</span> <button @click="removeFood(food)">Remove</button>
-        </p>
-    </div>
-
-    <p>
+        <button @click="removeFood(food)">Remove</button>
         <button @click="addFood(food)">Add Cat</button>
-    </p>
-    <!-- <button @click="addFood()">Aggiungi</button> -->
+    </div>
 </template>
 
 <style lang="scss" scoped>
