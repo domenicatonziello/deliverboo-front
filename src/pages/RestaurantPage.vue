@@ -10,8 +10,13 @@ export default {
         store,
         menu: [],
         name: '',
+        address: '',
+        phone_number: '',
+        description: '',
         subtotal: 0,
+        min_order: 0,
         shipment_price: 0,
+        logo: ''
 
     }),
     components: { FoodCard, CartContent },
@@ -33,7 +38,12 @@ export default {
                 .then((res) => {
                     this.menu = res.data.foods
                     this.name = res.data.restaurant.name
+                    this.address = res.data.restaurant.address
+                    this.phone_number = res.data.restaurant.phone_number
+                    this.description = res.data.restaurant.description
+                    this.min_order = res.data.restaurant.min_order
                     this.shipment_price = res.data.restaurant.shipment_price
+                    this.logo = res.data.restaurant.logo
                     // console.log(res.data.restaurant.name)
                     // console.log(this.menu)
                     // console.log(this.$route.params.id)
@@ -52,14 +62,41 @@ export default {
 </script>
 
 <template>
-    <div class="container">
-        <div class="row">
-            <div :class="!store.cart ? 'col-12' : 'col-10'">
-                <h1 class="my-5 text-center">Menù ristorante <span>{{ this.name }}</span></h1>
-                <div class="d-flex flex-wrap pt-5 justify-content-center gap-2">
-                    <food-card v-for="food in menu" :key="food.id" :food="food"></food-card>
+    <div class="container px-5">
+        <div class="row d-flex justify-content-center align-items-center text-center">
+
+
+            <!-- Restaurant-->
+            <div :class="!store.cart ? 'col-12 mb-5' : 'col-10 mb-5'">
+                <!-- Restaurant Name-->
+                <h1 class="mt-5 text-center bg-white restaurant-title"> <span>{{ this.name }}</span></h1>
+
+                <!-- Restaurant Elements-->
+                <div class="row d-flex flex-wrap pt-3 restaurant-card justify-content-between gap-3">
+
+                    <!-- Restaurant Details-->
+                    <div class="col-3 description">
+                        <div class="img-box"><img src="../../public/img/ristorante.webp" alt=""></div>
+                        <div class="text">
+                            <h5><a href="">{{ this.address }}</a></h5>
+                            <h5><a href="">Numero: {{ this.phone_number }}</a></h5>
+                            <h6>Minimo Ordine: €{{ this.min_order }}</h6>
+                            <h6>Costo Spedizione: €{{ this.shipment_price }}</h6>
+                            <p>{{ this.description }}</p>
+                        </div>
+                    </div>
+
+                    <!-- Restaurant Menu-->
+                    <div class="col menu">
+                        <h1 class="text-center mb-5">Menù</h1>
+                        <food-card v-for="food in menu" :key="food.id" :food="food"></food-card>
+                    </div>
+
+
                 </div>
             </div>
+
+            <!-- Cart -->
             <div class="col-2" v-if="store.cart">
                 <div class="cart">
                     <div class="container h-100 d-flex justify-content-center">
@@ -94,6 +131,74 @@ export default {
 </template>
 
 <style lang="scss" scoped>
+@use "./../assets/scss/style.scss" as *;
+@use "./../assets/scss/partial/variables" as *;
+
+.restaurant-title {
+    border-radius: 1.5rem;
+    border: 8px solid rgb(255, 233, 218);
+
+    padding: 1rem;
+}
+
+.restaurant-card {
+
+    .description {
+        background-color: white;
+
+        padding: 2rem;
+        border-radius: 1.5rem;
+        border: 8px solid rgb(255, 233, 218);
+
+        .img-box {
+            width: 100%;
+
+            img {
+                width: 100%;
+            }
+        }
+
+        .text {
+            h5 {
+                font-size: 1.2rem;
+            }
+
+            h6 {
+                font-size: 0.8rem;
+                margin-bottom: 0.8rem;
+            }
+
+            p {
+                margin-top: 1.5rem;
+            }
+        }
+
+        .text>* {
+            margin-bottom: 1.5rem;
+
+
+            a {
+                color: black;
+                text-decoration: none;
+                cursor: pointer;
+
+                &:hover {
+                    color: grey;
+                }
+            }
+        }
+    }
+
+    .menu {
+        background-color: white;
+
+        padding: 2rem;
+        border-radius: 1.5rem;
+        border: 8px solid rgb(255, 233, 218);
+    }
+
+}
+
 .cart {
     background-color: #fff;
     // struttura
@@ -102,10 +207,22 @@ export default {
 
     // stile
     border-radius: 20px;
-    border: 2px solid black;
+    border: 2px solid rgb(255, 233, 218);
 
     * {
         font-size: 11px;
+    }
+}
+
+@media screen and (max-width: 1000px) {
+    .restaurant-card {
+        .description {
+            width: 100%;
+        }
+
+        .menu {
+            width: 100%;
+        }
     }
 }
 </style>
