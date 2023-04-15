@@ -199,12 +199,13 @@ export default {
 
 .cart {
     position: absolute;
-    right: -200px;
-    top: 10px;
+    right: 50px;
+    top: 120px;
     background-color: #fff;
     min-height: 50px;
     box-shadow: 5px 5px 5px $brown;
     background-color: $light-orange;
+    z-index: 2;
 
     .text-order {
         font-size: 20px;

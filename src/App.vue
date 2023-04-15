@@ -16,9 +16,8 @@ export default {
 </script>
 
 <template>
+  <app-header></app-header>
   <section-jumbotron>
-    <app-header></app-header>
-
     <router-view>
     </router-view>
     <div class="loader  align-items-center justify-content-center" :class="{ 'd-flex': store.isLoading }">

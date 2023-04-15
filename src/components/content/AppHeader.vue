@@ -50,9 +50,20 @@ export default {
 
 <style lang="scss" scoped>
 header {
+
   padding: 10px;
-  min-height: 100px;
+  height: 12vh;
   width: 100%;
+  position: sticky;
+  top: 0;
+  right: 0;
+  left: 0;
+  background: linear-gradient(297.36deg,
+      #ff8c42 44.61%,
+      #feb889 44.61%,
+      #feb07c 87.32%,
+      #fcfbf7 143.55%);
+  z-index: 1;
 
 
   ul {

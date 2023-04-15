@@ -37,6 +37,8 @@ export default {
 </template>
 
 <style lang="scss" scoped>
+@use '../../assets/scss/partial/variables.scss' as *;
+
 .card {
   background-color: rgba(255, 234, 216, 0.904);
   height: 100%;
@@ -59,6 +61,12 @@ export default {
     color: white;
     font-weight: bold;
   }
+
+}
+
+footer {
+
+  background-color: white;
 
 }
 </style>
