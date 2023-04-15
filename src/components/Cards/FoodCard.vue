@@ -58,9 +58,12 @@ export default {
 
         },
         removeFood(food) {
-            console.log(food)
-            store.foodsCart.splice(food, 1);
-            this.saveFood();
+            if (store.foodsCart.includes(this.food)) {
+
+                console.log(food)
+                store.foodsCart.splice(food, 1);
+                this.saveFood();
+            } else return
         },
         saveFood() {
             let parsed = JSON.stringify(store.foodsCart);
@@ -138,4 +141,5 @@ export default {
             transition: color 1s;
         }
     }
-}</style>
+}
+</style>
