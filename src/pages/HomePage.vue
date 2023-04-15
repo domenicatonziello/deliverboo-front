@@ -105,7 +105,7 @@ export default {
         </div>
         <div class="container">
             <h2 class="mb-4">Le nostre tipologie</h2>
-            <p class="mb-2 indication">Scrollla e seleziona le tipologie che vuoi <i
+            <p class="mb-2 indication">Scrolla e seleziona le tipologie che vuoi <i
                     class="fa-solid fa-arrow-right-long fa-beat fa-sm ms-2" style="color: #6e6e6e;"></i></p>
             <carosel>
                 <typology-card @click="onClick()" v-for="typology in typologies" :key="typology.id"
