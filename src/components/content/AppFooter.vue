@@ -15,17 +15,16 @@ export default {
 <template>
     <!-- footer -->
     <footer>
-        <div class="banner-register">
-            <h2 class="text-white mb-4 d-none d-sm-block">Unisciti a noi!</h2>
-            <a href="http://127.0.0.1:8000/register" class="button">Registrati</a>
+        <div class="banner-register d-flex justify-content-center align-items-center">
+            <h2 class="text-white">Scopri Di Più !</h2>
+
         </div>
         <div class="info">
-            <div>
-                <h3 class="text-center ">Maggiori Informazioni</h3>
-            </div>
-
-            <div class="row row-cols-2 row-cols-sm-2 row-cols-md-4 row-cols-lg-6 justify-content-center gap-3">
-
+            <div class="row row-cols-2 row-cols-sm-2 row-cols-md-5 row-cols-lg-6 justify-content-center gap-3">
+                <div class="col">
+                    <h5>Lavora con Deliveboo</h5>
+                    <a href="http://127.0.0.1:8000/register" class="button">Registrati</a>
+                </div>
                 <div class="col">
                     <ul class="list">
                         <li class="list_item"><a href="#" aria-current="page"
@@ -97,17 +96,28 @@ export default {
 @use '../../assets/scss/partial/variables.scss' as *;
 
 footer {
-    position: sticky;
+    position: fixed;
     bottom: 0;
     right: 0;
     left: 0;
-    height: 11vh;
-    transition: all 1s linear;
+    height: 7vh;
+    transition: all 0.7s linear;
     background-color: $dark-blue;
     padding-bottom: 2rem;
+    transform: rotate(180deg);
+
+    .button {
+        background-color: $primary-bg;
+        border-radius: 10px;
+        padding: 5px 10px;
+        text-decoration: none;
+        color: white;
+        font-size: 20px;
+        margin-bottom: 10px;
+    }
 
     &:hover {
-        height: 30vh;
+        height: 20vh;
     }
 
     @media screen and (max-width: 778px) {
@@ -117,51 +127,46 @@ footer {
         }
     }
 
+
     &:hover .row {
-        display: flex;
+        visibility: visible;
     }
 
     &:hover .info {
-        display: block;
+        visibility: visible;
+        opacity: 1;
     }
 
     .banner-register {
+        transform: rotate(180deg);
         background-color: $blue;
         border-radius: 15px;
-        padding: 30px;
+        padding: 15px;
         text-align: center;
 
         position: absolute;
-        top: -50px;
-        left: 20%;
-        right: 20%;
+        bottom: -50px;
+        left: 25%;
+        right: 25%;
+        z-index: 1;
 
-        .button {
-            background-color: $primary-bg;
-            border-radius: 10px;
-            padding: 10px 20px;
-            text-decoration: none;
-            color: white;
-            font-size: 20px;
-        }
+
     }
 
     .info {
-        display: none;
-        padding-top: 6.5rem;
-        margin-bottom: 1rem;
-        // position: absolute;
-        // top: 120px;
-        // left: 40%;
-        // right: 40%;
+
+        opacity: 0;
+        transition: visibility 0.7s linear, opacity 0.5s linear;
+        padding-bottom: 1rem;
         color: #ffffff;
+        transform: rotate(180deg);
+        visibility: hidden;
+
     }
 
     .row {
         width: 100%;
         margin: 0;
-        display: none;
-        // transition: display 2s;
 
         .col {
             background-color: rgb(78, 89, 140);

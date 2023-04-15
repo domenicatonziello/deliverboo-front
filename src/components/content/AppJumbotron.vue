@@ -56,7 +56,7 @@ export default {
 @use "../../assets/scss/partial/variables" as *;
 
 .main {
-  height: 80vh;
+  height: 100%;
 }
 
 .brown {

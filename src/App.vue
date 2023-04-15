@@ -2,13 +2,12 @@
 import { store } from './data/store'
 import NotFoundPage from './pages/NotFoundPage.vue'
 import AppHeader from './components/content/AppHeader.vue'
-import AppFooter from './components/content/AppFooter.vue'
 
 
 import SectionJumbotron from './components/SectionJumbotron.vue'
 export default {
   name: 'DeliverBoo',
-  components: { AppHeader, AppFooter, NotFoundPage, SectionJumbotron },
+  components: { AppHeader, NotFoundPage, SectionJumbotron },
   data: () => ({
     store,
   }),
@@ -16,9 +15,8 @@ export default {
 </script>
 
 <template>
+  <app-header></app-header>
   <section-jumbotron>
-    <app-header></app-header>
-
     <router-view>
     </router-view>
     <div class="loader  align-items-center justify-content-center" :class="{ 'd-flex': store.isLoading }">
@@ -27,7 +25,6 @@ export default {
 
     </div>
   </section-jumbotron>
-  <app-footer></app-footer>
 </template>
 
 
