@@ -87,6 +87,7 @@ export default {
         },
     },
     created() {
+        store.currentTypology = [];
         this.fetchTypologies();
         this.allRestaurants();
     },
