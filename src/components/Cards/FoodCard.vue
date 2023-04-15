@@ -2,7 +2,7 @@
 import { store } from '../../data/store';
 export default {
     name: 'FoodCard',
-    props: { food: Object, index: Number },
+    props: { food: Object },
     data: () => ({
         store,
         active: false,
@@ -43,14 +43,10 @@ export default {
         setActive() {
             this.active = !this.active;
             store.cart = true;
-            // const getIndex = store.foodsCart.indexOf(this.food);
-            console.log(this.returnIndex)
 
             if (this.active) {
-                // store.foodsCart.push(this.food)
                 this.addFood(this.food)
             } else {
-                // store.foodsCart.splice(getIndex, 1)
                 this.removeFood(this.returnIndex)
 
             }
@@ -58,25 +54,19 @@ export default {
         addFood(newFood) {
             if (!newFood.name && !newFood.price) return
             store.foodsCart.push(newFood);
-            // this.newFood = { name: '', price: null };
             this.saveFood();
-            console.log(newFood.id)
 
         },
         removeFood(food) {
-            if (this.food.id == this.index) {
-                console.log(food)
-                store.foodsCart.splice(food, 1);
-                this.saveFood();
-            }
+            console.log(food)
+            store.foodsCart.splice(food, 1);
+            this.saveFood();
         },
         saveFood() {
             let parsed = JSON.stringify(store.foodsCart);
             localStorage.setItem('Carello', parsed);
         },
     },
-
-
 }
 </script>
 
@@ -103,7 +93,6 @@ export default {
     height: 180px;
     position: relative;
     border-radius: 10px;
-    // background-color: aqua;
     cursor: pointer;
 
     &.active .overlay {
@@ -149,5 +138,4 @@ export default {
             transition: color 1s;
         }
     }
-}
-</style>
+}</style>
