@@ -7,12 +7,7 @@ export default {
     store,
     active: false,
     getIndex: null,
-
-    carello: [],
-    newFood: {
-      name: "",
-      price: null,
-    },
+    quantityFood: null,
   }),
 
   mounted() {
@@ -52,7 +47,7 @@ export default {
     },
     addFood(newFood) {
       if (!newFood.name && !newFood.price) return;
-      store.foodsCart.push(newFood);
+      store.foodsCart.push({ newFood, 'quantity': this.quantityFood });
       this.saveFood();
     },
     removeFood(food) {
@@ -71,11 +66,8 @@ export default {
 <template>
   <div class="title">
     <div class="food-card row d-flex align-items-center">
-      <div
-        @click="setActive()"
-        class="custm-card col d-flex justify-content-around align-items-center gap-4"
-        :class="{ active: active }"
-      >
+      <div @click="setActive()" class="custm-card col d-flex justify-content-around align-items-center gap-4"
+        :class="{ active: active }">
         <div class="img-box col-3">
           <img :src="food.image" alt="" />
         </div>
@@ -86,8 +78,8 @@ export default {
         </div>
       </div>
       <div class="buttons col-2 d-flex flex-column align-items-center">
-        <label for="">Quantità</label>
-        <input type="number" />
+        <label for="quantityInput">Quantità</label>
+        <input type="number" name="quantityInput" id="quantityInput" v-model="quantityFood" />
         <button class="btn btn-success" @click="addFood(food)" href="">
           Aggiungi
         </button>
