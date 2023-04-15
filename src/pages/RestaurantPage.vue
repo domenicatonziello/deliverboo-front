@@ -23,7 +23,7 @@ export default {
         getTotalPrice() {
             this.subtotal = Number(this.shipment_price);
             store.foodsCart.forEach((food) => {
-                this.subtotal += Number(food.price);
+                this.subtotal += Number(food.newFood.price * food.quantity);
             });
             this.subtotal = this.subtotal.toFixed(2);
         },
