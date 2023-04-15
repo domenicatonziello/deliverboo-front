@@ -52,7 +52,7 @@ export default {
 header {
 
   padding: 10px;
-  height: 12vh;
+  min-height: 12vh;
   width: 100%;
   position: sticky;
   top: 0;
