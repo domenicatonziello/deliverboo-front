@@ -94,10 +94,6 @@ export default {
             </div>
         </div>
     </div>
-    <div>
-        <button @click="removeFood(returnIndex)">Remove</button>
-        <button @click="addFood(food)">Add Cat</button>
-    </div>
 </template>
 
 <style lang="scss" scoped>
