@@ -15,22 +15,18 @@ export default {
     }),
 
     mounted() {
-        if (localStorage.getItem('carello')) {
+        if (localStorage.getItem('Carello')) {
             try {
-                this.carello = JSON.parse(localStorage.getItem('carello'));
+                store.foodsCart = JSON.parse(localStorage.getItem('Carello'));
             } catch (e) {
-                localStorage.removeItem('carello');
+                localStorage.removeItem('Carello');
             }
             // store.foodsCart = JSON.parse(localStorage.foodsCart)
         }
     },
     watch: {
         foodsCart: {
-            handler(addFood) {
-                localStorage.carello = JSON.stringify(addFood);
-
-
-            },
+            handler(addFood) { localStorage.carello = JSON.stringify(addFood) },
             deep: true
         }
     },
@@ -41,24 +37,26 @@ export default {
             const getIndex = store.foodsCart.indexOf(this.food)
 
             if (this.active) {
-                store.foodsCart.push(this.food)
+                // store.foodsCart.push(this.food)
+                this.addFood(this.food)
             } else {
-                store.foodsCart.splice(getIndex, 1)
+                // store.foodsCart.splice(getIndex, 1)
+                this.removeFood(getIndex)
             }
         },
         addFood(newFood) {
             if (!newFood.name && !newFood.price) return
-            this.carello.push(newFood);
+            store.foodsCart.push(newFood);
             // this.newFood = { name: '', price: null };
             this.saveFood();
         },
         removeFood(food) {
-            this.carello.splice(food, 1);
+            store.foodsCart.splice(food, 1);
             this.saveFood();
         },
         saveFood() {
-            let parsed = JSON.stringify(this.carello);
-            localStorage.setItem('carello', parsed);
+            let parsed = JSON.stringify(store.foodsCart);
+            localStorage.setItem('Carello', parsed);
         },
     },
 
