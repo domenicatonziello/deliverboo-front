@@ -1,9 +1,23 @@
 <script>
+import { store } from '../../data/store';
+
 export default {
   name: "CartContent",
-  data: () => ({}),
+  data: () => ({ store, tot_price: 0 }),
   props: { foodCart: Object },
-  methods: {},
+  computed: {
+    getPrice() {
+      this.tot_price = Number(this.foodCart.newFood.price * this.foodCart.quantity);
+    }
+  },
+  methods: {
+    upQuantity() {
+      this.foodCart.quantity += 1;
+    },
+    downQuantity() {
+      this.foodCart.quantity -= 1;
+    }
+  }
 };
 </script>
 
@@ -12,17 +26,17 @@ export default {
   <div class="container-food-cart">
     <div class="food-cart">
       <div class="food-cont">
-        {{ foodCart.name ? foodCart.name : "nessun prodotto" }}
+        {{ foodCart.newFood.name ? foodCart.newFood.name : "nessun prodotto" }} (€{{ foodCart.newFood.price }})
       </div>
 
       <div class="food-price">
         <div class="counter">
-          <div class="btn">+</div>
-          <div class="count">2</div>
-          <div class="btn">-</div>
+          <div @click="upQuantity()" class="btn">+</div>
+          <div class="count">{{ foodCart.quantity }}</div>
+          <div @click="downQuantity()" class="btn">-</div>
         </div>
         <div class="price">
-          € <span>{{ foodCart.price }}</span>
+          € <span>{{ this.tot_price }}</span>
         </div>
       </div>
     </div>
@@ -31,6 +45,7 @@ export default {
 
 <style lang="scss" scoped>
 @use "../../assets/scss/partial/variables.scss" as *;
+
 .container-food-cart {
   display: flex;
   border-top: 1px solid $white;
@@ -77,12 +92,14 @@ export default {
   color: #202020;
   cursor: pointer;
 }
+
 .count {
   font-size: 15px;
   padding: 0px 10px 0 10px;
   font-weight: 900;
   color: #202020;
 }
+
 @media screen and (max-width: 992px) {
   .container-food-cart {
     display: flex;
