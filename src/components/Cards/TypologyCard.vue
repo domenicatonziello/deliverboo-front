@@ -36,12 +36,15 @@ export default {
 .active {
   border: 3px solid rgb(255, 0, 0);
 }
+
 .box {
   height: 120px;
   position: relative;
   overflow: hidden;
   border-radius: 10px;
   cursor: pointer;
+
+
 
   &:hover .overlay {
     h4 {
@@ -55,7 +58,10 @@ export default {
     width: 100%;
     border-radius: 10px;
     object-fit: cover;
+    transform: scale(1.2);
+    filter: brightness(0.6);
   }
+
   &:hover img {
     transform: scale(1.2);
     filter: brightness(0.6);
@@ -71,7 +77,7 @@ export default {
       color: white;
       margin: 0;
       font-size: 20px;
-      visibility: hidden;
+      visibility: visible;
     }
   }
 }

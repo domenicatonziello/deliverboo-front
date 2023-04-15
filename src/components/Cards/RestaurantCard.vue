@@ -18,56 +18,47 @@ export default {
 </script>
 
 <template>
-  <router-link :to="'restaurants/' + restaurant.id" @click="setActive()" class="card-restaurant"
-    :class="{ active: active }">
-    <img :src="restaurant.logo" class="card-img-top" alt="..." />
+  <div class="card" style="width: 17rem;">
+    <img :src="restaurant.logo" class="card-img-top" :alt="restaurant.name">
     <div class="card-body">
-      <h5 class="card-title">{{ restaurant.name }}</h5>
+      <h5 class="card-title text-center">{{ restaurant.name }}</h5>
+      <h6 class="text-center"><i class="fa-solid fa-location-dot" style="color: #FB0000;"></i> {{ restaurant.address }}
+      </h6>
+      <div class="d-flex justify-content-around mt-3">
+        <p><i class="fa-solid fa-utensils" style="color: #0C7CEC;"></i> {{ restaurant.min_order }}</p>
+        <p><i class="fa-solid fa-truck-fast" style="color: #FF8D43;"></i> {{ restaurant.shipment_price }}</p>
+      </div>
     </div>
-  </router-link>
+    <router-link :to="'restaurants/' + restaurant.id" @click="setActive()" class="card-restaurant"
+      :class="{ active: active }" style="text-decoration: none; color: inherit;">
+      <button class="btn cust-btn">ordina</button>
+    </router-link>
+  </div>
 </template>
 
 <style lang="scss" scoped>
-.active {
-  border: 2px solid blue;
-}
-
-.card-restaurant {
+.card {
+  background-color: rgba(255, 234, 216, 0.904);
+  height: 100%;
   position: relative;
-  border-radius: 10px;
-  overflow: hidden;
-  height: 150px;
-
-  &:hover .card-body {
-    h5 {
-      visibility: visible;
-      transition: 0.5s;
-    }
-  }
+  padding: 0;
+  margin-bottom: 2rem;
 
   img {
-    object-fit: cover;
-    height: 100%;
+    height: 180px;
     width: 100%;
-    border-radius: 10px;
   }
 
-  &:hover img {
-    transform: scale(1.2);
-    filter: brightness(0.6);
-  }
-
-  .card-body {
+  .cust-btn {
+    width: 40%;
     position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -25%);
-
-    h5 {
-      color: white;
-      visibility: hidden;
-      font-size: 15px;
-    }
+    bottom: -20px;
+    left: 30%;
+    right: 30%;
+    background-color: rgb(255, 140, 66);
+    color: white;
+    font-weight: bold;
   }
+
 }
 </style>

@@ -21,21 +21,11 @@ export default {
         <router-link :to="'/'">
           <div class="logo">Delive<span>Boo</span></div>
         </router-link>
-        <button
-          class="navbar-toggler"
-          type="button"
-          data-bs-toggle="collapse"
-          data-bs-target="#navbarSupportedContent"
-          aria-controls="navbarSupportedContent"
-          aria-expanded="false"
-          aria-label="Toggle navigation"
-        >
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
-        <div
-          class="collapse navbar-collapse flex-grow-0"
-          id="navbarSupportedContent"
-        >
+        <div class="collapse navbar-collapse flex-grow-0" id="navbarSupportedContent">
           <ul class="navbar-nav me-auto">
             <li class="nav-item mx-3">
               <router-link :to="'/'"> Home </router-link>
@@ -48,10 +38,7 @@ export default {
             </li>
             <li class="nav-item mx-3">
               <a href="#" @click="setActiveCart">
-                <font-awesome-icon
-                  icon="fa-solid fa-cart-shopping "
-                  class="text-white"
-                />
+                <font-awesome-icon icon="fa-solid fa-cart-shopping " class="text-white" />
               </a>
             </li>
           </ul>
@@ -64,8 +51,9 @@ export default {
 <style lang="scss" scoped>
 header {
   padding: 10px;
-  // height: 100px;
+  min-height: 100px;
   width: 100%;
+
 
   ul {
     list-style-type: none;
