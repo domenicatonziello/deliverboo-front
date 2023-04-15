@@ -64,7 +64,7 @@ export default {
 </script>
 
 <template>
-    <div class="container px-5 mt-5">
+    <div class="container p-5 ">
         <div class="row d-flex justify-content-center text-center cart-position">
             <!-- Restaurant-->
             <div class="col-12 mb-5" :class="store.cart ? 'restaurant-detail' : ''">
