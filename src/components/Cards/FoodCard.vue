@@ -2,10 +2,11 @@
 import { store } from '../../data/store';
 export default {
     name: 'FoodCard',
-    props: { food: Object },
+    props: { food: Object, index: Number },
     data: () => ({
         store,
         active: false,
+        getIndex: null,
 
         carello: [],
         newFood: {
@@ -30,18 +31,28 @@ export default {
             deep: true
         }
     },
+    computed: {
+        returnIndex() {
+
+            return this.getIndex = store.foodsCart.indexOf(this.food);
+
+        }
+    },
+
     methods: {
         setActive() {
             this.active = !this.active;
             store.cart = true;
-            const getIndex = store.foodsCart.indexOf(this.food)
+            // const getIndex = store.foodsCart.indexOf(this.food);
+            console.log(this.returnIndex)
 
             if (this.active) {
                 // store.foodsCart.push(this.food)
                 this.addFood(this.food)
             } else {
                 // store.foodsCart.splice(getIndex, 1)
-                this.removeFood(getIndex)
+                this.removeFood(this.returnIndex)
+
             }
         },
         addFood(newFood) {
@@ -49,10 +60,15 @@ export default {
             store.foodsCart.push(newFood);
             // this.newFood = { name: '', price: null };
             this.saveFood();
+            console.log(newFood.id)
+
         },
         removeFood(food) {
-            store.foodsCart.splice(food, 1);
-            this.saveFood();
+            if (this.food.id == this.index) {
+                console.log(food)
+                store.foodsCart.splice(food, 1);
+                this.saveFood();
+            }
         },
         saveFood() {
             let parsed = JSON.stringify(store.foodsCart);
@@ -72,7 +88,7 @@ export default {
         </div>
     </div>
     <div>
-        <button @click="removeFood(food)">Remove</button>
+        <button @click="removeFood(returnIndex)">Remove</button>
         <button @click="addFood(food)">Add Cat</button>
     </div>
 </template>

@@ -77,7 +77,7 @@ export default {
             <div :class="!store.cart ? 'col-12' : 'col-10'">
                 <h1 class="my-5 text-center">Menù ristorante <span>{{ this.name }}</span></h1>
                 <div class="d-flex flex-wrap pt-5 justify-content-center gap-2">
-                    <food-card v-for="food in menu" :key="food.id" :food="food"></food-card>
+                    <food-card v-for="food in menu" :key="food.id" :index="food.id" :food="food"></food-card>
                 </div>
             </div>
             <div class="col-2" v-if="store.cart">

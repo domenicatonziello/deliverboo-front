@@ -12,6 +12,7 @@ export default {
     setActive() {
       this.active = !this.active;
       const getIndex = store.currentTypology.indexOf(this.typology.id);
+      console.log(getIndex)
 
       if (this.active) {
         store.currentTypology.push(this.typology.id);
@@ -36,6 +37,7 @@ export default {
 .active {
   border: 3px solid rgb(255, 0, 0);
 }
+
 .box {
   height: 120px;
   position: relative;
@@ -56,6 +58,7 @@ export default {
     border-radius: 10px;
     object-fit: cover;
   }
+
   &:hover img {
     transform: scale(1.2);
     filter: brightness(0.6);
