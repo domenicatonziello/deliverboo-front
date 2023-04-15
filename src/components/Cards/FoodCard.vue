@@ -6,21 +6,68 @@ export default {
     data: () => ({
         store,
         active: false,
+        getIndex: null,
+
+        carello: [],
+        newFood: {
+            name: '',
+            price: null,
+        }
     }),
+
+    mounted() {
+        if (localStorage.getItem('Carello')) {
+            try {
+                store.foodsCart = JSON.parse(localStorage.getItem('Carello'));
+            } catch (e) {
+                localStorage.removeItem('Carello');
+            }
+            // store.foodsCart = JSON.parse(localStorage.foodsCart)
+        }
+    },
+    watch: {
+        foodsCart: {
+            handler(addFood) { localStorage.carello = JSON.stringify(addFood) },
+            deep: true
+        }
+    },
+    computed: {
+        returnIndex() {
+
+            return this.getIndex = store.foodsCart.indexOf(this.food);
+
+        }
+    },
 
     methods: {
         setActive() {
             this.active = !this.active;
             const getIndex = store.foodsCart.indexOf(this.food)
+            store.cart = true;
 
             if (this.active) {
-                store.foodsCart.push(this.food)
+                this.addFood(this.food)
             } else {
-                store.foodsCart.splice(getIndex, 1)
-            }
-        }
-    }
+                this.removeFood(this.returnIndex)
 
+            }
+        },
+        addFood(newFood) {
+            if (!newFood.name && !newFood.price) return
+            store.foodsCart.push(newFood);
+            this.saveFood();
+
+        },
+        removeFood(food) {
+            console.log(food)
+            store.foodsCart.splice(food, 1);
+            this.saveFood();
+        },
+        saveFood() {
+            let parsed = JSON.stringify(store.foodsCart);
+            localStorage.setItem('Carello', parsed);
+        },
+    },
 }
 </script>
 
@@ -46,6 +93,10 @@ export default {
                 <a class="btn btn-success" href="">Aggiungi</a>
             </div>
         </div>
+    </div>
+    <div>
+        <button @click="removeFood(returnIndex)">Remove</button>
+        <button @click="addFood(food)">Add Cat</button>
     </div>
 </template>
 
@@ -96,7 +147,6 @@ export default {
 .custm-card {
     position: relative;
     border-radius: 10px;
-    // background-color: aqua;
     cursor: pointer;
 
     &.active .overlay {
