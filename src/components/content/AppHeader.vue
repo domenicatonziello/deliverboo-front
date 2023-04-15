@@ -37,8 +37,12 @@ export default {
               <a href="http://127.0.0.1:8000/login">Login</a>
             </li>
             <li class="nav-item mx-3">
-              <a href="#" @click="setActiveCart">
+              <a href="#" @click="setActiveCart" class="conteiner-cart">
                 <font-awesome-icon icon="fa-solid fa-cart-shopping " class="text-white" />
+                <div class="cart-count d-flex align-items-center justify-content-center"
+                  :class="store.foodsCart.length ? 'd-flex' : 'd-none'">
+                  <span>{{ store.foodsCart.length }}</span>
+                </div>
               </a>
             </li>
           </ul>
@@ -88,6 +92,25 @@ header {
     text-decoration: none;
     font-size: 18px;
     color: white;
+  }
+}
+
+.conteiner-cart {
+  position: relative;
+
+  .cart-count {
+    // structure
+    background-color: #0032f9;
+    height: 13px;
+    width: 13px;
+    border-radius: 50%;
+    // position
+    position: absolute;
+    top: -5px;
+    right: -3px;
+    // count
+    font-size: 10px;
+    font-weight: bold;
   }
 }
 
