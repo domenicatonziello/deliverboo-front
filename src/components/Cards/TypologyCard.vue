@@ -12,7 +12,6 @@ export default {
     setActive() {
       this.active = !this.active;
       const getIndex = store.currentTypology.indexOf(this.typology.id);
-      console.log(getIndex)
 
       if (this.active) {
         store.currentTypology.push(this.typology.id);
