@@ -58,12 +58,9 @@ export default {
 
         },
         removeFood(food) {
-            if (store.foodsCart.includes(this.food)) {
-
-                console.log(food)
-                store.foodsCart.splice(food, 1);
-                this.saveFood();
-            } else return
+            console.log(food)
+            store.foodsCart.splice(food, 1);
+            this.saveFood();
         },
         saveFood() {
             let parsed = JSON.stringify(store.foodsCart);
