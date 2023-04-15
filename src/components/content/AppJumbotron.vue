@@ -133,7 +133,8 @@ export default {
 .col-img img {
   position: absolute;
   right: 10px;
-  height: 400px;
+  height: 450px;
+  width: 550px;
 }
 
 @media screen and (max-width: 1000px) {
