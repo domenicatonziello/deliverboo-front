@@ -12,12 +12,39 @@ export default {
   },
   methods: {
     upQuantity() {
-      this.foodCart.quantity += 1;
+
+      this.store.quantityFood += 1;
+
+      this.removeFood();
+      const newFood = this.foodCart.newFood;
+      store.foodsCart.push({ newFood, 'quantity': store.quantityFood });
+      this.saveFood();
     },
+
+
     downQuantity() {
-      this.foodCart.quantity -= 1;
-    }
-  }
+      this.store.quantityFood -= 1;
+
+      this.removeFood();
+      const newFood = this.foodCart.newFood;
+      store.foodsCart.push({ newFood, 'quantity': store.quantityFood });
+      this.saveFood();
+    },
+
+
+    removeFood() {
+      const getIndex = store.foodsCart.indexOf(this.foodCart);
+      store.foodsCart.splice(getIndex, 1);
+      this.saveFood();
+    },
+
+
+    saveFood() {
+      let parsed = JSON.stringify(store.foodsCart);
+      localStorage.setItem("Carello", parsed);
+    },
+
+  },
 };
 </script>
 
@@ -32,7 +59,7 @@ export default {
       <div class="food-price">
         <div class="counter">
           <div @click="upQuantity()" class="btn">+</div>
-          <div class="count">{{ foodCart.quantity }}</div>
+          <div class="count">{{ store.quantityFood }}</div>
           <div @click="downQuantity()" class="btn">-</div>
         </div>
         <div class="price">
