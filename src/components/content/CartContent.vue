@@ -23,6 +23,7 @@ export default {
 
 
     downQuantity() {
+      if (!this.store.quantityFood) return
       this.store.quantityFood -= 1;
 
       this.removeFood();
@@ -60,7 +61,7 @@ export default {
         <div class="counter">
           <div @click="upQuantity()" class="btn">+</div>
           <div class="count">{{ store.quantityFood }}</div>
-          <div @click="downQuantity()" class="btn">-</div>
+          <div @click="downQuantity()" class="btn" :class="!this.store.quantityFood ? 'clicked' : ''">-</div>
         </div>
         <div class="price">
           € <span>{{ this.tot_price }}</span>
@@ -88,6 +89,7 @@ export default {
     display: flex;
     justify-content: space-between;
 
+    .clicked,
     &:hover {
       background-color: rgba(181, 118, 0, 0.537);
     }
