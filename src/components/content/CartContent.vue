@@ -12,39 +12,27 @@ export default {
   },
   methods: {
     upQuantity() {
-
       this.store.quantityFood += 1;
-
-      this.removeFood();
-      const newFood = this.foodCart.newFood;
-      store.foodsCart.push({ newFood, 'quantity': store.quantityFood });
-      this.saveFood();
+      this.setLocalStorage()
     },
-
 
     downQuantity() {
       if (!this.store.quantityFood) return
       this.store.quantityFood -= 1;
-
-      this.removeFood();
-      const newFood = this.foodCart.newFood;
-      store.foodsCart.push({ newFood, 'quantity': store.quantityFood });
-      this.saveFood();
+      this.setLocalStorage()
     },
 
-
-    removeFood() {
+    setLocalStorage() {
+      // remove food
       const getIndex = store.foodsCart.indexOf(this.foodCart);
       store.foodsCart.splice(getIndex, 1);
-      this.saveFood();
-    },
-
-
-    saveFood() {
+      // added food
+      const newFood = this.foodCart.newFood;
+      store.foodsCart.push({ newFood, 'quantity': store.quantityFood });
+      // save food;
       let parsed = JSON.stringify(store.foodsCart);
       localStorage.setItem("Carello", parsed);
     },
-
   },
 };
 </script>
@@ -60,8 +48,8 @@ export default {
       <div class="food-price">
         <div class="counter">
           <div @click="upQuantity()" class="btn">+</div>
-          <div class="count">{{ store.quantityFood }}</div>
-          <div @click="downQuantity()" class="btn" :class="!this.store.quantityFood ? 'clicked' : ''">-</div>
+          <div class="count">{{ this.foodCart.quantity }}</div>
+          <div @click="downQuantity()" class="btn" :class="!this.foodCart.quantity ? 'clicked' : ''">-</div>
         </div>
         <div class="price">
           € <span>{{ this.tot_price }}</span>
