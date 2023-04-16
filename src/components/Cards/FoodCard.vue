@@ -7,7 +7,6 @@ export default {
     store,
     active: false,
     getIndex: null,
-    quantityFood: null,
   }),
 
   mounted() {
@@ -17,7 +16,6 @@ export default {
       } catch (e) {
         localStorage.removeItem("Carello");
       }
-      // store.foodsCart = JSON.parse(localStorage.foodsCart)
     }
   },
   watch: {
@@ -46,8 +44,9 @@ export default {
       }
     },
     addFood(newFood) {
+      this.removeFood(this.returnIndex);
       if (!newFood.name && !newFood.price) return;
-      store.foodsCart.push({ newFood, 'quantity': this.quantityFood });
+      store.foodsCart.push({ newFood, 'quantity': store.quantityFood });
       this.saveFood();
     },
     removeFood(food) {
@@ -79,7 +78,7 @@ export default {
       </div>
       <div class="buttons col-2 d-flex flex-column align-items-center">
         <label for="quantityInput">Quantità</label>
-        <input type="number" name="quantityInput" id="quantityInput" v-model="quantityFood" />
+        <input type="number" name="quantityInput" id="quantityInput" v-model="store.quantityFood" />
         <button class="btn btn-success" @click="addFood(food)" href="">
           Aggiungi
         </button>
