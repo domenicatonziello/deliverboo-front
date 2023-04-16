@@ -55,6 +55,10 @@ export default {
         closeCart() {
             store.cart = false;
         },
+        cartEmpty() {
+            store.foodsCart = [],
+                localStorage.removeItem("Carello");
+        }
     },
     created() {
         store.isLoading = true;
@@ -122,6 +126,9 @@ export default {
                                     <div>
                                         Totale ordine:<span>€ {{ this.subtotal }}</span>
                                     </div>
+                                </div>
+                                <div class="empty-cart d-flex justify-content-start">
+                                    <button @click="cartEmpty()" class="btn btn-danger m-2">Svuota carello</button>
                                 </div>
                             </div>
                             <div v-else class="d-flex justify-content-center align-items-center text-white">

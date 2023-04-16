@@ -26,7 +26,7 @@ export default {
   <div class="container-food-cart">
     <div class="food-cart">
       <div class="food-cont">
-        {{ foodCart.newFood.name ? foodCart.newFood.name : "nessun prodotto" }} (€{{ foodCart.newFood.price }})
+        {{ foodCart.newFood.name }} (€{{ foodCart.newFood.price }})
       </div>
 
       <div class="food-price">
