@@ -1,11 +1,15 @@
 <script>
+import { store } from '../data/store'
 export default {
   name: "SectionJumbotron",
+  data: () => ({
+    store,
+  }),
 };
 </script>
 
 <template>
-  <section id="jumbotron">
+  <section :class="{ 'full-size': store.fullSizeMain }" id="jumbotron">
     <slot></slot>
   </section>
 </template>
@@ -20,6 +24,11 @@ export default {
       #feb889 55%,
       #feb07c 87.32%,
       #fcfbf7 143.55%);
+  padding-bottom: 2rem;
+}
+
+#jumbotron.full-size {
+  min-height: calc(100vh - 11vh);
 }
 </style>
 

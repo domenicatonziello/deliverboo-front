@@ -59,6 +59,7 @@ export default {
     created() {
         store.isLoading = true;
         this.fetchRestaurants();
+        store.fullSizeMain = true;
     },
 };
 </script>
