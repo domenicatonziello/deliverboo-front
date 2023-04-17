@@ -11,5 +11,5 @@ export const store = reactive({
     fullSizeMain: false,
     ristorante: false,
     message: '',
-    restaurant_id: null
+    restaurantid: null
 });

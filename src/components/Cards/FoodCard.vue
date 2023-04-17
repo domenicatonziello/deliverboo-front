@@ -45,7 +45,7 @@ export default {
     },
     addFood(newFood) {
       if (store.foodsCart.length) {
-        if (store.restaurant_id == newFood.restaurant_id) {
+        if (store.restaurantid == newFood.restaurant_id) {
           store.message = '';
           store.foodsCart.forEach((food) => {
             if (food.id == this.food.id) {
@@ -59,7 +59,7 @@ export default {
 
 
       } else {
-        store.restaurant_id = newFood.restaurant_id;
+        store.restaurantid = newFood.restaurant_id;
       }
       if (!newFood.name && !newFood.price) return;
       newFood['quantity'] = 1;
