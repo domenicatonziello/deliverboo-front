@@ -67,7 +67,7 @@ export default {
       this.saveFood();
     },
     removeFood(food) {
-      console.log(food);
+      console.log(this.food.id);
       store.foodsCart.splice(food, 1);
       this.saveFood();
     },
