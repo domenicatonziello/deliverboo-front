@@ -1,5 +1,5 @@
 <script>
-import { store } from '../../data/store'
+import { store } from "../../data/store";
 export default {
   name: "AppJumbotron",
   data: () => ({
@@ -10,8 +10,8 @@ export default {
       if (store.city.length > 0) {
         store.addedCity = true;
       }
-    }
-  }
+    },
+  },
 };
 </script>
 <template>
@@ -26,17 +26,32 @@ export default {
 
             <!-- Search Bar -->
             <div id="web-search">
-              <input class="web-search" type="text" placeholder="Inserisci il tuo indirizzo" v-model="store.city" />
-              <button type="button" href="" class="search" @click="searchCity">Cerca</button>
+              <input
+                class="web-search"
+                type="text"
+                placeholder="Inserisci il tuo indirizzo"
+                @keyup.enter="searchCity"
+                v-model="store.city"
+              />
+              <button type="button" href="" class="search" @click="searchCity">
+                Cerca
+              </button>
             </div>
             <div id="mobile-search">
-              <input class="mobile-search" type="text" v-model="store.city" @keyup.enter="searchCity"
-                placeholder="Inserisci il tuo indirizzo" />
+              <input
+                class="mobile-search"
+                type="text"
+                v-model="store.city"
+                @keyup.enter="searchCity"
+                placeholder="Inserisci il tuo indirizzo"
+              />
             </div>
 
             <div class="d-flex justify-content-start col mb-5">
               <h1>
-                <b class="brown">Food <br /><span class="light-brown">Delivery</span></b>
+                <b class="brown"
+                  >Food <br /><span class="light-brown">Delivery</span></b
+                >
               </h1>
               <img src="../../../public/img/Vector.png" alt="" />
             </div>
@@ -45,7 +60,9 @@ export default {
         <div class="col-6 col-img col">
           <img
             src="https://s3-alpha-sig.figma.com/img/75a1/3e45/54eadf39c3f1708083b6f1b5cb191111?Expires=1682294400&Signature=ALT67NDNVo1LKfcC6uqAVqau4EAJztVlTqPEfJzw9WWUIoAWyMBrfId8-6RCrP3lyW3hl1IpEKnE~51EFLF4BQM2SngHCE3UMAQx9PrVgTIjHfJNQCAfKiIfIZNBALKsrP9ePCBWm4PEML~BXRQs0SD6Ihtry8cMXdDyAB~MT5-DdGyGZLp6DLzZ3KM5i~pE8FRH2pbfgXbvemqHl5wC6rHiQ90wMMwNJdwK3-VpNgTSL0zIz7W4yDDW0HG0s6nW3Y7KMTtcgF7G5o2mOIlnO4uEYAYKOkzGrqXzdnSN-6SLTqT~Dvv84TiVBOkw1p3Pl9SlRKP2TBLsOvcETl-iTA__&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4"
-            alt="" class="img-fluid" />
+            alt=""
+            class="img-fluid"
+          />
         </div>
       </div>
     </div>
@@ -90,7 +107,7 @@ export default {
     color: $dark-orange;
   }
 
-  #web-search>* {
+  #web-search > * {
     margin: 6rem 0 6rem;
   }
 
@@ -193,7 +210,7 @@ export default {
     }
   }
 
-  #web-search>* {
+  #web-search > * {
     padding: 0;
   }
 
