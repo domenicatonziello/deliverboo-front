@@ -7,4 +7,5 @@ export const store = reactive({
     foodsCart: [],
     city: '',
     addedCity: false,
+    message: '',
 });

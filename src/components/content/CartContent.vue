@@ -5,6 +5,7 @@ export default {
   name: "CartContent",
   data: () => ({ store, tot_price: 0 }),
   props: { foodCart: Object },
+  emits: {},
   computed: {
     getPrice() {
       this.tot_price = Number(this.foodCart.newFood.price * this.foodCart.quantity);
@@ -17,8 +18,11 @@ export default {
     },
 
     downQuantity() {
-      if (!this.foodcart.quantity) {
-        // gestire eliminazione
+
+      // se inferiore a 0 cancella
+      if (this.foodCart.quantity <= 1) {
+        const getIndex = store.foodsCart.indexOf(this.foodCart);
+        store.foodsCart.splice(getIndex, 1);
       }
       this.foodCart.quantity -= 1;
       this.setLocalStorage()
@@ -27,10 +31,10 @@ export default {
     setLocalStorage() {
       // remove food
       const getIndex = store.foodsCart.indexOf(this.foodCart);
-      store.foodsCart.splice(getIndex, 1);
+      // store.foodsCart.splice(getIndex, 1);
       // added food
       const newFood = this.foodCart.newFood;
-      store.foodsCart.fill({ newFood, 'quantity': this.foodCart.quantity });
+      store.foodsCart.fill({ newFood, 'quantity': this.foodCart.quantity }, getIndex, getIndex + 1);
       // save food;
       let parsed = JSON.stringify(store.foodsCart);
       localStorage.setItem("Carello", parsed);

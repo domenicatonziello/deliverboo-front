@@ -44,6 +44,7 @@ export default {
       }
     },
     addFood(newFood) {
+
       if (store.foodsCart.length) {
         store.foodsCart.forEach((food) => {
           if (food.newFood.id == this.food.id) {

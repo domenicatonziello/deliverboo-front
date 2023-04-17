@@ -23,7 +23,7 @@ export default {
         getTotalPrice() {
             this.subtotal = Number(this.shipment_price);
             store.foodsCart.forEach((food) => {
-                this.subtotal += Number(food.price * food.quantity);
+                this.subtotal += Number(food.newFood.price * food.quantity);
             });
             this.subtotal = this.subtotal.toFixed(2);
         },
@@ -113,6 +113,7 @@ export default {
                             <span @click="closeCart()" class="close px-3 mx-0">x</span>
                         </div>
                         <div class="text-order">il tuo ordine</div>
+                        <div class="text-danger">{{ store.message }}</div>
                         <div class="">
                             <cart-content v-for="foodCart in store.foodsCart" :foodCart="foodCart">
                             </cart-content>
@@ -121,10 +122,10 @@ export default {
                                 <div class="border-cart"></div>
                                 <div class="final-order">
                                     <div>
-                                        Spedizione:<span>€ {{ this.shipment_price }}</span>
+                                        Spedizione:<span>€ {{ shipment_price }}</span>
                                     </div>
                                     <div>
-                                        Totale ordine:<span>€ {{ this.subtotal }}</span>
+                                        Totale ordine:<span>€ {{ subtotal }}</span>
                                     </div>
                                 </div>
                                 <div class="empty-cart d-flex justify-content-start">
