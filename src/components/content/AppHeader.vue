@@ -140,6 +140,9 @@ header {
     font-size: 18px;
     color: white;
   }
+  .active {
+    background: none;
+  }
 }
 .nav-mobile {
   display: none;
@@ -163,6 +166,7 @@ header {
     font-weight: bold;
   }
 }
+
 @media screen and (max-width: 1000px) {
   .nav-mobile {
     display: flex;
