@@ -89,7 +89,7 @@ export default {
         <button class="btn btn-success" @click="addFood(food)" href="">
           Aggiungi
         </button>
-        <button class="btn btn-danger" @click="removeFood(returnIndex)">
+        <button v-if="store.foodsCart.length >= 1" class="btn btn-danger" @click="removeFood(returnIndex)">
           Remove
         </button>
       </div>

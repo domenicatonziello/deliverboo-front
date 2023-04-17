@@ -42,7 +42,7 @@ export default {
 <template>
   <!-- food Cart -->
   <div class="container-food-cart">
-    <div class="food-cart">
+    <div class="food-cart my-3">
       <div class="food-cont">
         {{ foodCart.newFood.name }} (€{{ foodCart.newFood.price }})
       </div>
@@ -77,7 +77,8 @@ export default {
     padding: 10px 5px 10px 5px;
 
     display: flex;
-    justify-content: space-between;
+    justify-content: space-around;
+    align-items: center;
 
     .clicked,
     &:hover {
@@ -95,6 +96,7 @@ export default {
 
   .food-price {
     display: flex;
+    align-items: center;
   }
 }
 

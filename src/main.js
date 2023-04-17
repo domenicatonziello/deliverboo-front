@@ -1,5 +1,5 @@
 import { createApp } from "vue";
-import 'bootstrap/dist/js/bootstrap.bundle.js';
+import "bootstrap/dist/js/bootstrap.bundle.js";
 import "bootstrap/dist/css/bootstrap.min.css";
 import App from "./App.vue";
 import { router } from "./routes/";
@@ -10,13 +10,17 @@ import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 
 import { faStar } from "@fortawesome/free-solid-svg-icons";
 import { faStar as farStar } from "@fortawesome/free-regular-svg-icons";
+
 import {
   faMagnifyingGlass,
   faCartShopping,
+  faPhone,
+  faTruckFast,
+  faLocationDot
 } from "@fortawesome/free-solid-svg-icons";
 // import { faYoutube, faTwitch, faFacebookF, faInstagram } from '@fortawesome/free-brands-svg-icons';
 
-library.add(faStar, farStar, faMagnifyingGlass, faCartShopping);
+library.add(faStar, farStar, faMagnifyingGlass, faCartShopping, faPhone, faTruckFast, faLocationDot);
 
 const app = createApp(App);
 app.use(router);

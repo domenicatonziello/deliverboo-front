@@ -1,36 +1,35 @@
 <script>
-import { store } from './data/store'
-import NotFoundPage from './pages/NotFoundPage.vue'
-import AppHeader from './components/content/AppHeader.vue'
+import { store } from "./data/store";
+import NotFoundPage from "./pages/NotFoundPage.vue";
+import AppHeader from "./components/content/AppHeader.vue";
+import otherPage from "./pages/otherPage.vue";
 
-
-import SectionJumbotron from './components/SectionJumbotron.vue'
+import SectionJumbotron from "./components/SectionJumbotron.vue";
 export default {
-  name: 'DeliverBoo',
-  components: { AppHeader, NotFoundPage, SectionJumbotron },
+  name: "DeliverBoo",
+  components: { AppHeader, NotFoundPage, SectionJumbotron, otherPage },
   data: () => ({
     store,
   }),
-}
+};
 </script>
 
 <template>
   <app-header></app-header>
   <section-jumbotron>
-    <router-view>
-    </router-view>
-    <div class="loader  align-items-center justify-content-center" :class="{ 'd-flex': store.isLoading }">
-
+    <router-view> </router-view>
+    <div
+      class="loader align-items-center justify-content-center"
+      :class="{ 'd-flex': store.isLoading }"
+    >
       <i class="fa-solid fa-spinner fa-spin fa-5xl"></i>
-
     </div>
   </section-jumbotron>
 </template>
 
-
 <style lang="scss">
-@use './assets/scss/style' as *;
-@use './assets/scss/partial/variables' as *;
+@use "./assets/scss/style" as *;
+@use "./assets/scss/partial/variables" as *;
 
 .loader {
   height: calc(100vh - 80px);
@@ -50,6 +49,5 @@ export default {
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
   }
-
 }
 </style>

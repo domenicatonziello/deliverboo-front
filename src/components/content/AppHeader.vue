@@ -3,12 +3,19 @@ import { store } from "../../data/store";
 
 export default {
   name: "AppHeader",
+
   data: () => ({
     store,
+    isActive: false,
   }),
   methods: {
     setActiveCart() {
       store.cart = !store.cart;
+      if (store.cart) {
+        this.isActive = true;
+      } else {
+        this.isActive = false;
+      }
     },
   },
 };
@@ -21,11 +28,10 @@ export default {
         <router-link :to="'/'">
           <div class="logo">Delive<span>Boo</span></div>
         </router-link>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
-          aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse flex-grow-0" id="navbarSupportedContent">
+        <div
+          class="collapse navbar-collapse flex-grow-0"
+          id="navbarSupportedContent"
+        >
           <ul class="navbar-nav me-auto">
             <li class="nav-item mx-3">
               <router-link :to="'/'"> Home </router-link>
@@ -38,9 +44,14 @@ export default {
             </li>
             <li class="nav-item mx-3">
               <a href="#" @click="setActiveCart" class="conteiner-cart">
-                <font-awesome-icon icon="fa-solid fa-cart-shopping " class="text-white" />
-                <div class="cart-count d-flex align-items-center justify-content-center"
-                  :class="store.foodsCart.length ? 'd-flex' : 'd-none'">
+                <font-awesome-icon
+                  icon="fa-solid fa-cart-shopping "
+                  class="text-white"
+                />
+                <div
+                  class="cart-count d-flex align-items-center justify-content-center"
+                  :class="store.foodsCart.length ? 'd-flex' : 'd-none'"
+                >
                   <span>{{ store.foodsCart.length }}</span>
                 </div>
               </a>
@@ -50,11 +61,46 @@ export default {
       </div>
     </nav>
   </header>
+
+  <section class="nav-mobile">
+    <div>
+      <router-link :to="'/'">
+        <i class="fa-solid fa-house"><p>Home</p></i></router-link
+      >
+    </div>
+    <div>
+      <a href="http://127.0.0.1:8000">
+        <i class="fa-solid fa-user"><p>Login</p></i>
+      </a>
+    </div>
+    <div v-if="!store.ristorante" class="other">
+      <router-link :to="'/other'">
+        <i class="fa-solid fa-circle-up"><p>Altro</p></i>
+      </router-link>
+    </div>
+    <div v-if="store.ristorante">
+      <a
+        href="#"
+        @click="setActiveCart"
+        :class="{ active: isActive }"
+        class="conteiner-cart"
+      >
+        <i class="fa-solid fa-cart-shopping"><p>Carrello</p></i>
+        <div
+          class="cart-count d-flex align-items-center justify-content-center"
+          :class="store.foodsCart.length ? 'd-flex' : 'd-none'"
+        >
+          <span>{{ store.foodsCart.length }}</span>
+        </div>
+      </a>
+    </div>
+  </section>
 </template>
 
 <style lang="scss" scoped>
-header {
+@use "../../assets/scss/partial/variables.scss" as *;
 
+header {
   padding: 10px;
   min-height: 12vh;
   width: 100%;
@@ -62,13 +108,14 @@ header {
   top: 0;
   right: 0;
   left: 0;
-  background: linear-gradient(297.36deg,
-      #ff8c42 44.61%,
-      #feb889 44.61%,
-      #feb07c 87.32%,
-      #fcfbf7 143.55%);
+  background: linear-gradient(
+    297.36deg,
+    #ff8c42 44.61%,
+    #feb889 44.61%,
+    #feb07c 87.32%,
+    #fcfbf7 143.55%
+  );
   z-index: 1;
-
 
   ul {
     list-style-type: none;
@@ -94,6 +141,9 @@ header {
     color: white;
   }
 }
+.nav-mobile {
+  display: none;
+}
 
 .conteiner-cart {
   position: relative;
@@ -113,7 +163,64 @@ header {
     font-weight: bold;
   }
 }
+@media screen and (max-width: 1000px) {
+  .nav-mobile {
+    display: flex;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 80px;
+    z-index: 2;
+    background-color: $white;
+    justify-content: space-around;
+    padding: 10px;
+    // box-shadow: 0px -5px 14px -3px $orange;
+    border-top: 1px solid $orange;
 
+    i {
+      font-size: 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+    a {
+      text-decoration: none;
+      color: $orange;
+    }
+  }
+  .nav-mobile > * {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    &:hover {
+      transform: scale(1.2);
+      transition: 0.4s;
+    }
+
+    & > * {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    p {
+      margin: 0;
+    }
+  }
+  .other {
+    cursor: pointer;
+  }
+}
+.active {
+  background-color: $secondary-bg;
+  border-radius: 10px;
+  & > * {
+    color: white;
+    padding: 8px;
+  }
+}
 @media screen and (max-width: 550px) {
   header {
     .logo {

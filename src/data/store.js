@@ -1,10 +1,13 @@
-import { reactive } from 'vue';
+import { reactive } from "vue";
 export const store = reactive({
-    currentTypology: [],
-    restaurants: [],
-    isLoading: false,
-    cart: false,
-    foodsCart: [],
-    city: '',
-    addedCity: false,
+  currentTypology: [],
+  restaurants: [],
+  isLoading: false,
+  cart: false,
+  foodsCart: [],
+  quantityFood: null,
+  city: "",
+  addedCity: false,
+  fullSizeMain: false,
+  ristorante: false,
 });
