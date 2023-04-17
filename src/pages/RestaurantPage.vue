@@ -75,7 +75,7 @@ export default {
             <div class="col-12 mb-5" :class="store.cart ? 'restaurant-detail' : ''">
                 <!-- Restaurant Name-->
                 <h1 class="text-center bg-white restaurant-title">
-                    <span>{{ this.name }}</span>
+                    <span>{{ name }}</span>
                 </h1>
 
                 <!-- Restaurant Elements-->
@@ -83,23 +83,41 @@ export default {
                     <!-- Restaurant Details-->
                     <div class="col-3 description">
                         <div class="img-box">
-                            <img :src="this.logo" alt="" />
+                            <img :src="logo" alt="logo" />
                         </div>
-                        <div class="text">
-                            <h5>
-                                <a href="">{{ this.address }}</a>
-                            </h5>
-                            <h5>
-                                <a href="">Numero: {{ this.phone_number }}</a>
-                            </h5>
-                            <h6>Minimo Ordine: €{{ this.min_order }}</h6>
-                            <h6>Costo Spedizione: €{{ this.shipment_price }}</h6>
-                            <p>{{ this.description }}</p>
-                        </div>
+                        <ul class="text">
+                            <li>
+                                <p>
+                                    {{ description }}
+                                </p>
+                            </li>
+                            <li>
+                                <font-awesome-icon :icon="['fas', 'phone']" class="icon" />
+                                <a href="#"> {{ phone_number }}</a>
+                            </li>
+                            <li>
+                                <font-awesome-icon :icon="['fas', 'cart-shopping']" class="icon" />
+                                Ordine Minimo: <small> €{{ min_order }} </small>
+                            </li>
+                            <li>
+                                <font-awesome-icon :icon="['fas', 'truck-fast']" class="icon" />
+                                Spedizione: <small> €{{ shipment_price }} </small>
+                            </li>
+                            <li>
+                                <p> <font-awesome-icon :icon="['fas', 'location-dot']" class="icon" /> {{ address }} </p>
+                                <div class="map">
+                                    <iframe
+                                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d179077.24358987078!2d9.017039295041839!3d45.46815344694175!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4786c1493f1275e7%3A0x3cffcd13c6740e8d!2sMilano%20MI!5e0!3m2!1sit!2sit!4v1681718621223!5m2!1sit!2sit"
+                                        style="border:0;" allowfullscreen="" loading="lazy"
+                                        referrerpolicy="no-referrer-when-downgrade">
+                                    </iframe>
+                                </div>
+                            </li>
+                        </ul>
                     </div>
 
                     <!-- Restaurant Menu-->
-                    <div class="col menu">
+                    <div class="col menu text-start">
                         <h1 class="text-center mb-5">Menù</h1>
                         <food-card v-for="food in menu" :key="food.id" :food="food"></food-card>
                     </div>
@@ -122,10 +140,10 @@ export default {
                                 <div class="border-cart"></div>
                                 <div class="final-order mt-3">
                                     <div>
-                                        Spedizione:<span>€ {{ this.shipment_price }}</span>
+                                        Spedizione:<span>€ {{ shipment_price }}</span>
                                     </div>
                                     <div>
-                                        Totale ordine:<span>€ {{ this.subtotal }}</span>
+                                        Totale ordine:<span>€ {{ subtotal }}</span>
                                     </div>
                                 </div>
                                 <div class="empty-cart d-flex justify-content-start mb-4">
@@ -168,6 +186,7 @@ export default {
 
         .img-box {
             width: 100%;
+            margin-bottom: 1.5rem;
 
             img {
                 width: 100%;
@@ -175,22 +194,36 @@ export default {
         }
 
         .text {
-            h5 {
-                font-size: 1.2rem;
+            padding: 0;
+            list-style-type: none;
+
+            li {
+                font-size: 17px;
+
+                .icon {
+                    font-size: 13px;
+                    color: $primary-bg;
+                    margin-right: 3px;
+                }
+
+                .map {
+                    width: 100%;
+
+                }
+
+                .map>* {
+                    width: 100%;
+                }
             }
 
             h6 {
-                font-size: 0.8rem;
+                // font-size: 0.8rem;
                 margin-bottom: 0.8rem;
-            }
-
-            p {
-                margin-top: 1.5rem;
             }
         }
 
         .text>* {
-            margin-bottom: 1.5rem;
+            margin-bottom: 1rem;
 
             a {
                 color: black;
@@ -266,6 +299,11 @@ export default {
 }
 
 @media screen and (max-width: 1000px) {
+    .restaurant-card .description .img-box {
+        padding: 40px;
+        margin-bottom: 0;
+    }
+
     .cart {
         min-width: 80%;
     }
@@ -282,6 +320,7 @@ export default {
 }
 
 @media screen and (max-width: 567px) {
+
     .cart {
         min-width: 90%;
     }
