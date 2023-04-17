@@ -44,9 +44,16 @@ export default {
       }
     },
     addFood(newFood) {
-      this.removeFood(this.returnIndex);
+      if (store.foodsCart.length) {
+        store.foodsCart.forEach((food) => {
+          if (food.newFood.id == this.food.id) {
+            this.removeFood(this.returnIndex);
+            // food.newFood.quantity == store.quantityFood;
+          }
+        })
+      }
       if (!newFood.name && !newFood.price) return;
-      store.foodsCart.push({ newFood, 'quantity': store.quantityFood });
+      store.foodsCart.push({ newFood, 'quantity': 1 });
       this.saveFood();
     },
     removeFood(food) {
@@ -77,8 +84,8 @@ export default {
         </div>
       </div>
       <div class="buttons col-2 d-flex flex-column align-items-center">
-        <label for="quantityInput">Quantità</label>
-        <input type="number" name="quantityInput" id="quantityInput" v-model="store.quantityFood" />
+        <!-- <label for="quantityInput">Quantità</label> -->
+        <!-- <input type="number" name="quantityInput" id="quantityInput" v-model="store.quantityFood" /> -->
         <button class="btn btn-success" @click="addFood(food)" href="">
           Aggiungi
         </button>

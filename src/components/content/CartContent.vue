@@ -12,13 +12,15 @@ export default {
   },
   methods: {
     upQuantity() {
-      this.store.quantityFood += 1;
+      this.foodCart.quantity += 1;
       this.setLocalStorage()
     },
 
     downQuantity() {
-      if (!this.store.quantityFood) return
-      this.store.quantityFood -= 1;
+      if (!this.foodcart.quantity) {
+        // gestire eliminazione
+      }
+      this.foodCart.quantity -= 1;
       this.setLocalStorage()
     },
 
@@ -28,7 +30,7 @@ export default {
       store.foodsCart.splice(getIndex, 1);
       // added food
       const newFood = this.foodCart.newFood;
-      store.foodsCart.push({ newFood, 'quantity': store.quantityFood });
+      store.foodsCart.fill({ newFood, 'quantity': this.foodCart.quantity });
       // save food;
       let parsed = JSON.stringify(store.foodsCart);
       localStorage.setItem("Carello", parsed);
@@ -48,11 +50,11 @@ export default {
       <div class="food-price">
         <div class="counter">
           <div @click="upQuantity()" class="btn">+</div>
-          <div class="count">{{ this.foodCart.quantity }}</div>
-          <div @click="downQuantity()" class="btn" :class="!this.foodCart.quantity ? 'clicked' : ''">-</div>
+          <div class="count">{{ foodCart.quantity }}</div>
+          <div @click="downQuantity()" class="btn" :class="!foodCart.quantity ? 'clicked' : ''">-</div>
         </div>
         <div class="price">
-          € <span>{{ this.tot_price }}</span>
+          € <span>{{ tot_price }}</span>
         </div>
       </div>
     </div>
