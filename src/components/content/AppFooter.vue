@@ -137,20 +137,28 @@ footer {
         opacity: 1;
     }
 
+
+
     .banner-register {
         transform: rotate(180deg);
         background-color: $blue;
         border-radius: 15px;
         padding: 15px;
         text-align: center;
-
         position: absolute;
         bottom: -50px;
         left: 25%;
         right: 25%;
         z-index: 1;
+        visibility: visible;
+        opacity: 1;
+        transition: visibility 0.7s linear, opacity 0.5s linear;
+    }
 
+    &:hover .banner-register {
 
+        opacity: 0;
+        visibility: hidden;
     }
 
     .info {
