@@ -132,8 +132,9 @@ export default {
 
 .info {
   width: 100%;
-  height: 80vh;
+  min-height: 80vh;
   padding-top: 50px;
+  padding-bottom: 100px;
   color: white;
 
   .button {
