@@ -90,6 +90,7 @@ export default {
         store.currentTypology = [];
         this.fetchTypologies();
         this.allRestaurants();
+        store.fullSizeMain = false;
     },
 };
 </script>

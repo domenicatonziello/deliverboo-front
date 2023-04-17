@@ -8,4 +8,5 @@ export const store = reactive({
     quantityFood: null,
     city: '',
     addedCity: false,
+    fullSizeMain: false,
 });
