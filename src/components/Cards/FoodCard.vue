@@ -45,15 +45,25 @@ export default {
     },
     addFood(newFood) {
       if (store.foodsCart.length) {
-        store.foodsCart.forEach((food) => {
-          if (food.newFood.id == this.food.id) {
-            this.removeFood(this.returnIndex);
-            // food.newFood.quantity == store.quantityFood;
-          }
-        })
+        if (store.restaurant_id == newFood.restaurant_id) {
+          store.message = '';
+          store.foodsCart.forEach((food) => {
+            if (food.id == this.food.id) {
+              this.removeFood(this.returnIndex);
+              // food.newFood.quantity == store.quantityFood;
+            }
+          })
+        } else {
+          return store.message = 'non puoi ordinare da più ristoranti';
+        }
+
+
+      } else {
+        store.restaurant_id = newFood.restaurant_id;
       }
       if (!newFood.name && !newFood.price) return;
-      store.foodsCart.push({ newFood, 'quantity': 1 });
+      newFood['quantity'] = 1;
+      store.foodsCart.push(newFood);
       this.saveFood();
     },
     removeFood(food) {
