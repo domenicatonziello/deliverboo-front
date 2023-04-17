@@ -46,6 +46,7 @@ export default {
     addFood(newFood) {
       if (store.foodsCart.length) {
         if (store.restaurant_id == newFood.restaurant_id) {
+          store.message = '';
           store.foodsCart.forEach((food) => {
             if (food.id == this.food.id) {
               this.removeFood(this.returnIndex);
