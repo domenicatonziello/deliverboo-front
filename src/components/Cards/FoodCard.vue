@@ -79,10 +79,10 @@ export default {
       <div class="buttons col-2 d-flex flex-column align-items-center">
         <label for="quantityInput">Quantità</label>
         <input type="number" name="quantityInput" id="quantityInput" v-model="store.quantityFood" />
-        <button class="btn btn-success" @click="addFood(food)" href="">
+        <button class="btn btn-success mb-2" @click="addFood(food)" href="">
           Aggiungi
         </button>
-        <button class="btn btn-danger" @click="removeFood(returnIndex)">
+        <button v-if="store.foodsCart.length >= 1" class="btn btn-danger" @click="removeFood(returnIndex)">
           Remove
         </button>
       </div>

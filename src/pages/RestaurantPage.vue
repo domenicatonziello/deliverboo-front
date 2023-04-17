@@ -82,7 +82,7 @@ export default {
                     <!-- Restaurant Details-->
                     <div class="col-3 description">
                         <div class="img-box">
-                            <img src="../../public/img/ristorante.webp" alt="" />
+                            <img :src="this.logo" alt="" />
                         </div>
                         <div class="text">
                             <h5>
@@ -112,14 +112,14 @@ export default {
                         <div class="mt-1 text-end">
                             <span @click="closeCart()" class="close px-3 mx-0">x</span>
                         </div>
-                        <div class="text-order">il tuo ordine</div>
+                        <div class="text-order"><b>Il tuo ordine</b></div>
                         <div class="">
                             <cart-content v-for="foodCart in store.foodsCart" :foodCart="foodCart">
                             </cart-content>
                             <!-- total price -->
                             <div v-if="store.foodsCart.length >= 1" class="row p-0 align-items-end h-100">
                                 <div class="border-cart"></div>
-                                <div class="final-order">
+                                <div class="final-order mt-3">
                                     <div>
                                         Spedizione:<span>€ {{ this.shipment_price }}</span>
                                     </div>
@@ -127,12 +127,12 @@ export default {
                                         Totale ordine:<span>€ {{ this.subtotal }}</span>
                                     </div>
                                 </div>
-                                <div class="empty-cart d-flex justify-content-start">
+                                <div class="empty-cart d-flex justify-content-start mb-4">
                                     <button @click="cartEmpty()" class="btn btn-danger m-2">Svuota carello</button>
                                 </div>
                             </div>
-                            <div v-else class="d-flex justify-content-center align-items-center text-white">
-                                Il carello è Vuoto
+                            <div v-else class="d-flex justify-content-center align-items-center text-white my-5">
+                                Il carrello è vuoto
                             </div>
                         </div>
                     </div>
