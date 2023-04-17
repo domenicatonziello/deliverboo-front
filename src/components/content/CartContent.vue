@@ -8,7 +8,7 @@ export default {
   emits: {},
   computed: {
     getPrice() {
-      this.tot_price = Number(this.foodCart.newFood.price * this.foodCart.quantity);
+      this.tot_price = Number(this.foodCart.price * this.foodCart.quantity);
     }
   },
   methods: {
@@ -33,8 +33,8 @@ export default {
       const getIndex = store.foodsCart.indexOf(this.foodCart);
       // store.foodsCart.splice(getIndex, 1);
       // added food
-      const newFood = this.foodCart.newFood;
-      store.foodsCart.fill({ newFood, 'quantity': this.foodCart.quantity }, getIndex, getIndex + 1);
+      const newFood = this.foodCart;
+      store.foodsCart.fill(newFood, getIndex, getIndex + 1);
       // save food;
       let parsed = JSON.stringify(store.foodsCart);
       localStorage.setItem("Carello", parsed);
@@ -48,7 +48,7 @@ export default {
   <div class="container-food-cart">
     <div class="food-cart">
       <div class="food-cont">
-        {{ foodCart.newFood.name }} (€{{ foodCart.newFood.price }})
+        {{ foodCart.name }} (€{{ foodCart.price }})
       </div>
 
       <div class="food-price">

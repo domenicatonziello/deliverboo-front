@@ -8,4 +8,5 @@ export const store = reactive({
     city: '',
     addedCity: false,
     message: '',
+    restaurant_id: null
 });
