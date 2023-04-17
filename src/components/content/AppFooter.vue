@@ -20,7 +20,8 @@ export default {
 
         </div>
         <div class="info">
-            <div class="row row-cols-2 row-cols-sm-2 row-cols-md-5 row-cols-lg-6 justify-content-center gap-3">
+            <div
+                class="row row-cols-2 row-cols-sm-2 row-cols-md-5 row-cols-lg-6 justify-content-center align-items-center gap-3">
                 <div class="col">
                     <h5>Lavora con Deliveboo</h5>
                     <a href="http://127.0.0.1:8000/register" class="button">Registrati</a>
@@ -179,6 +180,7 @@ footer {
         .col {
             background-color: rgb(78, 89, 140);
             border-radius: 15px;
+            height: 50%;
             text-align: center;
             display: flex;
             flex-direction: column;
