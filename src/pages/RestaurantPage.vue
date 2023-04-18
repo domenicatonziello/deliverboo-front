@@ -150,8 +150,9 @@ export default {
                                         Totale ordine:<span>€ {{ subtotal }}</span>
                                     </div>
                                 </div>
-                                <div class="empty-cart d-flex justify-content-start">
-                                    <button @click="cartEmpty()" class="btn btn-danger m-2">Svuota carello</button>
+                                <div class="empty-cart d-flex justify-content-between">
+                                    <button @click="cartEmpty()" class="btn btn-danger m-2">Svuota carrello</button>
+                                    <button class="btn btn-success m-2">Procedi all'ordine</button>
                                 </div>
                             </div>
                             <div v-else class="d-flex justify-content-center align-items-center text-white">

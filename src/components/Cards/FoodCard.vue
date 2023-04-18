@@ -7,6 +7,7 @@ export default {
     store,
     active: false,
     getIndex: null,
+    isSelect: false,
   }),
 
   mounted() {
@@ -31,6 +32,12 @@ export default {
     returnIndex() {
       return (this.getIndex = store.foodsCart.indexOf(this.food));
     },
+    select() {
+      return store.foodsCart.forEach((food) => {
+        if (food.id == this.food.id) this.isSelect = true;
+        else this.isSelect = false;
+      })
+    }
   },
 
   methods: {
@@ -66,10 +73,11 @@ export default {
       newFood['quantity'] = 1;
       store.foodsCart.push(newFood);
       this.saveFood();
+      this.isSelect = true;
     },
     removeFood(food) {
-      console.log(this.food.id);
       store.foodsCart.splice(food, 1);
+      this.isSelect = false;
       this.saveFood();
     },
     saveFood() {
@@ -97,13 +105,11 @@ export default {
         </div>
       </div>
       <div class="buttons col-2 d-flex flex-column align-items-center">
-        <!-- <label for="quantityInput">Quantità</label> -->
-        <!-- <input type="number" name="quantityInput" id="quantityInput" v-model="store.quantityFood" /> -->
-        <button class="btn btn-success" @click="addFood(food)" href="">
-          Aggiungi
-        </button>
-        <button v-if="store.foodsCart.length >= 1" class="btn btn-danger" @click="removeFood(returnIndex)">
+        <button v-if="isSelect" class="btn btn-danger" @click="removeFood(returnIndex)">
           Remove
+        </button>
+        <button v-else class="btn btn-success" @click="addFood(food)">
+          Aggiungi
         </button>
       </div>
     </div>
