@@ -1,117 +1,107 @@
 <script>
-import braintree from "braintree-web";
-import paypal from "paypal-checkout";
+import braintree from 'braintree-web';
+import paypal from 'paypal-checkout';
 export default {
-  name: "PaymentPage",
   data() {
     return {
       hostedFieldInstance: false,
       nonce: "",
       error: "",
-      message: "Errore scemo",
-      amount: 10,
-    };
+      amount: 10
+    }
   },
   methods: {
     payWithCreditCard() {
       if (this.hostedFieldInstance) {
         this.error = "";
         this.nonce = "";
-        this.hostedFieldInstance
-          .tokenize()
-          .then((payload) => {
-            console.log(payload);
-            this.nonce = payload.nonce;
-          })
-          .catch((err) => {
+        this.hostedFieldInstance.tokenize().then(payload => {
+          console.log(payload);
+          this.nonce = payload.nonce;
+        })
+          .catch(err => {
             console.error(err);
-            this.error = this.message;
-          });
+            this.error = err.message;
+          })
       }
-    },
+    }
   },
-
   mounted() {
-    braintree.client
-      .create({
-        authorization: "sandbox_7b9qmcqw_m69f6tkxgwj9537t",
-      })
-      .then((clientInstance) => {
+    braintree.client.create({
+      authorization: "sandbox_93smtrz3_bbgx4xf7h8bx24xg"
+    })
+      .then(clientInstance => {
         let options = {
           client: clientInstance,
           styles: {
             input: {
-              "font-size": "14px",
-              "font-family": "Open Sans",
-            },
+              'font-size': '14px',
+              'font-family': 'Open Sans'
+            }
           },
           fields: {
             number: {
-              selector: "#creditCardNumber",
-              placeholder: "Enter Credit Card",
+              selector: '#creditCardNumber',
+              placeholder: 'Enter Credit Card'
             },
             cvv: {
-              selector: "#cvv",
-              placeholder: "Enter CVV",
+              selector: '#cvv',
+              placeholder: 'Enter CVV'
             },
             expirationDate: {
-              selector: "#expireDate",
-              placeholder: "00 / 0000",
-            },
-          },
-        };
+              selector: '#expireDate',
+              placeholder: '00 / 0000'
+            }
+          }
+        }
         return Promise.all([
           braintree.hostedFields.create(options),
-          braintree.paypalCheckout.create({ client: clientInstance }),
-        ]);
+          braintree.paypalCheckout.create({ client: clientInstance })
+        ])
       })
-      .then((instances) => {
+      .then(instances => {
         const hostedFieldInstance = instances[0];
         const paypalCheckoutInstance = instances[1];
         // Use hostedFieldInstance to send data to Braintree
         this.hostedFieldInstance = hostedFieldInstance;
-        return paypal.Button.render(
-          {
-            env: "sandbox",
-            style: {
-              label: "paypal",
-              size: "responsive",
-              shape: "rect",
-            },
-            payment: () => {
-              return paypalCheckoutInstance.createPayment({
-                flow: "checkout",
-                intent: "sale",
-                amount: parseFloat(this.amount) > 0 ? this.amount : 10,
-                displayName: "Braintree Testing",
-                currency: "USD",
-              });
-            },
-            onAuthorize: (data, options) => {
-              return paypalCheckoutInstance
-                .tokenizePayment(data)
-                .then((payload) => {
-                  console.log(payload);
-                  this.error = "";
-                  this.nonce = payload.nonce;
-                });
-            },
-            onCancel: (data) => {
-              console.log(data);
-              console.log("Payment Cancelled");
-            },
-            onError: (err) => {
-              console.error(err);
-              this.error =
-                "An error occurred while processing the paypal payment.";
-            },
+        // Setup PayPal Button
+        return paypal.Button.render({
+          env: 'sandbox',
+          style: {
+            label: 'paypal',
+            size: 'responsive',
+            shape: 'rect'
           },
-          "#paypalButton"
-        );
+          payment: () => {
+            return paypalCheckoutInstance.createPayment({
+              flow: 'checkout',
+              intent: 'sale',
+              amount: parseFloat(this.amount) > 0 ? this.amount : 10,
+              displayName: 'Braintree Testing',
+              currency: 'USD'
+            })
+          },
+          onAuthorize: (data, options) => {
+            return paypalCheckoutInstance.tokenizePayment(data).then(payload => {
+              console.log(payload);
+              this.error = "";
+              this.nonce = payload.nonce;
+            })
+          },
+          onCancel: (data) => {
+            console.log(data);
+            console.log("Payment Cancelled");
+          },
+          onError: (err) => {
+            console.error(err);
+            this.error = "An error occurred while processing the paypal payment.";
+          }
+        }, '#paypalButton')
       })
-      .catch((err) => {});
-  },
-};
+      .catch(err => {
+      });
+  }
+}
 </script>
 
 <template>
@@ -120,26 +110,18 @@ export default {
       <div class="card bg-light">
         <div class="card-header">Payment Information</div>
         <div class="card-body">
+          <div class="alert alert-success" v-if="nonce">
+            Successfully generated nonce.
+          </div>
           <div class="alert alert-danger" v-if="error">
             {{ error }}
-          </div>
-          <div class="alert alert-success" v-if="nonce">
-            Nonce generato correttamente.
           </div>
           <form>
             <div class="form-group">
               <label for="amount">Amount</label>
               <div class="input-group">
-                <div class="input-group-prepend">
-                  <span class="input-group-text">$</span>
-                </div>
-                <input
-                  type="number"
-                  id="amount"
-                  v-model="amount"
-                  class="form-control"
-                  placeholder="Enter Amount"
-                />
+                <div class="input-group-prepend"><span class="input-group-text">$</span></div>
+                <input type="number" id="amount" v-model="amount" class="form-control" placeholder="Enter Amount">
               </div>
             </div>
             <hr />
@@ -159,12 +141,7 @@ export default {
                 </div>
               </div>
             </div>
-            <button
-              class="btn btn-primary btn-block"
-              @click.prevent="payWithCreditCard"
-            >
-              Paga con carta di credito
-            </button>
+            <button class="btn btn-primary btn-block" @click.prevent="payWithCreditCard">Pay with Credit Card</button>
             <hr />
             <div id="paypalButton"></div>
           </form>
