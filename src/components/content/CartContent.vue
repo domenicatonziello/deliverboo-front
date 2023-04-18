@@ -1,5 +1,5 @@
 <script>
-import { store } from '../../data/store';
+import { store } from "../../data/store";
 
 export default {
   name: "CartContent",
@@ -8,13 +8,14 @@ export default {
   emits: {},
   computed: {
     getPrice() {
-      this.tot_price = Number(this.foodCart.price * this.foodCart.quantity);
-    }
+      this.tot_price = Number(
+        this.foodCart.price * this.foodCart.quantity
+      ).toFixed(2);
+    },
   },
   watch: {
-    getPrice() {
-    }
-  }
+    getPrice() {},
+  },
 };
 </script>
 
@@ -22,9 +23,7 @@ export default {
   <!-- food Cart -->
   <div class="container-food-cart">
     <div class="food-cart my-3">
-      <div class="food-cont">
-        {{ foodCart.name }} (€{{ foodCart.price }})
-      </div>
+      <div class="food-cont">{{ foodCart.name }} (€{{ foodCart.price }})</div>
 
       <div class="food-price">
         <div class="counter">

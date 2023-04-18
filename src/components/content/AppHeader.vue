@@ -13,8 +13,8 @@ export default {
       store.quantityCart = 0;
       return store.foodsCart.forEach((food) => {
         store.quantityCart += food.quantity;
-      })
-    }
+      });
+    },
   },
   methods: {
     setActiveCart() {
@@ -28,8 +28,8 @@ export default {
   },
   watch: {
     totQuantity() {
-      console.log('carrello');
-    }
+      console.log("carrello");
+    },
   },
 };
 </script>
@@ -41,7 +41,10 @@ export default {
         <router-link :to="'/'">
           <div class="logo">Delive<span>Boo</span></div>
         </router-link>
-        <div class="collapse navbar-collapse flex-grow-0" id="navbarSupportedContent">
+        <div
+          class="collapse navbar-collapse flex-grow-0"
+          id="navbarSupportedContent"
+        >
           <ul class="navbar-nav me-auto">
             <li class="nav-item mx-3">
               <router-link :to="'/'"> Home </router-link>
@@ -54,9 +57,14 @@ export default {
             </li>
             <li v-if="store.ristorante" class="nav-item mx-3">
               <a href="#" @click="setActiveCart" class="conteiner-cart">
-                <font-awesome-icon icon="fa-solid fa-cart-shopping " class="text-white" />
-                <div class="cart-count d-flex align-items-center justify-content-center"
-                  :class="store.foodsCart.length ? 'd-flex' : 'd-none'">
+                <font-awesome-icon
+                  icon="fa-solid fa-cart-shopping "
+                  class="text-white"
+                />
+                <div
+                  class="cart-count d-flex align-items-center justify-content-center"
+                  :class="store.foodsCart.length ? 'd-flex' : 'd-none'"
+                >
                   <span>{{ store.quantityCart }}</span>
                 </div>
               </a>
@@ -72,7 +80,8 @@ export default {
       <router-link :to="'/'">
         <i class="fa-solid fa-house">
           <p>Home</p>
-        </i></router-link>
+        </i></router-link
+      >
     </div>
     <div>
       <a href="http://127.0.0.1:8000">
@@ -89,13 +98,20 @@ export default {
       </router-link>
     </div>
     <div v-if="store.ristorante">
-      <a href="#" @click="setActiveCart" :class="{ active: isActive }" class="conteiner-cart">
+      <a
+        href="#"
+        @click="setActiveCart"
+        :class="{ active: isActive }"
+        class="conteiner-cart"
+      >
         <i class="fa-solid fa-cart-shopping">
           <p>Carrello</p>
         </i>
-        <div class="cart-count d-flex align-items-center justify-content-center"
-          :class="store.foodsCart.length ? 'd-flex' : 'd-none'">
-          <span>{{ store.foodsCart.length }}</span>
+        <div
+          class="cart-count d-flex align-items-center justify-content-center"
+          :class="store.foodsCart.length ? 'd-flex' : 'd-none'"
+        >
+          <span>{{ store.quantityCart }}</span>
         </div>
       </a>
     </div>
@@ -113,11 +129,13 @@ header {
   top: 0;
   right: 0;
   left: 0;
-  background: linear-gradient(297.36deg,
-      #ff8c42 44.61%,
-      #feb889 44.61%,
-      #feb07c 87.32%,
-      #fcfbf7 143.55%);
+  background: linear-gradient(
+    297.36deg,
+    #ff8c42 44.61%,
+    #feb889 44.61%,
+    #feb07c 87.32%,
+    #fcfbf7 143.55%
+  );
   z-index: 1;
 
   ul {
@@ -199,9 +217,20 @@ header {
       text-decoration: none;
       color: $orange;
     }
+    .cart-count {
+      background-color: #0032f9;
+      height: 20px;
+      width: 20px;
+      border-radius: 50%;
+      position: absolute;
+      top: -5px;
+      right: -3px;
+      font-size: 12px;
+      font-weight: bold;
+    }
   }
 
-  .nav-mobile>* {
+  .nav-mobile > * {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -212,7 +241,7 @@ header {
       transition: 0.4s;
     }
 
-    &>* {
+    & > * {
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -232,7 +261,7 @@ header {
   background-color: $secondary-bg;
   border-radius: 10px;
 
-  &>* {
+  & > * {
     color: white;
     padding: 8px;
   }
