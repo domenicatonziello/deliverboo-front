@@ -54,6 +54,7 @@ export default {
         },
         cartEmpty() {
             (store.foodsCart = []), localStorage.removeItem("Carello");
+            (store.restaurantid = null), localStorage.removeItem('Restaurant ID');
         },
     },
     created() {
@@ -121,7 +122,7 @@ export default {
 
                     <!-- Restaurant Menu-->
                     <div class="col menu text-start">
-                        <h1 class="text-center mb-5">Menù</h1>
+                        <h1 class="text-center mb-5">Menu</h1>
                         <food-card v-for="food in menu" :key="food.id" :food="food"></food-card>
                     </div>
                 </div>
@@ -135,7 +136,6 @@ export default {
                             <span @click="closeCart()" class="close px-3 mx-0">x</span>
                         </div>
                         <div class="text-order">il tuo ordine</div>
-                        <div class="text-danger">{{ store.message }}</div>
                         <div class="">
                             <cart-content v-for="foodCart in store.foodsCart" :foodCart="foodCart">
                             </cart-content>
@@ -156,7 +156,7 @@ export default {
                                 </div>
                             </div>
                             <div v-else class="d-flex justify-content-center align-items-center text-white">
-                                Il carello è Vuoto
+                                Il carrello è vuoto
                             </div>
                         </div>
                     </div>

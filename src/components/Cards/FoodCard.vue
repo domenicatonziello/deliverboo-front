@@ -1,7 +1,9 @@
 <script>
+import Modal from "../Modal.vue";
 import { store } from "../../data/store";
 export default {
   name: "FoodCard",
+  components: { Modal },
   props: { food: Object },
   data: () => ({
     store,
@@ -49,8 +51,12 @@ export default {
       })
     },
     deleteCart() {
-      if (!store.foodsCart.length) this.isSelect = false;
-    }
+      if (!store.foodsCart.length) {
+        this.isSelect = false;
+        (store.restaurantid = null), localStorage.removeItem('Restaurant ID');
+      }
+    },
+
 
   },
 
@@ -94,40 +100,25 @@ export default {
       })
       this.isSelect = true;
       this.saveFood();
-      // this.setLocalStorage()
     },
 
     downQuantity() {
-
       // se inferiore a 0 cancella
       store.foodsCart.forEach((food, index) => {
         if (food.quantity <= 1) {
-          // const getIndex = store.foodsCart.indexOf(this.foodCart);
           store.foodsCart.splice(index, 1);
           this.isSelect = false;
         }
         if (food.id == this.food.id) food.quantity -= 1;
       })
       this.saveFood();
-      // this.setLocalStorage()
     },
-
-    // setLocalStorage() {
-    //   // remove food
-    //   const getIndex = store.foodsCart.indexOf(this.foodCart);
-    //   // store.foodsCart.splice(getIndex, 1);
-    //   // added food
-    //   const newFood = this.foodCart;
-    //   store.foodsCart.fill(newFood, getIndex, getIndex + 1);
-    //   // save food;
-    //   let parsed = JSON.stringify(store.foodsCart);
-    //   localStorage.setItem("Carello", parsed);
-    // },
   },
 };
 </script>
 
 <template>
+  <Modal />
   <div class="title">
     <div class="food-card row d-flex align-items-center">
       <div @click="setActive()" class="custm-card col d-flex justify-content-around align-items-center gap-3"
@@ -150,10 +141,16 @@ export default {
             <div @click="downQuantity()" class="btn" :class="!quantity ? 'clicked' : ''">-</div>
           </div>
         </div>
-        <button v-if="isSelect" class="btn btn-danger" @click="removeFood(returnIndex)">
-          Remove
-        </button>
-        <button v-else class="btn btn-success" @click="addFood(food)">
+        <div v-if="!store.restaurantid || store.restaurantid == food.restaurant_id">
+          <button v-if="isSelect" class="btn btn-danger" @click="removeFood(returnIndex)">
+            Remove
+          </button>
+          <button v-else class="btn btn-success" @click="addFood(food)">
+            Aggiungi
+          </button>
+        </div>
+        <button v-if="store.restaurantid && store.restaurantid != food.restaurant_id" class="btn btn-success"
+          type="button" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
           Aggiungi
         </button>
       </div>
