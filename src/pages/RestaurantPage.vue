@@ -75,21 +75,21 @@ export default {
             <div class="col-12 mb-5" :class="store.cart ? 'restaurant-detail' : ''">
                 <!-- Restaurant Name-->
                 <h1 class="text-center bg-white restaurant-title">
-                    <span>{{ name }}</span>
+                    <span>{{ name }} </span>
                 </h1>
 
                 <!-- Restaurant Elements-->
                 <div class="row d-flex flex-wrap pt-3 restaurant-card justify-content-between gap-2">
                     <!-- Restaurant Details-->
-                    <div class="col-3 description">
-                        <div class="img-box">
+                    <div class="col-3 details">
+                        <div class="img-box mb-3">
                             <img :src="logo" alt="logo" />
                         </div>
                         <ul class="text">
                             <li>
-                                <p>
+                                <div id="description">
                                     {{ description }}
-                                </p>
+                                </div>
                             </li>
                             <li>
                                 <font-awesome-icon :icon="['fas', 'phone']" class="icon" />
@@ -182,7 +182,7 @@ export default {
 }
 
 .restaurant-card {
-    .description {
+    .details {
         background-color: white;
 
         padding: 2rem;
@@ -304,7 +304,7 @@ export default {
 }
 
 @media screen and (max-width: 1000px) {
-    .restaurant-card .description .img-box {
+    .restaurant-card .details .img-box {
         padding: 40px;
         margin-bottom: 0;
     }
@@ -314,7 +314,7 @@ export default {
     }
 
     .restaurant-card {
-        .description {
+        .details {
             width: 100%;
         }
 
@@ -327,6 +327,13 @@ export default {
 @media screen and (max-width: 567px) {
     .cart {
         min-width: 90%;
+    }
+
+    .details .text #description {
+        text-align: center;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
     }
 }
 </style>
