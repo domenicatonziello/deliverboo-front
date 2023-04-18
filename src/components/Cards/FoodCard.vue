@@ -105,7 +105,7 @@ export default {
     downQuantity() {
       // se inferiore a 0 cancella
       store.foodsCart.forEach((food, index) => {
-        if (food.quantity <= 1) {
+        if (food.quantity <= 1 && food.id == this.food.id) {
           store.foodsCart.splice(index, 1);
           this.isSelect = false;
         }
