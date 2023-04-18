@@ -15,8 +15,11 @@
     "@fortawesome/vue-fontawesome": "^3.0.3",
     "axios": "^1.3.4",
     "bootstrap": "^5.2.3",
+    "braintree-web": "^3.92.1",
+    "paypal-checkout": "^4.0.336",
     "sass": "^1.60.0",
     "vue": "^3.2.47",
+    "vue-braintree": "^2.1.0",
     "vue-router": "^4.1.6"
   },
   "devDependencies": {
