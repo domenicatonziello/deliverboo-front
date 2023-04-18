@@ -5,7 +5,7 @@ export const store = reactive({
     isLoading: false,
     cart: false,
     foodsCart: [],
-    quantityFood: null,
+    quantityCart: null,
     city: "",
     addedCity: false,
     fullSizeMain: false,

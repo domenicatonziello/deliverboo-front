@@ -11,35 +11,10 @@ export default {
       this.tot_price = Number(this.foodCart.price * this.foodCart.quantity);
     }
   },
-  methods: {
-    upQuantity() {
-      this.foodCart.quantity += 1;
-      this.setLocalStorage()
-    },
-
-    downQuantity() {
-
-      // se inferiore a 0 cancella
-      if (this.foodCart.quantity <= 1) {
-        const getIndex = store.foodsCart.indexOf(this.foodCart);
-        store.foodsCart.splice(getIndex, 1);
-      }
-      this.foodCart.quantity -= 1;
-      this.setLocalStorage()
-    },
-
-    setLocalStorage() {
-      // remove food
-      const getIndex = store.foodsCart.indexOf(this.foodCart);
-      // store.foodsCart.splice(getIndex, 1);
-      // added food
-      const newFood = this.foodCart;
-      store.foodsCart.fill(newFood, getIndex, getIndex + 1);
-      // save food;
-      let parsed = JSON.stringify(store.foodsCart);
-      localStorage.setItem("Carello", parsed);
-    },
-  },
+  watch: {
+    getPrice() {
+    }
+  }
 };
 </script>
 
@@ -53,9 +28,7 @@ export default {
 
       <div class="food-price">
         <div class="counter">
-          <div @click="upQuantity()" class="btn">+</div>
-          <div class="count">{{ foodCart.quantity }}</div>
-          <div @click="downQuantity()" class="btn" :class="!foodCart.quantity ? 'clicked' : ''">-</div>
+          <div class="count">Quantità: {{ foodCart.quantity }}</div>
         </div>
         <div class="price">
           € <span>{{ tot_price }}</span>

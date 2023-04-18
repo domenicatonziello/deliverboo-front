@@ -1,56 +1,66 @@
 <script>
+import Modal from "../Modal.vue";
 import { store } from "../../data/store";
 export default {
   name: "FoodCard",
+  components: { Modal },
   props: { food: Object },
   data: () => ({
     store,
     active: false,
     getIndex: null,
     isSelect: false,
+    quantity: null,
   }),
 
   mounted() {
     if (localStorage.getItem("Carello")) {
       try {
         store.foodsCart = JSON.parse(localStorage.getItem("Carello"));
-        store.restaurantid = localStorage.getItem("Restaurant ID");
+        store.restaurantid = Number(localStorage.getItem("Restaurant ID"));
       } catch (e) {
         localStorage.removeItem("Carello");
       }
     }
   },
-  // watch: {
-  //   foodsCart: {
-  //     handler(addFood) {
-  //       localStorage.carello = JSON.stringify(addFood);
-  //     },
-  //     deep: true,
-  //   },
-  // },
+  watch: {
+    select() {
+      console.log('select');
+    },
+    foodQuantity() {
+      console.log('quantity');
+    },
+    deleteCart() {
+      console.log('svuota carrello');
+    }
+  },
   computed: {
+
     returnIndex() {
       return (this.getIndex = store.foodsCart.indexOf(this.food));
     },
     select() {
       return store.foodsCart.forEach((food) => {
         if (food.id == this.food.id) this.isSelect = true;
-        else this.isSelect = false;
+        // else this.isSelect = false;
       })
-    }
+    },
+    foodQuantity() {
+      return store.foodsCart.forEach((food) => {
+        if (food.id == this.food.id) this.quantity = food.quantity
+      })
+    },
+    deleteCart() {
+      if (!store.foodsCart.length) {
+        this.isSelect = false;
+        (store.restaurantid = null), localStorage.removeItem('Restaurant ID');
+      }
+    },
+
+
   },
 
   methods: {
-    setActive() {
-      this.active = !this.active;
-      const getIndex = store.foodsCart.indexOf(this.food);
-
-      if (this.active) {
-        // this.addFood(this.food);
-      } else {
-        // this.removeFood(this.returnIndex);
-      }
-    },
     addFood(newFood) {
       if (store.foodsCart.length) {
         if (store.restaurantid == newFood.restaurant_id) {
@@ -64,8 +74,6 @@ export default {
         } else {
           return store.message = 'non puoi ordinare da più ristoranti';
         }
-
-
       } else {
         store.restaurantid = newFood.restaurant_id;
       }
@@ -73,7 +81,7 @@ export default {
       newFood['quantity'] = 1;
       store.foodsCart.push(newFood);
       this.saveFood();
-      this.isSelect = true;
+      // this.isSelect = true;
     },
     removeFood(food) {
       store.foodsCart.splice(food, 1);
@@ -83,14 +91,34 @@ export default {
     saveFood() {
       let parsed = JSON.stringify(store.foodsCart);
       localStorage.setItem("Carello", parsed);
-      let resId = JSON.stringify(store.restaurantid);
+      let resId = store.restaurantid;
       localStorage.setItem("Restaurant ID", resId);
+    },
+    upQuantity() {
+      store.foodsCart.forEach((food) => {
+        if (food.id == this.food.id) food.quantity += 1;
+      })
+      this.isSelect = true;
+      this.saveFood();
+    },
+
+    downQuantity() {
+      // se inferiore a 0 cancella
+      store.foodsCart.forEach((food, index) => {
+        if (food.quantity <= 1 && food.id == this.food.id) {
+          store.foodsCart.splice(index, 1);
+          this.isSelect = false;
+        }
+        if (food.id == this.food.id) food.quantity -= 1;
+      })
+      this.saveFood();
     },
   },
 };
 </script>
 
 <template>
+  <Modal />
   <div class="title">
     <div class="food-card row d-flex align-items-center">
       <div @click="setActive()" class="custm-card col d-flex justify-content-around align-items-center gap-3"
@@ -104,11 +132,25 @@ export default {
           <p><b>Prezzo: </b>€{{ food.price }}</p>
         </div>
       </div>
+
       <div class="buttons col-2 d-flex flex-column align-items-center">
-        <button v-if="isSelect" class="btn btn-danger" @click="removeFood(returnIndex)">
-          Remove
-        </button>
-        <button v-else class="btn btn-success" @click="addFood(food)">
+        <div v-if="isSelect" class="up-e-down">
+          <div class="counter">
+            <div @click="upQuantity()" class="btn">+</div>
+            <div class="count">{{ quantity }}</div>
+            <div @click="downQuantity()" class="btn" :class="!quantity ? 'clicked' : ''">-</div>
+          </div>
+        </div>
+        <div v-if="!store.restaurantid || store.restaurantid == food.restaurant_id">
+          <button v-if="isSelect" class="btn btn-danger" @click="removeFood(returnIndex)">
+            Remove
+          </button>
+          <button v-else class="btn btn-success" @click="addFood(food)">
+            Aggiungi
+          </button>
+        </div>
+        <button v-if="store.restaurantid && store.restaurantid != food.restaurant_id" class="btn btn-success"
+          type="button" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
           Aggiungi
         </button>
       </div>
@@ -207,6 +249,23 @@ export default {
       color: #11090300;
       transition: color 1s;
     }
+  }
+}
+
+.up-e-down {
+  .counter {
+    margin-left: 0;
+    padding: 0 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .count {
+    font-size: 15px;
+    padding: 0px 10px 0 10px;
+    font-weight: 900;
+    color: #202020;
   }
 }
 
