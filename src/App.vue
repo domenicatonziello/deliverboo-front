@@ -3,11 +3,18 @@ import { store } from "./data/store";
 import NotFoundPage from "./pages/NotFoundPage.vue";
 import AppHeader from "./components/content/AppHeader.vue";
 import otherPage from "./pages/otherPage.vue";
+import PaymentPage from "./pages/PaymentPage.vue";
 
 import SectionJumbotron from "./components/SectionJumbotron.vue";
 export default {
   name: "DeliverBoo",
-  components: { AppHeader, NotFoundPage, SectionJumbotron, otherPage },
+  components: {
+    AppHeader,
+    NotFoundPage,
+    SectionJumbotron,
+    otherPage,
+    PaymentPage,
+  },
   data: () => ({
     store,
   }),
