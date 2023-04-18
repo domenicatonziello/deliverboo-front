@@ -15,7 +15,7 @@ export default {
     if (localStorage.getItem("Carello")) {
       try {
         store.foodsCart = JSON.parse(localStorage.getItem("Carello"));
-        store.restaurantid = localStorage.getItem("Restaurant ID");
+        store.restaurantid = Number(localStorage.getItem("Restaurant ID"));
       } catch (e) {
         localStorage.removeItem("Carello");
       }
@@ -62,8 +62,6 @@ export default {
         } else {
           return store.message = 'non puoi ordinare da più ristoranti';
         }
-
-
       } else {
         store.restaurantid = newFood.restaurant_id;
       }
@@ -71,7 +69,7 @@ export default {
       newFood['quantity'] = 1;
       store.foodsCart.push(newFood);
       this.saveFood();
-      this.isSelect = true;
+      // this.isSelect = true;
     },
     removeFood(food) {
       store.foodsCart.splice(food, 1);
@@ -81,7 +79,7 @@ export default {
     saveFood() {
       let parsed = JSON.stringify(store.foodsCart);
       localStorage.setItem("Carello", parsed);
-      let resId = JSON.stringify(store.restaurantid);
+      let resId = store.restaurantid;
       localStorage.setItem("Restaurant ID", resId);
     },
     upQuantity() {
