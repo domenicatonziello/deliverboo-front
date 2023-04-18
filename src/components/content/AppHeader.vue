@@ -52,7 +52,7 @@ export default {
             <li class="nav-item mx-3">
               <a href="http://127.0.0.1:8000/login">Login</a>
             </li>
-            <li class="nav-item mx-3">
+            <li v-if="store.ristorante" class="nav-item mx-3">
               <a href="#" @click="setActiveCart" class="conteiner-cart">
                 <font-awesome-icon icon="fa-solid fa-cart-shopping " class="text-white" />
                 <div class="cart-count d-flex align-items-center justify-content-center"
