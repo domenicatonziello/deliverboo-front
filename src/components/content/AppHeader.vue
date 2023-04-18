@@ -7,7 +7,17 @@ export default {
   data: () => ({
     store,
     isActive: false,
+    quantityCart: null,
   }),
+  computed: {
+    totQuantity() {
+      this.quantityCart = 0;
+      store.foodsCart.forEach((food) => {
+        this.quantityCart += food.quantity;
+        return this.quantityCart;
+      })
+    }
+  },
   methods: {
     setActiveCart() {
       store.cart = !store.cart;
@@ -28,10 +38,7 @@ export default {
         <router-link :to="'/'">
           <div class="logo">Delive<span>Boo</span></div>
         </router-link>
-        <div
-          class="collapse navbar-collapse flex-grow-0"
-          id="navbarSupportedContent"
-        >
+        <div class="collapse navbar-collapse flex-grow-0" id="navbarSupportedContent">
           <ul class="navbar-nav me-auto">
             <li class="nav-item mx-3">
               <router-link :to="'/'"> Home </router-link>
@@ -44,15 +51,10 @@ export default {
             </li>
             <li class="nav-item mx-3">
               <a href="#" @click="setActiveCart" class="conteiner-cart">
-                <font-awesome-icon
-                  icon="fa-solid fa-cart-shopping "
-                  class="text-white"
-                />
-                <div
-                  class="cart-count d-flex align-items-center justify-content-center"
-                  :class="store.foodsCart.length ? 'd-flex' : 'd-none'"
-                >
-                  <span>{{ store.foodsCart.length }}</span>
+                <font-awesome-icon icon="fa-solid fa-cart-shopping " class="text-white" />
+                <div class="cart-count d-flex align-items-center justify-content-center"
+                  :class="store.foodsCart.length ? 'd-flex' : 'd-none'">
+                  <span>{{ quantityCart }}</span>
                 </div>
               </a>
             </li>
@@ -65,31 +67,31 @@ export default {
   <section class="nav-mobile">
     <div>
       <router-link :to="'/'">
-        <i class="fa-solid fa-house"><p>Home</p></i></router-link
-      >
+        <i class="fa-solid fa-house">
+          <p>Home</p>
+        </i></router-link>
     </div>
     <div>
       <a href="http://127.0.0.1:8000">
-        <i class="fa-solid fa-user"><p>Login</p></i>
+        <i class="fa-solid fa-user">
+          <p>Login</p>
+        </i>
       </a>
     </div>
     <div v-if="!store.ristorante" class="other">
       <router-link :to="'/other'">
-        <i class="fa-solid fa-circle-up"><p>Altro</p></i>
+        <i class="fa-solid fa-circle-up">
+          <p>Altro</p>
+        </i>
       </router-link>
     </div>
     <div v-if="store.ristorante">
-      <a
-        href="#"
-        @click="setActiveCart"
-        :class="{ active: isActive }"
-        class="conteiner-cart"
-      >
-        <i class="fa-solid fa-cart-shopping"><p>Carrello</p></i>
-        <div
-          class="cart-count d-flex align-items-center justify-content-center"
-          :class="store.foodsCart.length ? 'd-flex' : 'd-none'"
-        >
+      <a href="#" @click="setActiveCart" :class="{ active: isActive }" class="conteiner-cart">
+        <i class="fa-solid fa-cart-shopping">
+          <p>Carrello</p>
+        </i>
+        <div class="cart-count d-flex align-items-center justify-content-center"
+          :class="store.foodsCart.length ? 'd-flex' : 'd-none'">
           <span>{{ store.foodsCart.length }}</span>
         </div>
       </a>
@@ -108,13 +110,11 @@ header {
   top: 0;
   right: 0;
   left: 0;
-  background: linear-gradient(
-    297.36deg,
-    #ff8c42 44.61%,
-    #feb889 44.61%,
-    #feb07c 87.32%,
-    #fcfbf7 143.55%
-  );
+  background: linear-gradient(297.36deg,
+      #ff8c42 44.61%,
+      #feb889 44.61%,
+      #feb07c 87.32%,
+      #fcfbf7 143.55%);
   z-index: 1;
 
   ul {
@@ -140,10 +140,12 @@ header {
     font-size: 18px;
     color: white;
   }
+
   .active {
     background: none;
   }
 }
+
 .nav-mobile {
   display: none;
 }
@@ -189,42 +191,50 @@ header {
       align-items: center;
       justify-content: center;
     }
+
     a {
       text-decoration: none;
       color: $orange;
     }
   }
-  .nav-mobile > * {
+
+  .nav-mobile>* {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
+
     &:hover {
       transform: scale(1.2);
       transition: 0.4s;
     }
 
-    & > * {
+    &>* {
       display: flex;
       flex-direction: column;
       align-items: center;
     }
+
     p {
       margin: 0;
     }
   }
+
   .other {
     cursor: pointer;
   }
 }
+
 .active {
   background-color: $secondary-bg;
   border-radius: 10px;
-  & > * {
+
+  &>* {
     color: white;
     padding: 8px;
   }
 }
+
 @media screen and (max-width: 550px) {
   header {
     .logo {

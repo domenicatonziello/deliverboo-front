@@ -8,6 +8,7 @@ export default {
     active: false,
     getIndex: null,
     isSelect: false,
+    quantity: null,
   }),
 
   mounted() {
@@ -29,6 +30,7 @@ export default {
   //   },
   // },
   computed: {
+
     returnIndex() {
       return (this.getIndex = store.foodsCart.indexOf(this.food));
     },
@@ -37,7 +39,13 @@ export default {
         if (food.id == this.food.id) this.isSelect = true;
         else this.isSelect = false;
       })
+    },
+    foodQuantity() {
+      return store.foodsCart.forEach((food) => {
+        if (food.id == this.food.id) this.quantity = food.quantity
+      })
     }
+
   },
 
   methods: {
@@ -86,6 +94,38 @@ export default {
       let resId = JSON.stringify(store.restaurantid);
       localStorage.setItem("Restaurant ID", resId);
     },
+    upQuantity() {
+      store.foodsCart.forEach((food) => {
+        if (food.id == this.food.id) food.quantity += 1;
+      })
+      this.setLocalStorage()
+    },
+
+    downQuantity() {
+
+      // se inferiore a 0 cancella
+      store.foodsCart.forEach((food, index) => {
+        if (food.quantity <= 1) {
+          // const getIndex = store.foodsCart.indexOf(this.foodCart);
+          store.foodsCart.splice(index, 1);
+          this.isSelect = false;
+        }
+        if (food.id == this.food.id) food.quantity -= 1;
+      })
+      this.setLocalStorage()
+    },
+
+    setLocalStorage() {
+      // remove food
+      const getIndex = store.foodsCart.indexOf(this.foodCart);
+      // store.foodsCart.splice(getIndex, 1);
+      // added food
+      const newFood = this.foodCart;
+      store.foodsCart.fill(newFood, getIndex, getIndex + 1);
+      // save food;
+      let parsed = JSON.stringify(store.foodsCart);
+      localStorage.setItem("Carello", parsed);
+    },
   },
 };
 </script>
@@ -104,7 +144,15 @@ export default {
           <p><b>Prezzo: </b>€{{ food.price }}</p>
         </div>
       </div>
+
       <div class="buttons col-2 d-flex flex-column align-items-center">
+        <div v-if="isSelect" class="up-e-down">
+          <div class="counter">
+            <div @click="upQuantity()" class="btn">+</div>
+            <div class="count">{{ quantity }}</div>
+            <div @click="downQuantity()" class="btn" :class="!quantity ? 'clicked' : ''">-</div>
+          </div>
+        </div>
         <button v-if="isSelect" class="btn btn-danger" @click="removeFood(returnIndex)">
           Remove
         </button>
@@ -207,6 +255,23 @@ export default {
       color: #11090300;
       transition: color 1s;
     }
+  }
+}
+
+.up-e-down {
+  .counter {
+    margin-left: 0;
+    padding: 0 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .count {
+    font-size: 15px;
+    padding: 0px 10px 0 10px;
+    font-weight: 900;
+    color: #202020;
   }
 }
 
