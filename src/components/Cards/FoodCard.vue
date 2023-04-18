@@ -38,9 +38,9 @@ export default {
       const getIndex = store.foodsCart.indexOf(this.food);
 
       if (this.active) {
-        this.addFood(this.food);
+        // this.addFood(this.food);
       } else {
-        this.removeFood(this.returnIndex);
+        // this.removeFood(this.returnIndex);
       }
     },
     addFood(newFood) {

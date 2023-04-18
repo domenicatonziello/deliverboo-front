@@ -240,6 +240,8 @@ export default {
     }
 
     .menu {
+        max-height: 850px;
+        overflow-y: scroll;
         background-color: white;
 
         padding: 2rem;
