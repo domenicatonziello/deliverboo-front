@@ -22,10 +22,12 @@ export default {
     }
   },
   watch: {
-    quantity() {
-      console.log('cambiamento')
+    select() {
+      console.log('select');
     },
-    // deep: true,
+    foodQuantity() {
+      console.log('quantity');
+    }
   },
   computed: {
 
@@ -35,7 +37,7 @@ export default {
     select() {
       return store.foodsCart.forEach((food) => {
         if (food.id == this.food.id) this.isSelect = true;
-        else this.isSelect = false;
+        // else this.isSelect = false;
       })
     },
     foodQuantity() {
@@ -47,16 +49,6 @@ export default {
   },
 
   methods: {
-    // setActive() {
-    //   this.active = !this.active;
-    //   const getIndex = store.foodsCart.indexOf(this.food);
-
-    //   if (this.active) {
-    //     // this.addFood(this.food);
-    //   } else {
-    //     // this.removeFood(this.returnIndex);
-    //   }
-    // },
     addFood(newFood) {
       if (store.foodsCart.length) {
         if (store.restaurantid == newFood.restaurant_id) {
@@ -96,8 +88,9 @@ export default {
       store.foodsCart.forEach((food) => {
         if (food.id == this.food.id) food.quantity += 1;
       })
+      this.isSelect = true;
+      this.saveFood();
       // this.setLocalStorage()
-      console.log('aggiunto');
     },
 
     downQuantity() {
@@ -111,6 +104,7 @@ export default {
         }
         if (food.id == this.food.id) food.quantity -= 1;
       })
+      this.saveFood();
       // this.setLocalStorage()
     },
 
@@ -148,7 +142,7 @@ export default {
         <div v-if="isSelect" class="up-e-down">
           <div class="counter">
             <div @click="upQuantity()" class="btn">+</div>
-            <div class="count">{{ food.quantity }}</div>
+            <div class="count">{{ quantity }}</div>
             <div @click="downQuantity()" class="btn" :class="!quantity ? 'clicked' : ''">-</div>
           </div>
         </div>
