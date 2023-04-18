@@ -7,14 +7,12 @@ export default {
   data: () => ({
     store,
     isActive: false,
-    quantityCart: null,
   }),
   computed: {
     totQuantity() {
-      this.quantityCart = 0;
-      store.foodsCart.forEach((food) => {
-        this.quantityCart += food.quantity;
-        return this.quantityCart;
+      store.quantityCart = 0;
+      return store.foodsCart.forEach((food) => {
+        store.quantityCart += food.quantity;
       })
     }
   },
@@ -27,6 +25,11 @@ export default {
         this.isActive = false;
       }
     },
+  },
+  watch: {
+    totQuantity() {
+      console.log('carrello');
+    }
   },
 };
 </script>
@@ -54,7 +57,7 @@ export default {
                 <font-awesome-icon icon="fa-solid fa-cart-shopping " class="text-white" />
                 <div class="cart-count d-flex align-items-center justify-content-center"
                   :class="store.foodsCart.length ? 'd-flex' : 'd-none'">
-                  <span>{{ quantityCart }}</span>
+                  <span>{{ store.quantityCart }}</span>
                 </div>
               </a>
             </li>

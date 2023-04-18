@@ -21,14 +21,12 @@ export default {
       }
     }
   },
-  // watch: {
-  //   foodsCart: {
-  //     handler(addFood) {
-  //       localStorage.carello = JSON.stringify(addFood);
-  //     },
-  //     deep: true,
-  //   },
-  // },
+  watch: {
+    quantity() {
+      console.log('cambiamento')
+    },
+    // deep: true,
+  },
   computed: {
 
     returnIndex() {
@@ -49,16 +47,16 @@ export default {
   },
 
   methods: {
-    setActive() {
-      this.active = !this.active;
-      const getIndex = store.foodsCart.indexOf(this.food);
+    // setActive() {
+    //   this.active = !this.active;
+    //   const getIndex = store.foodsCart.indexOf(this.food);
 
-      if (this.active) {
-        // this.addFood(this.food);
-      } else {
-        // this.removeFood(this.returnIndex);
-      }
-    },
+    //   if (this.active) {
+    //     // this.addFood(this.food);
+    //   } else {
+    //     // this.removeFood(this.returnIndex);
+    //   }
+    // },
     addFood(newFood) {
       if (store.foodsCart.length) {
         if (store.restaurantid == newFood.restaurant_id) {
@@ -98,7 +96,8 @@ export default {
       store.foodsCart.forEach((food) => {
         if (food.id == this.food.id) food.quantity += 1;
       })
-      this.setLocalStorage()
+      // this.setLocalStorage()
+      console.log('aggiunto');
     },
 
     downQuantity() {
@@ -112,20 +111,20 @@ export default {
         }
         if (food.id == this.food.id) food.quantity -= 1;
       })
-      this.setLocalStorage()
+      // this.setLocalStorage()
     },
 
-    setLocalStorage() {
-      // remove food
-      const getIndex = store.foodsCart.indexOf(this.foodCart);
-      // store.foodsCart.splice(getIndex, 1);
-      // added food
-      const newFood = this.foodCart;
-      store.foodsCart.fill(newFood, getIndex, getIndex + 1);
-      // save food;
-      let parsed = JSON.stringify(store.foodsCart);
-      localStorage.setItem("Carello", parsed);
-    },
+    // setLocalStorage() {
+    //   // remove food
+    //   const getIndex = store.foodsCart.indexOf(this.foodCart);
+    //   // store.foodsCart.splice(getIndex, 1);
+    //   // added food
+    //   const newFood = this.foodCart;
+    //   store.foodsCart.fill(newFood, getIndex, getIndex + 1);
+    //   // save food;
+    //   let parsed = JSON.stringify(store.foodsCart);
+    //   localStorage.setItem("Carello", parsed);
+    // },
   },
 };
 </script>
@@ -149,7 +148,7 @@ export default {
         <div v-if="isSelect" class="up-e-down">
           <div class="counter">
             <div @click="upQuantity()" class="btn">+</div>
-            <div class="count">{{ quantity }}</div>
+            <div class="count">{{ food.quantity }}</div>
             <div @click="downQuantity()" class="btn" :class="!quantity ? 'clicked' : ''">-</div>
           </div>
         </div>
