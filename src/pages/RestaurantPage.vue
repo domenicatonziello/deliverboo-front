@@ -41,9 +41,6 @@ export default {
                     this.min_order = res.data.restaurant.min_order;
                     this.shipment_price = res.data.restaurant.shipment_price;
                     this.logo = res.data.restaurant.logo;
-                    // console.log(res.data.restaurant.name)
-                    // console.log(this.menu)
-                    // console.log(this.$route.params.id)
                 })
                 .catch((err) => {
                     console.error(err);
@@ -65,6 +62,9 @@ export default {
         store.fullSizeMain = true;
         store.ristorante = true;
     },
+    watch: {
+        getTotalPrice() { }
+    }
 };
 </script>
 
