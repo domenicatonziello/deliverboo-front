@@ -82,7 +82,7 @@ export default {
                 <div class="row d-flex flex-wrap pt-3 restaurant-card justify-content-between gap-2">
                     <!-- Restaurant Details-->
                     <div class="col-3 details">
-                        <div class="img-box">
+                        <div class="img-box mb-3">
                             <img :src="logo" alt="logo" />
                         </div>
                         <ul class="text">
