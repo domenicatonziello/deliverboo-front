@@ -85,9 +85,9 @@ export default {
 <template>
   <div class="title">
     <div class="food-card row d-flex align-items-center">
-      <div @click="setActive()" class="custm-card col d-flex justify-content-around align-items-center gap-4"
+      <div @click="setActive()" class="custm-card col d-flex justify-content-around align-items-center gap-3"
         :class="{ active: active }">
-        <div class="img-box col-3">
+        <div class="img-box col text-center">
           <img :src="food.image" alt="" />
         </div>
         <div class="details col">
@@ -124,9 +124,11 @@ export default {
   }
 
   .img-box {
+    width: 100%;
+
     img {
-      width: 100%;
-      height: 125px;
+      width: 250px;
+      height: 150px;
       object-fit: cover;
 
       &:hover {
@@ -198,6 +200,17 @@ export default {
       visibility: hidden;
       color: #11090300;
       transition: color 1s;
+    }
+  }
+}
+
+@media screen and (max-width: 567px) {
+  .container .row .img-box {
+    width: 150px;
+
+    img {
+      width: 150px;
+      height: 130px;
     }
   }
 }
