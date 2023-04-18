@@ -81,7 +81,7 @@ export default {
     padding: 10px 5px 10px 5px;
 
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
     align-items: center;
 
     .clicked,
