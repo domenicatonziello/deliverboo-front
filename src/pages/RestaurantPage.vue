@@ -56,8 +56,7 @@ export default {
             store.cart = false;
         },
         cartEmpty() {
-            store.foodsCart = [],
-                localStorage.removeItem("Carello");
+            (store.foodsCart = []), localStorage.removeItem("Carello");
         },
     },
     created() {

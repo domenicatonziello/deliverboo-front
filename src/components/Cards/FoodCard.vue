@@ -27,6 +27,9 @@ export default {
     },
     foodQuantity() {
       console.log('quantity');
+    },
+    deleteCart() {
+      console.log('svuota carrello');
     }
   },
   computed: {
@@ -44,6 +47,9 @@ export default {
       return store.foodsCart.forEach((food) => {
         if (food.id == this.food.id) this.quantity = food.quantity
       })
+    },
+    deleteCart() {
+      if (!store.foodsCart.length) this.isSelect = false;
     }
 
   },
