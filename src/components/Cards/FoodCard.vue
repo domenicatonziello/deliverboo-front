@@ -13,19 +13,20 @@ export default {
     if (localStorage.getItem("Carello")) {
       try {
         store.foodsCart = JSON.parse(localStorage.getItem("Carello"));
+        store.restaurantid = localStorage.getItem("Restaurant ID");
       } catch (e) {
         localStorage.removeItem("Carello");
       }
     }
   },
-  watch: {
-    foodsCart: {
-      handler(addFood) {
-        localStorage.carello = JSON.stringify(addFood);
-      },
-      deep: true,
-    },
-  },
+  // watch: {
+  //   foodsCart: {
+  //     handler(addFood) {
+  //       localStorage.carello = JSON.stringify(addFood);
+  //     },
+  //     deep: true,
+  //   },
+  // },
   computed: {
     returnIndex() {
       return (this.getIndex = store.foodsCart.indexOf(this.food));
@@ -74,6 +75,8 @@ export default {
     saveFood() {
       let parsed = JSON.stringify(store.foodsCart);
       localStorage.setItem("Carello", parsed);
+      let resId = JSON.stringify(store.restaurantid);
+      localStorage.setItem("Restaurant ID", resId);
     },
   },
 };
