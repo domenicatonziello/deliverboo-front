@@ -1,5 +1,8 @@
-@use './partial/variables' as *;
+@use "./partial/variables" as *;
 
 * {
-    font-family: 'Ubuntu', sans-serif;
+  font-family: "Ubuntu", sans-serif;
+}
+*::-webkit-scrollbar {
+  display: none;
 }
