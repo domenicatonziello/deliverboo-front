@@ -129,77 +129,116 @@ export default {
 </script>
 
 <template>
-  <div class="container">
-    <div class="col-6 offset-3">
-      <div class="card bg-light">
-        <div class="card-header">Informazioni sul pagamento</div>
-        <div class="card-body">
-          <div class="alert alert-success" v-if="nonce">
-            Il pagamento è andato a buon fine.
+  <div class="container mb-5 pb-5">
+    <div class="row row-cols-lg-auto justify-content-center">
+      <div class="col pt-5">
+        <div class="card bg-white rounded-4">
+          <div class="header-card text-center pt-5">
+            <h1>Pagamento</h1>
           </div>
-          <div class="alert alert-danger" v-if="error">
-            {{ error }}
-          </div>
-          <form id="payment-form" method="post" @submit.prevent="sendForm()">
-            <!-- prezzo totale -->
-            <div class="form-group">
-              <label for="total_order">Totale</label>
-              <div class="input-group">
-                <div class="input-group-prepend"><span class="input-group-text">€</span></div>
-                <input type="text" disabled id="total_order" name="total_order" v-model="form.total_order"
-                  class="form-control" placeholder="Enter Amount">
-              </div>
+          <div class="body-card">
+            <div class="alert alert-success" v-if="nonce">
+              Il pagamento è andato a buon fine.
             </div>
-            <!-- address -->
-            <div class="form-group">
-              <label for="address">Indirizzo</label>
-              <input type="text" id="address" name="address" v-model="form.address" class="form-control"
-                placeholder="Inserisci il tuo indirizzo">
+            <div class="alert alert-danger" v-if="error">
+              {{ error }}
             </div>
-            <!-- phone number -->
-            <div class="form-group">
-              <label for="phone">Numero</label>
-              <input type="number" id="phone" name="phone_number" v-model="form.phone_number" class="form-control"
-                placeholder="Inserisci il tuo numero di cellulare">
-            </div>
-            <!-- guest name -->
-            <div class="form-group">
-              <label for="guest_name">Nome</label>
-              <input type="text" id="guest_name" name="guest_name" v-model="form.guest_name" class="form-control"
-                placeholder="Inserisci il tuo nome">
-            </div>
-            <hr />
-            <div class="form-group">
-              <label>Credit Card Number</label>
-              <div id="creditCardNumber" class="form-control"></div>
-            </div>
-            <div class="form-group">
-              <div class="row">
-                <div class="col-6">
-                  <label>Expire Date</label>
-                  <div id="expireDate" class="form-control"></div>
-                </div>
-                <div class="col-6">
-                  <label>CVV</label>
-                  <div id="cvv" class="form-control"></div>
+            <form id="payment-form" method="post" @submit.prevent="sendForm()">
+              <!-- prezzo totale -->
+              <div class="form-group text-center">
+                <label for="total_order text-center">
+                </label>
+                <h2>Totale</h2>
+                <div class="d-flex align-items-center justify-content-center amount mt-3">
+                  <p class="fs-3">€</p>
+                  <input type="text" disabled id="total_order" name="total_order" v-model="form.total_order"
+                    class="form-control bg-white mx-2" placeholder="Enter Amount">
                 </div>
               </div>
-            </div>
-            <button class="btn btn-primary btn-block" @click.prevent="payWithCreditCard">Pay with Credit Card</button>
-            <hr />
-            <div id="paypalButton"></div>
-            <div id="dropin-container"></div>
-            <button type="submit" class="btn btn-primary"> Invia </button>
-            <!-- <input type="hidden" id="nonce" name="payment_method_nonce" /> -->
-          </form>
+              <!-- guest name -->
+              <div class="form-group">
+                <label for="guest_name">Nome</label>
+                <input type="text" id="guest_name" name="guest_name" v-model="form.guest_name" class="form-control"
+                  placeholder="Inserisci il tuo nome">
+              </div>
+              <!-- address -->
+              <div class="form-group">
+                <label for="address">Indirizzo</label>
+                <input type="text" id="address" name="address" v-model="form.address" class="form-control"
+                  placeholder="Inserisci il tuo indirizzo">
+              </div>
+              <!-- phone number -->
+              <div class="form-group">
+                <label for="phone">Numero</label>
+                <input type="number" id="phone" name="phone_number" v-model="form.phone_number" class="form-control"
+                  placeholder="Inserisci il tuo numero di cellulare">
+              </div>
+
+              <hr />
+              <div class="form-group">
+                <label>Credit Card Number</label>
+                <div id="creditCardNumber" class="form-control"></div>
+              </div>
+              <div class="form-group">
+                <div class="row">
+                  <div class="col-6">
+                    <label>Expire Date</label>
+                    <div id="expireDate" class="form-control"></div>
+                  </div>
+                  <div class="col-6">
+                    <label>CVV</label>
+                    <div id="cvv" class="form-control"></div>
+                  </div>
+                </div>
+              </div>
+              <button class="btn btn-primary btn-block" @click.prevent="payWithCreditCard">Pay with Credit Card</button>
+              <hr />
+              <div id="paypalButton"></div>
+              <div id="dropin-container"></div>
+              <button type="submit" class="btn btn-primary"> Invia </button>
+              <!-- <input type="hidden" id="nonce" name="payment_method_nonce" /> -->
+            </form>
+          </div>
         </div>
       </div>
     </div>
   </div>
 </template>
 
-<style scoped>
+<style lang="scss" scoped>
 body {
   padding: 20px;
+}
+
+.card {
+  width: 100%;
+}
+
+.body-card {
+  padding: 0 2rem 2rem 2rem;
+}
+
+#creditCardNumber,
+#expireDate,
+#cvv {
+  height: 3rem;
+  margin: 1rem 0;
+}
+
+.form-group {
+  margin-bottom: 1rem;
+}
+
+.amount {
+  height: 50px;
+
+  #total_order {
+    text-align: center;
+    width: 4rem;
+  }
+}
+
+form label {
+  margin-bottom: 0.3rem;
 }
 </style>
