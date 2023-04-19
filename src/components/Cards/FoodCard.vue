@@ -153,18 +153,18 @@ export default {
         >
           <button
             v-if="isSelect"
-            class="btn btn-danger"
+            class="btn-remove"
             @click="removeFood(returnIndex)"
           >
             Remove
           </button>
-          <button v-else class="btn btn-success btn-add" @click="addFood(food)">
+          <button v-else class="btn-add" @click="addFood(food)">
             Aggiungi
           </button>
         </div>
         <button
           v-if="store.restaurantid && store.restaurantid != food.restaurant_id"
-          class="btn btn-success"
+          class="btn-add"
           type="button"
           data-bs-toggle="modal"
           data-bs-target="#staticBackdrop"
@@ -186,7 +186,8 @@ export default {
   cursor: pointer;
 
   &:hover {
-    color: grey;
+    transform: scale(1.1);
+    transition: 0.5s;
   }
 
   .img-box {
@@ -197,9 +198,9 @@ export default {
       height: 150px;
       object-fit: cover;
 
-      &:hover {
-        filter: grayscale(0.5);
-      }
+      // &:hover {
+      //   filter: grayscale(0.5);
+      // }
     }
   }
 
@@ -284,6 +285,36 @@ export default {
     padding: 0px 10px 0 10px;
     font-weight: 900;
     color: #202020;
+  }
+}
+
+.btn-add {
+  padding: 5px 10px;
+  text-align: center;
+  font-size: 15px;
+  text-decoration: none;
+  background-color: $orange;
+  color: $white;
+  border: 1px solid $dark-orange;
+  border-radius: 10px;
+
+  &:hover {
+    color: $brown;
+    background-color: $white;
+  }
+}
+.btn-remove {
+  padding: 5px 10px;
+  text-align: center;
+  font-size: 15px;
+  text-decoration: none;
+  background-color: red;
+  color: $white;
+  border: 1px solid $brown;
+  border-radius: 10px;
+  &:hover {
+    color: red;
+    background-color: $white;
   }
 }
 
