@@ -42,7 +42,7 @@ export default {
 
 .container-food-cart {
   display: flex;
-  border-top: 1px solid $white;
+  border-bottom: 1px solid $brown;
 
   .food-cont {
     display: block;

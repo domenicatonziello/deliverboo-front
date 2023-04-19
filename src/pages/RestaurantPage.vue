@@ -172,12 +172,10 @@ export default {
                   </div>
                 </div>
                 <div class="empty-cart d-flex justify-content-between">
-                  <button @click="cartEmpty()" class="btn btn-danger m-2">
+                  <button @click="cartEmpty()" class="btn-svuota m-2">
                     Svuota carrello
                   </button>
-                  <button class="btn btn-success m-2">
-                    Procedi all'ordine
-                  </button>
+                  <button class="btn-order m-2">Procedi all'ordine</button>
                 </div>
               </div>
               <div
@@ -285,7 +283,7 @@ export default {
   display: inline-block;
   font-size: 30px;
   cursor: pointer;
-  color: #fff;
+  color: $brown;
 
   &:hover {
     transform: scale(1.2);
@@ -298,11 +296,11 @@ export default {
 }
 
 .cart {
-  background-color: #fff;
+  background-color: $white;
   min-height: 100px;
   min-width: 50%;
-  box-shadow: 5px 5px 5px $brown;
-  background-color: $light-orange;
+  box-shadow: 2px 1px 5px black;
+
   display: flex;
   z-index: 1;
   position: absolute;
@@ -314,23 +312,56 @@ export default {
     font-size: 20px;
     text-align: center;
     margin-bottom: 5px;
+    padding-bottom: 5px;
+    border-bottom: 1px solid $brown;
     color: $brown;
   }
 
   // stile
-  border-radius: 1.5rem;
-  border: 8px solid rgb(255, 233, 218);
+  border-radius: 10px;
+  border: 2px solid black;
 }
 
 .final-order {
   display: flex;
   justify-content: space-between;
   align-content: end;
-  padding-bottom: 10px;
+  padding: 10px;
 }
 
 .bgcart {
   background: opacity($color: #0000008e);
+}
+.btn-order {
+  padding: 5px 10px;
+  text-align: center;
+  font-size: 15px;
+  text-decoration: none;
+  background-color: green;
+  color: $white;
+  border: 1px solid rgb(0, 86, 0);
+  border-radius: 10px;
+
+  &:hover {
+    color: green;
+    background-color: $white;
+  }
+}
+
+.btn-svuota {
+  padding: 5px 10px;
+  text-align: center;
+  font-size: 15px;
+  text-decoration: none;
+  background-color: red;
+  color: $white;
+  border: 1px solid rgb(145, 0, 0);
+  border-radius: 10px;
+
+  &:hover {
+    color: red;
+    background-color: $white;
+  }
 }
 
 @media screen and (max-width: 1000px) {
