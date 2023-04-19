@@ -16,11 +16,12 @@ import {
   faCartShopping,
   faPhone,
   faTruckFast,
-  faLocationDot
+  faLocationDot,
+  faCircleCheck
 } from "@fortawesome/free-solid-svg-icons";
 // import { faYoutube, faTwitch, faFacebookF, faInstagram } from '@fortawesome/free-brands-svg-icons';
 
-library.add(faStar, farStar, faMagnifyingGlass, faCartShopping, faPhone, faTruckFast, faLocationDot);
+library.add(faStar, farStar, faMagnifyingGlass, faCartShopping, faPhone, faTruckFast, faLocationDot, faCircleCheck);
 
 const app = createApp(App);
 app.use(router);
