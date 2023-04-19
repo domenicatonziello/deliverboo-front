@@ -132,8 +132,8 @@ export default {
 </script>
 
 <template>
-  <div class="container mb-5 pb-5">
-    <div class="row row-cols-lg-auto justify-content-center">
+  <div class="container pb-5">
+    <div class="row row-cols-lg-auto justify-content-center mb-5">
       <div class="col pt-5">
         <div class="card bg-white rounded-4">
           <div class="header-card text-center pt-5">
