@@ -147,17 +147,6 @@ export default {
               {{ error }}
             </div>
             <form id="payment-form" method="post" @submit.prevent="sendForm()">
-              <!-- prezzo totale -->
-              <div class="form-group text-center">
-                <label for="total_order text-center">
-                </label>
-                <h2>Totale</h2>
-                <div class="d-flex align-items-center justify-content-center amount mt-3">
-                  <p class="fs-3">€</p>
-                  <input type="text" disabled id="total_order" name="total_order" v-model="form.total_order"
-                    class="form-control bg-white mx-2" placeholder="Enter Amount">
-                </div>
-              </div>
               <!-- guest name -->
               <div class="form-group">
                 <label for="guest_name">Nome</label>
@@ -176,7 +165,6 @@ export default {
                 <input type="number" id="phone" name="phone_number" v-model="form.phone_number" class="form-control"
                   placeholder="Inserisci il tuo numero di cellulare">
               </div>
-
               <hr />
               <div class="form-group">
                 <label>Credit Card Number</label>
@@ -192,6 +180,15 @@ export default {
                     <label>CVV</label>
                     <div id="cvv" class="form-control"></div>
                   </div>
+                </div>
+              </div>
+              <!-- prezzo totale -->
+              <div class="d-flex justify-content-between align-items-center amount">
+                <h2> Totale: </h2>
+                <div class="d-flex">
+                  <p class="fs-3 mb-0">€</p>
+                  <input type="text" disabled id="total_order" name="total_order" v-model="form.total_order" class=""
+                    placeholder="Enter Amount">
                 </div>
               </div>
               <button class="btn btn-primary btn-block" @click.prevent="payWithCreditCard">Pay with Credit Card</button>
@@ -236,8 +233,12 @@ body {
   height: 50px;
 
   #total_order {
-    text-align: center;
+    background-color: white;
+    margin-left: 5px;
+    border: none;
+    font-size: 25px;
     width: 4rem;
+    color: black;
   }
 }
 
