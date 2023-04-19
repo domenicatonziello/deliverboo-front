@@ -56,11 +56,6 @@ export default {
       (store.foodsCart = []), localStorage.removeItem("Carello");
       (store.restaurantid = null), localStorage.removeItem("Restaurant ID");
     },
-    saveTotPrice() {
-      localStorage.removeItem("Carello");
-      let resId = this.subtotal;
-      localStorage.setItem("Tot Price", resId);
-    }
   },
   created() {
     store.isLoading = true;
@@ -159,7 +154,7 @@ export default {
                     Svuota carrello
                   </button>
 
-                  <router-link :to="'/payment'" class="btn btn-success m-2" @click="saveTotPrice()"> Procedi all'ordine
+                  <router-link :to="'/payment'" class="btn btn-success m-2"> Procedi all'ordine
                   </router-link>
                 </div>
               </div>

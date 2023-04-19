@@ -28,6 +28,8 @@ export default {
           console.log(payload);
           this.nonce = payload.nonce;
           this.form.status = true;
+          (store.foodsCart = []), localStorage.removeItem("Carello");
+          (store.restaurantid = null), localStorage.removeItem('Restaurant ID');
         })
           .catch(err => {
             console.error(err);
