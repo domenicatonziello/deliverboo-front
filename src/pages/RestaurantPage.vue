@@ -64,7 +64,7 @@ export default {
     store.ristorante = true;
   },
   watch: {
-    getTotalPrice() {},
+    getTotalPrice() { },
   },
 };
 </script>
@@ -80,9 +80,7 @@ export default {
         </h1>
 
         <!-- Restaurant Elements-->
-        <div
-          class="row d-flex flex-wrap pt-3 restaurant-card justify-content-between gap-2"
-        >
+        <div class="row d-flex flex-wrap pt-3 restaurant-card justify-content-between gap-2">
           <!-- Restaurant Details-->
           <div class="col-3 details">
             <div class="img-box mb-3">
@@ -99,10 +97,7 @@ export default {
                 <a href="#"> {{ phone_number }}</a>
               </li>
               <li>
-                <font-awesome-icon
-                  :icon="['fas', 'cart-shopping']"
-                  class="icon"
-                />
+                <font-awesome-icon :icon="['fas', 'cart-shopping']" class="icon" />
                 Ordine Minimo: <small> €{{ min_order }} </small>
               </li>
               <li>
@@ -111,20 +106,13 @@ export default {
               </li>
               <li>
                 <p>
-                  <font-awesome-icon
-                    :icon="['fas', 'location-dot']"
-                    class="icon"
-                  />
+                  <font-awesome-icon :icon="['fas', 'location-dot']" class="icon" />
                   {{ address }}
                 </p>
                 <div class="map">
                   <iframe
                     src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d179077.24358987078!2d9.017039295041839!3d45.46815344694175!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4786c1493f1275e7%3A0x3cffcd13c6740e8d!2sMilano%20MI!5e0!3m2!1sit!2sit!4v1681718621223!5m2!1sit!2sit"
-                    style="border: 0"
-                    allowfullscreen=""
-                    loading="lazy"
-                    referrerpolicy="no-referrer-when-downgrade"
-                  >
+                    style="border: 0" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
                   </iframe>
                 </div>
               </li>
@@ -134,11 +122,7 @@ export default {
           <!-- Restaurant Menu-->
           <div class="col menu text-start">
             <h1 class="text-center mb-5">Menu</h1>
-            <food-card
-              v-for="food in menu"
-              :key="food.id"
-              :food="food"
-            ></food-card>
+            <food-card v-for="food in menu" :key="food.id" :food="food"></food-card>
           </div>
         </div>
       </div>
@@ -152,16 +136,10 @@ export default {
             </div>
             <div class="text-order">il tuo ordine</div>
             <div class="">
-              <cart-content
-                v-for="foodCart in store.foodsCart"
-                :foodCart="foodCart"
-              >
+              <cart-content v-for="foodCart in store.foodsCart" :foodCart="foodCart">
               </cart-content>
               <!-- total price -->
-              <div
-                v-if="store.foodsCart.length >= 1"
-                class="row p-0 align-items-end h-100"
-              >
+              <div v-if="store.foodsCart.length >= 1" class="row p-0 align-items-end h-100">
                 <div class="border-cart"></div>
                 <div class="final-order">
                   <div>
@@ -175,15 +153,11 @@ export default {
                   <button @click="cartEmpty()" class="btn btn-danger m-2">
                     Svuota carrello
                   </button>
-                  <button class="btn btn-success m-2">
-                    Procedi all'ordine
-                  </button>
+
+                  <router-link :to="'/payment'" class="btn btn-success m-2"> Procedi all'ordine </router-link>
                 </div>
               </div>
-              <div
-                v-else
-                class="d-flex justify-content-center align-items-center text-white"
-              >
+              <div v-else class="d-flex justify-content-center align-items-center text-white">
                 Il carrello è vuoto
               </div>
             </div>
@@ -244,7 +218,7 @@ export default {
           width: 100%;
         }
 
-        .map > * {
+        .map>* {
           width: 100%;
         }
       }
@@ -255,7 +229,7 @@ export default {
       }
     }
 
-    .text > * {
+    .text>* {
       margin-bottom: 1rem;
 
       a {
