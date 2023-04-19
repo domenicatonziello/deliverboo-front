@@ -27,6 +27,7 @@ export default {
     }
   },
   mounted() {
+    this.amount = Number(localStorage.getItem("Tot Price"));
     braintree.client.create({
       authorization: "sandbox_93smtrz3_bbgx4xf7h8bx24xg"
     })
