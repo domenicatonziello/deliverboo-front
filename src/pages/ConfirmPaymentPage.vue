@@ -18,7 +18,7 @@ export default {
 
 <style scoped lang="scss">
 #confirm-page {
-    height: calc(100vh - 100px);
+    height: calc(100vh - 80px);
     background-color: white;
 }
 
