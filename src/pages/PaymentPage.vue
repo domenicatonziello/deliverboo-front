@@ -7,13 +7,14 @@ import paypal from 'paypal-checkout';
 export default {
   data() {
     return {
+      store,
       hostedFieldInstance: false,
       nonce: "",
       error: "",
       // amount: 10,
       form: {
         address: '',
-        total_order: null,
+        total_order: store.subtotal,
         phone_number: null,
         guest_name: '',
         status: false,
@@ -52,7 +53,7 @@ export default {
     }
   },
   mounted() {
-    this.form.total_order = Number(localStorage.getItem("Tot Price"));
+    // this.form.total_order = Number(localStorage.getItem("Tot Price"));
     braintree.client.create({
       authorization: "sandbox_38hhz6r4_fzbw7r3fc9t6rn2y"
     })
@@ -113,6 +114,8 @@ export default {
               this.error = "";
               this.nonce = payload.nonce;
               this.form.status = true;
+              (store.foodsCart = []), localStorage.removeItem("Carello");
+              (store.restaurantid = null), localStorage.removeItem('Restaurant ID');
               this.$router.push({
                 path: "/confirmOrder",
                 reload: true
@@ -191,7 +194,7 @@ export default {
                 <h2> Totale: </h2>
                 <div class="d-flex">
                   <p class="fs-3 mb-0">€</p>
-                  <input type="text" disabled id="total_order" name="total_order" v-model="form.total_order" class=""
+                  <input type="text" disabled id="total_order" name="total_order" v-model="store.subtotal" class=""
                     placeholder="Enter Amount">
                 </div>
               </div>

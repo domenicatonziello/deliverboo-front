@@ -13,7 +13,7 @@ export default {
     address: "",
     phone_number: "",
     description: "",
-    subtotal: 0,
+    // subtotal: 0,
     min_order: 0,
     shipment_price: 0,
     logo: "",
@@ -21,11 +21,11 @@ export default {
   components: { FoodCard, CartContent },
   computed: {
     getTotalPrice() {
-      this.subtotal = Number(this.shipment_price);
+      store.subtotal = Number(this.shipment_price);
       store.foodsCart.forEach((food) => {
-        this.subtotal += Number(food.price * food.quantity);
+        store.subtotal += Number(food.price * food.quantity);
       });
-      this.subtotal = this.subtotal.toFixed(2);
+      store.subtotal = store.subtotal.toFixed(2);
     },
   },
   methods: {
@@ -54,7 +54,7 @@ export default {
     },
     cartEmpty() {
       (store.foodsCart = []), localStorage.removeItem("Carello");
-      (store.restaurantid = null), localStorage.removeItem("Restaurant ID");
+      // (store.restaurantid = null), localStorage.removeItem("Restaurant ID");
     },
     resetCart() {
       store.cart = false
@@ -149,7 +149,7 @@ export default {
                     Spedizione:<span>€ {{ shipment_price }}</span>
                   </div>
                   <div>
-                    Totale ordine:<span>€ {{ subtotal }}</span>
+                    Totale ordine:<span>€ {{ store.subtotal }}</span>
                   </div>
                 </div>
                 <div class="empty-cart d-flex justify-content-between">

@@ -52,7 +52,7 @@ export default {
     deleteCart() {
       if (!store.foodsCart.length) {
         this.isSelect = false;
-        (store.restaurantid = null), localStorage.removeItem("Restaurant ID");
+        // localStorage.removeItem("Restaurant ID");
       }
     },
   },
@@ -118,11 +118,8 @@ export default {
   <Modal />
   <div class="title">
     <div class="food-card row d-flex align-items-center">
-      <div
-        @click="setActive()"
-        class="custm-card col d-flex justify-content-around align-items-center gap-3"
-        :class="{ active: active }"
-      >
+      <div @click="setActive()" class="custm-card col d-flex justify-content-around align-items-center gap-3"
+        :class="{ active: active }">
         <div class="img-box col text-center">
           <img :src="food.image" alt="" />
         </div>
@@ -138,37 +135,21 @@ export default {
           <div class="counter">
             <div @click="upQuantity()" class="btn">+</div>
             <div class="count">{{ quantity }}</div>
-            <div
-              @click="downQuantity()"
-              class="btn"
-              :class="!quantity ? 'clicked' : ''"
-            >
+            <div @click="downQuantity()" class="btn" :class="!quantity ? 'clicked' : ''">
               -
             </div>
           </div>
         </div>
-        <div
-          class="cont-btn"
-          v-if="!store.restaurantid || store.restaurantid == food.restaurant_id"
-        >
-          <button
-            v-if="isSelect"
-            class="btn-remove"
-            @click="removeFood(returnIndex)"
-          >
+        <div class="cont-btn" v-if="!store.restaurantid || store.restaurantid == food.restaurant_id">
+          <button v-if="isSelect" class="btn-remove" @click="removeFood(returnIndex)">
             Remove
           </button>
           <button v-else class="btn-add" @click="addFood(food)">
             Aggiungi
           </button>
         </div>
-        <button
-          v-if="store.restaurantid && store.restaurantid != food.restaurant_id"
-          class="btn-add"
-          type="button"
-          data-bs-toggle="modal"
-          data-bs-target="#staticBackdrop"
-        >
+        <button v-if="store.restaurantid && store.restaurantid != food.restaurant_id" class="btn-add" type="button"
+          data-bs-toggle="modal" data-bs-target="#staticBackdrop">
           Aggiungi
         </button>
       </div>
@@ -303,6 +284,7 @@ export default {
     background-color: $white;
   }
 }
+
 .btn-remove {
   padding: 5px 10px;
   text-align: center;
@@ -312,6 +294,7 @@ export default {
   color: $white;
   border: 1px solid $brown;
   border-radius: 10px;
+
   &:hover {
     color: red;
     background-color: $white;
@@ -322,12 +305,14 @@ export default {
   .food-card {
     position: relative;
   }
+
   .buttons {
     position: absolute;
     right: 2px;
     bottom: 10px;
   }
 }
+
 @media screen and (max-width: 780px) {
   .img-box {
     display: none;
