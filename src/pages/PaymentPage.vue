@@ -113,6 +113,10 @@ export default {
               this.error = "";
               this.nonce = payload.nonce;
               this.form.status = true;
+              this.$router.push({
+                path: "/confirmOrder",
+                reload: true
+              });
             })
           },
           onCancel: (data) => {
@@ -137,7 +141,7 @@ export default {
       <div class="col pt-5">
         <div class="card bg-white rounded-4">
           <div class="header-card text-center pt-5">
-            <h1>Pagamento</h1>
+            <h1 class="mb-5">Pagamento</h1>
           </div>
           <div class="body-card">
             <div class="alert alert-success" v-if="nonce">
@@ -191,11 +195,13 @@ export default {
                     placeholder="Enter Amount">
                 </div>
               </div>
-              <button class="btn btn-primary btn-block" @click.prevent="payWithCreditCard">Pay with Credit Card</button>
+              <button type="submit" class="btn btn-primary btn-block my-3" @click="payWithCreditCard">Paga con
+                carta di credito
+              </button>
               <hr />
-              <div id="paypalButton"></div>
+              <button type="submit" id="paypalButton" class="paypal-button"></button>
               <div id="dropin-container"></div>
-              <button type="submit" class="btn btn-primary"> Invia </button>
+              <!-- <button type="submit" class="btn btn-primary"> Invia </button> -->
               <!-- <input type="hidden" id="nonce" name="payment_method_nonce" /> -->
             </form>
           </div>
@@ -244,5 +250,11 @@ body {
 
 form label {
   margin-bottom: 0.3rem;
+}
+
+.paypal-button {
+  border: 0;
+  background-color: white;
+  width: 100%;
 }
 </style>
