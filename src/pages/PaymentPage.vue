@@ -199,7 +199,7 @@ export default {
                 carta di credito
               </button>
               <hr />
-              <button type="submit" id="paypalButton" class="paypal-button"></button>
+              <button type="button" id="paypalButton" class="paypal-button"></button>
               <div id="dropin-container"></div>
               <!-- <button type="submit" class="btn btn-primary"> Invia </button> -->
               <!-- <input type="hidden" id="nonce" name="payment_method_nonce" /> -->
