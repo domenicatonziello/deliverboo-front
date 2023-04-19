@@ -1,4 +1,6 @@
 <script>
+const endpoint = 'http://127.0.0.1:8000/api/order';
+import axios from 'axios';
 import braintree from 'braintree-web';
 import paypal from 'paypal-checkout';
 export default {
@@ -7,7 +9,14 @@ export default {
       hostedFieldInstance: false,
       nonce: "",
       error: "",
-      amount: 10
+      // amount: 10,
+      form: {
+        address: '',
+        total_order: null,
+        phone_number: null,
+        guest_name: '',
+        status: false,
+      }
     }
   },
   methods: {
@@ -18,18 +27,31 @@ export default {
         this.hostedFieldInstance.tokenize().then(payload => {
           console.log(payload);
           this.nonce = payload.nonce;
+          this.form.status = true;
         })
           .catch(err => {
             console.error(err);
             this.error = err.message;
           })
       }
+    },
+    sendForm() {
+      axios.post(endpoint, this.form)
+        .then(() => {
+          if (this.form.status) {
+            this.form = { address: '', total_order: 10, phone_number: null, guest_name: '', status: false, };
+            this.$router.push({
+              path: "/confirmOrder",
+              reload: true
+            });
+          }
+        })
     }
   },
   mounted() {
-    this.amount = Number(localStorage.getItem("Tot Price"));
+    this.form.total_order = Number(localStorage.getItem("Tot Price"));
     braintree.client.create({
-      authorization: "sandbox_93smtrz3_bbgx4xf7h8bx24xg"
+      authorization: "sandbox_38hhz6r4_fzbw7r3fc9t6rn2y"
     })
       .then(clientInstance => {
         let options = {
@@ -77,7 +99,7 @@ export default {
             return paypalCheckoutInstance.createPayment({
               flow: 'checkout',
               intent: 'sale',
-              amount: parseFloat(this.amount) > 0 ? this.amount : 10,
+              amount: parseFloat(this.form.total_order) > 0 ? this.form.total_order : 10,
               displayName: 'Braintree Testing',
               currency: 'USD'
             })
@@ -87,6 +109,7 @@ export default {
               console.log(payload);
               this.error = "";
               this.nonce = payload.nonce;
+              this.form.status = true;
             })
           },
           onCancel: (data) => {
@@ -109,21 +132,41 @@ export default {
   <div class="container">
     <div class="col-6 offset-3">
       <div class="card bg-light">
-        <div class="card-header">Payment Information</div>
+        <div class="card-header">Informazioni sul pagamento</div>
         <div class="card-body">
           <div class="alert alert-success" v-if="nonce">
-            Successfully generated nonce.
+            Il pagamento è andato a buon fine.
           </div>
           <div class="alert alert-danger" v-if="error">
             {{ error }}
           </div>
-          <form>
+          <form id="payment-form" method="post" @submit.prevent="sendForm()">
+            <!-- prezzo totale -->
             <div class="form-group">
-              <label for="amount">Amount</label>
+              <label for="total_order">Totale</label>
               <div class="input-group">
-                <div class="input-group-prepend"><span class="input-group-text">$</span></div>
-                <input type="number" id="amount" v-model="amount" class="form-control" placeholder="Enter Amount">
+                <div class="input-group-prepend"><span class="input-group-text">€</span></div>
+                <input type="text" disabled id="total_order" name="total_order" v-model="form.total_order"
+                  class="form-control" placeholder="Enter Amount">
               </div>
+            </div>
+            <!-- address -->
+            <div class="form-group">
+              <label for="address">Indirizzo</label>
+              <input type="text" id="address" name="address" v-model="form.address" class="form-control"
+                placeholder="Inserisci il tuo indirizzo">
+            </div>
+            <!-- phone number -->
+            <div class="form-group">
+              <label for="phone">Numero</label>
+              <input type="number" id="phone" name="phone_number" v-model="form.phone_number" class="form-control"
+                placeholder="Inserisci il tuo numero di cellulare">
+            </div>
+            <!-- guest name -->
+            <div class="form-group">
+              <label for="guest_name">Nome</label>
+              <input type="text" id="guest_name" name="guest_name" v-model="form.guest_name" class="form-control"
+                placeholder="Inserisci il tuo nome">
             </div>
             <hr />
             <div class="form-group">
@@ -145,6 +188,9 @@ export default {
             <button class="btn btn-primary btn-block" @click.prevent="payWithCreditCard">Pay with Credit Card</button>
             <hr />
             <div id="paypalButton"></div>
+            <div id="dropin-container"></div>
+            <button type="submit" class="btn btn-primary"> Invia </button>
+            <!-- <input type="hidden" id="nonce" name="payment_method_nonce" /> -->
           </form>
         </div>
       </div>

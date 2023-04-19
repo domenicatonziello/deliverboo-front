@@ -5,6 +5,7 @@ import HomePage from "../pages/HomePage.vue";
 import RestaurantPage from "../pages/RestaurantPage.vue";
 import OtherPage from "../pages/OtherPage.vue";
 import PaymentPage from "../pages/PaymentPage.vue";
+import ConfirmPaymentPage from '../pages/ConfirmPaymentPage.vue';
 
 // ROUTES
 
@@ -17,6 +18,7 @@ const router = createRouter({
     { path: "/restaurants/:id", name: "restaurant", component: RestaurantPage },
     { path: "/other", name: "other", component: OtherPage },
     { path: "/payment", name: "payment", component: PaymentPage },
+    { path: "/confirmOrder", name: "confirmOrder", component: ConfirmPaymentPage },
   ],
 });
 

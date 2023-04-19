@@ -4,6 +4,7 @@ import NotFoundPage from "./pages/NotFoundPage.vue";
 import AppHeader from "./components/content/AppHeader.vue";
 import otherPage from "./pages/otherPage.vue";
 import PaymentPage from "./pages/PaymentPage.vue";
+import ConfirmPaymentPage from "./pages/ConfirmPaymentPage.vue";
 
 import SectionJumbotron from "./components/SectionJumbotron.vue";
 export default {
@@ -14,6 +15,7 @@ export default {
     SectionJumbotron,
     otherPage,
     PaymentPage,
+    ConfirmPaymentPage
   },
   data: () => ({
     store,
@@ -26,10 +28,7 @@ export default {
     <app-header></app-header>
     <section-jumbotron>
       <router-view> </router-view>
-      <div
-        class="loader align-items-center justify-content-center"
-        :class="{ 'd-flex': store.isLoading }"
-      >
+      <div class="loader align-items-center justify-content-center" :class="{ 'd-flex': store.isLoading }">
         <i class="fa-solid fa-spinner fa-spin fa-5xl"></i>
       </div>
     </section-jumbotron>
@@ -59,13 +58,12 @@ export default {
     -webkit-text-fill-color: transparent;
   }
 }
+
 .bcg-gradient {
-  background: linear-gradient(
-    297.36deg,
-    #ff8c42 44.61%,
-    #feb889 44.61%,
-    #feb07c 87.32%,
-    #fcfbf7 143.55%
-  );
+  background: linear-gradient(297.36deg,
+      #ff8c42 44.61%,
+      #feb889 44.61%,
+      #feb07c 87.32%,
+      #fcfbf7 143.55%);
 }
 </style>
