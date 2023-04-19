@@ -32,6 +32,9 @@ export default {
       return (this.id_typologies = allRestaurants().toString());
     },
   },
+  watch: {
+    filterCheck() {},
+  },
   methods: {
     refreshCity() {
       store.currentTypology = [];
@@ -88,6 +91,7 @@ export default {
       }
     },
   },
+
   created() {
     store.currentTypology = [];
     this.fetchTypologies();
