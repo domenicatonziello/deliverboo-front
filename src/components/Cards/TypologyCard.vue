@@ -33,8 +33,10 @@ export default {
 </template>
 
 <style lang="scss" scoped>
+@use "../../assets/scss/partial/variables.scss" as *;
+
 .active {
-  border: 3px solid rgb(255, 0, 0);
+  border: 4px solid $orange;
 }
 
 .box {
@@ -44,12 +46,11 @@ export default {
   border-radius: 10px;
   cursor: pointer;
 
-
-
   &:hover .overlay {
     h4 {
       visibility: visible;
       transition: 0.5s;
+      transform: scale(1.05);
     }
   }
 
