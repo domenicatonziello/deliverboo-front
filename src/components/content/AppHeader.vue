@@ -36,16 +36,16 @@ export default {
 
 <template>
   <header>
-    <nav class="navbar navbar-expand-lg bg-body-tertiary">
+    <nav class="navbar h-100 navbar-expand-lg bg-body-tertiary">
       <div class="container-fluid">
-        <router-link :to="'/'">
+        <router-link class="cont-logo" :to="'/'">
           <div class="logo">Delive<span>Boo</span></div>
         </router-link>
         <div
           class="collapse navbar-collapse flex-grow-0"
           id="navbarSupportedContent"
         >
-          <ul class="navbar-nav me-auto">
+          <ul class="navbar-nav p-0 me-auto">
             <li class="nav-item mx-3">
               <router-link :to="'/'"> Home </router-link>
             </li>
@@ -122,20 +122,19 @@ export default {
 @use "../../assets/scss/partial/variables.scss" as *;
 
 header {
-  padding: 10px;
-  min-height: 12vh;
   width: 100%;
-  position: sticky;
+  height: 100px;
+  position: static;
   top: 0;
   right: 0;
   left: 0;
-  background: linear-gradient(
-    297.36deg,
-    #ff8c42 44.61%,
-    #feb889 44.61%,
-    #feb07c 87.32%,
-    #fcfbf7 143.55%
-  );
+  // background: linear-gradient(
+  //   297.36deg,
+  //   #ff8c42 44.61%,
+  //   #feb889 44.61%,
+  //   #feb07c 87.32%,
+  //   #fcfbf7 143.55%
+  // );
   z-index: 1;
 
   ul {
@@ -145,10 +144,16 @@ header {
     margin: 2rem 0;
   }
 
+  .cont-logo {
+    display: flex;
+    align-items: center;
+    height: 100%;
+  }
+
   .logo {
     color: white;
     // margin-left: 60px;
-    font-size: 60px;
+    font-size: 35px;
     font-weight: bold;
 
     span {

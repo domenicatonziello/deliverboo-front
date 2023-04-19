@@ -22,16 +22,18 @@ export default {
 </script>
 
 <template>
-  <app-header></app-header>
-  <section-jumbotron>
-    <router-view> </router-view>
-    <div
-      class="loader align-items-center justify-content-center"
-      :class="{ 'd-flex': store.isLoading }"
-    >
-      <i class="fa-solid fa-spinner fa-spin fa-5xl"></i>
-    </div>
-  </section-jumbotron>
+  <div class="bcg-gradient">
+    <app-header></app-header>
+    <section-jumbotron>
+      <router-view> </router-view>
+      <div
+        class="loader align-items-center justify-content-center"
+        :class="{ 'd-flex': store.isLoading }"
+      >
+        <i class="fa-solid fa-spinner fa-spin fa-5xl"></i>
+      </div>
+    </section-jumbotron>
+  </div>
 </template>
 
 <style lang="scss">
@@ -56,5 +58,14 @@ export default {
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
   }
+}
+.bcg-gradient {
+  background: linear-gradient(
+    297.36deg,
+    #ff8c42 44.61%,
+    #feb889 44.61%,
+    #feb07c 87.32%,
+    #fcfbf7 143.55%
+  );
 }
 </style>
