@@ -166,7 +166,7 @@ export default {
 
   .container {
     .row {
-      flex-direction: column;
+      // flex-direction: column;
       justify-content: center;
       align-items: center;
 

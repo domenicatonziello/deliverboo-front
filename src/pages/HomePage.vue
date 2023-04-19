@@ -135,7 +135,7 @@ export default {
 
       <div
         v-if="store.restaurants.length > 0"
-        class="row justify-content-center gap-3 mt-5"
+        class="row justify-content-center gap-2 mt-5"
       >
         <restaurant-card
           v-for="restaurant in store.restaurants"
