@@ -11,13 +11,15 @@ export default {
       hostedFieldInstance: false,
       nonce: "",
       error: "",
+      isOpen: false,
       // amount: 10,
       form: {
         address: '',
-        total_order: store.subtotal,
+        total_order: null,
         phone_number: null,
         guest_name: '',
         status: false,
+        restaurantid: null,
       }
     }
   },
@@ -30,6 +32,10 @@ export default {
           console.log(payload);
           this.nonce = payload.nonce;
           this.form.status = true;
+          this.$router.push({
+            path: "/confirmOrder",
+            reload: true
+          });
           (store.foodsCart = []), localStorage.removeItem("Carello");
           (store.restaurantid = null), localStorage.removeItem('Restaurant ID');
         })
@@ -43,7 +49,7 @@ export default {
       axios.post(endpoint, this.form)
         .then(() => {
           if (this.form.status) {
-            this.form = { address: '', total_order: 10, phone_number: null, guest_name: '', status: false, };
+            this.form = { address: '', total_order: 10, phone_number: null, guest_name: '', status: false, restaurantid: null };
             this.$router.push({
               path: "/confirmOrder",
               reload: true
@@ -53,7 +59,8 @@ export default {
     }
   },
   mounted() {
-    // this.form.total_order = Number(localStorage.getItem("Tot Price"));
+    this.form.total_order = Number(localStorage.getItem("Tot Price"));
+    this.form.restaurantid = localStorage.getItem("Restaurant ID");
     braintree.client.create({
       authorization: "sandbox_38hhz6r4_fzbw7r3fc9t6rn2y"
     })
@@ -115,7 +122,7 @@ export default {
               this.nonce = payload.nonce;
               this.form.status = true;
               (store.foodsCart = []), localStorage.removeItem("Carello");
-              (store.restaurantid = null), localStorage.removeItem('Restaurant ID');
+              // (store.restaurantid = null), localStorage.removeItem('Restaurant ID');
               this.$router.push({
                 path: "/confirmOrder",
                 reload: true
@@ -194,7 +201,7 @@ export default {
                 <h2> Totale: </h2>
                 <div class="d-flex">
                   <p class="fs-3 mb-0">€</p>
-                  <input type="text" disabled id="total_order" name="total_order" v-model="store.subtotal" class=""
+                  <input type="text" disabled id="total_order" name="total_order" v-model="form.total_order" class=""
                     placeholder="Enter Amount">
                 </div>
               </div>
@@ -202,10 +209,12 @@ export default {
                 carta di credito
               </button>
               <hr />
+              <!-- <div v-if="!isOpen" class="text-center">
+                                                                <button @click="paypal()" class="btn btn-warning text-center text-white"><small>Paga con
+                                                                    Paypal</small></button>
+                                                              </div> -->
               <button type="button" id="paypalButton" class="paypal-button"></button>
               <div id="dropin-container"></div>
-              <!-- <button type="submit" class="btn btn-primary"> Invia </button> -->
-              <!-- <input type="hidden" id="nonce" name="payment_method_nonce" /> -->
             </form>
           </div>
         </div>
