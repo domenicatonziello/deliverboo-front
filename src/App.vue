@@ -4,7 +4,6 @@ import NotFoundPage from "./pages/NotFoundPage.vue";
 import AppHeader from "./components/content/AppHeader.vue";
 import otherPage from "./pages/otherPage.vue";
 import PaymentPage from "./pages/PaymentPage.vue";
-import ConfirmPaymentPage from "./pages/ConfirmPaymentPage.vue";
 
 import SectionJumbotron from "./components/SectionJumbotron.vue";
 export default {
@@ -15,7 +14,6 @@ export default {
     SectionJumbotron,
     otherPage,
     PaymentPage,
-    ConfirmPaymentPage
   },
   data: () => ({
     store,

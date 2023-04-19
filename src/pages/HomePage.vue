@@ -33,7 +33,7 @@ export default {
     },
   },
   watch: {
-    filterCheck() {},
+    filterCheck() { },
   },
   methods: {
     refreshCity() {
@@ -105,7 +105,7 @@ export default {
 <template>
   <AppJumbotron />
   <!-- tipologie -->
-  <section id="typology" v-if="store.addedCity">
+  <section id="typology" v-if="store.addedCity" class="pb-6">
     <div class="container">
       <p>
         <i class="fa-solid fa-location-dot" style="color: #000000"></i>
@@ -119,29 +119,16 @@ export default {
       <h2 class="mb-4">Le nostre tipologie</h2>
       <p class="mb-2 indication">
         Scrolla e seleziona le tipologie che vuoi
-        <i
-          class="fa-solid fa-arrow-right-long fa-beat fa-sm ms-2"
-          style="color: #6e6e6e"
-        ></i>
+        <i class="fa-solid fa-arrow-right-long fa-beat fa-sm ms-2" style="color: #6e6e6e"></i>
       </p>
       <carosel>
-        <typology-card
-          @click="onClick()"
-          v-for="typology in typologies"
-          :key="typology.id"
-          :typology="typology"
-        ></typology-card>
+        <typology-card @click="onClick()" v-for="typology in typologies" :key="typology.id"
+          :typology="typology"></typology-card>
       </carosel>
 
-      <div
-        v-if="store.restaurants.length > 0"
-        class="row justify-content-center gap-2 mt-5"
-      >
-        <restaurant-card
-          v-for="restaurant in store.restaurants"
-          :key="restaurant.id"
-          :restaurant="restaurant"
-        ></restaurant-card>
+      <div v-if="store.restaurants.length > 0" class="row justify-content-center gap-2 mt-5">
+        <restaurant-card v-for="restaurant in store.restaurants" :key="restaurant.id"
+          :restaurant="restaurant"></restaurant-card>
       </div>
       <div v-if="store.restaurants.length < 1" class="mt-5 py-3 text-center">
         <h3>Non ci sono ristoranti per le tipologie selezionate</h3>
