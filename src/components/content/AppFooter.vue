@@ -107,6 +107,7 @@ footer {
     padding-bottom: 2rem;
     transform: rotate(180deg);
 
+
     .button {
         background-color: $primary-bg;
         border-radius: 10px;
@@ -180,7 +181,7 @@ footer {
         .col {
             background-color: rgb(78, 89, 140);
             border-radius: 15px;
-            height: 50%;
+            height: 100px;
             text-align: center;
             display: flex;
             flex-direction: column;
