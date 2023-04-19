@@ -1,4 +1,5 @@
 <script>
+import { store } from '../data/store';
 const endpoint = 'http://127.0.0.1:8000/api/order';
 import axios from 'axios';
 import braintree from 'braintree-web';

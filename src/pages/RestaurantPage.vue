@@ -56,6 +56,9 @@ export default {
       (store.foodsCart = []), localStorage.removeItem("Carello");
       (store.restaurantid = null), localStorage.removeItem("Restaurant ID");
     },
+    resetCart() {
+      store.cart = false
+    }
   },
   created() {
     store.isLoading = true;
@@ -154,7 +157,7 @@ export default {
                     Svuota carrello
                   </button>
 
-                  <router-link :to="'/payment'" class="btn btn-success m-2"> Procedi all'ordine
+                  <router-link :to="'/payment'" class="btn btn-success m-2" @click="resetCart()"> Procedi all'ordine
                   </router-link>
                 </div>
               </div>
