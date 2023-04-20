@@ -142,7 +142,7 @@ export default {
         </div>
         <div class="cont-btn" v-if="!store.restaurantid || store.restaurantid == food.restaurant_id">
           <button v-if="isSelect" class="btn-remove" @click="removeFood(returnIndex)">
-            Remove
+            Rimuovi
           </button>
           <button v-else class="btn-add" @click="addFood(food)">
             Aggiungi
