@@ -12,7 +12,6 @@ export const store = reactive({
     ristorante: false,
     message: '',
     restaurantid: null,
-    subtotal: 0
 });
 
 // assegnare il restaurant_id nel local storage

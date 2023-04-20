@@ -13,7 +13,7 @@ export default {
     address: "",
     phone_number: "",
     description: "",
-    // subtotal: 0,
+    subtotal: 0,
     min_order: 0,
     shipment_price: 0,
     logo: "",
@@ -21,11 +21,13 @@ export default {
   components: { FoodCard, CartContent },
   computed: {
     getTotalPrice() {
-      store.subtotal = Number(this.shipment_price);
+      this.subtotal = Number(this.shipment_price);
       store.foodsCart.forEach((food) => {
-        store.subtotal += Number(food.price * food.quantity);
+        this.subtotal += Number(food.price * food.quantity);
       });
-      store.subtotal = store.subtotal.toFixed(2);
+      this.subtotal = this.subtotal.toFixed(2);
+      let tot_price = this.subtotal;
+      localStorage.setItem("Tot Price", tot_price);
     },
   },
   methods: {
@@ -149,7 +151,7 @@ export default {
                     Spedizione:<span>€ {{ shipment_price }}</span>
                   </div>
                   <div>
-                    Totale ordine:<span>€ {{ store.subtotal }}</span>
+                    Totale ordine:<span>€ {{ subtotal }}</span>
                   </div>
                 </div>
                 <div class="empty-cart d-flex justify-content-between">
